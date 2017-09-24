@@ -13,6 +13,8 @@ import java.io.Serializable;
  */
 public class Utente implements Serializable{
     private int id;
+    private String firstName;
+    private String lastName;
     private boolean isAdmin;
     private boolean isRegistered;
     private boolean isSeller;
@@ -23,6 +25,22 @@ public class Utente implements Serializable{
     
     public int getId(){
         return this.id;
+    }
+    
+    public void setFirstName(String s){
+        this.firstName=s;
+    }
+    
+    public String getFirstName(){
+        return this.firstName;
+    }
+    
+    public void setLastName(String s){
+        this.lastName=s;
+    }
+    
+    public String getLastName(){
+        return this.lastName;
     }
     
     public void setIsAdmin(boolean b){

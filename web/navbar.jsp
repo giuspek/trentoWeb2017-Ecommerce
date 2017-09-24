@@ -17,8 +17,8 @@
                         <span id="search_concept">Filter by</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#contains">Contains</a></li>
-                        <li><a href="#its_equal">It's equal</a></li>
+                        <li><a href="#contains">Per oggetto</a></li>
+                        <li><a href="#its_equal">Per categoria</a></li>
                         <li><a href="#greather_than">Greather than ></a></li>
                         <li><a href="#less_than">Less than < </a></li>
                         <li class="divider"></li>
@@ -74,7 +74,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">    
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nome e Cognome<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" />
+                        <span class="caret">   
+                        </span>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Profilo</a></li>
                         <li><a href="#">Segnala anomalie</a></li>

@@ -97,7 +97,9 @@ public class Login extends HttpServlet {
                  out.close();
             }
             else{
-                u.setIsAdmin(true);
+                u.setIsRegistered(true);
+                u.setFirstName(rs.getString(2));
+                u.setLastName(rs.getString(3));
                 s.setAttribute("user", u);
                 response.sendRedirect("register.jsp");
             }
