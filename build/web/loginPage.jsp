@@ -32,9 +32,15 @@
                                 <input class="form-control" type="password" id="password" name="password">
                             </div>
                         </div>
-                        <input class="btn btn-success" type="submit" value="Conferma">
-                        <input class="btn btn-danger" type="reset" value="Annulla">
-                        
+                        <p> </P>
+                        <div class="row">
+                            <a href="forgetPassword.jsp" >Hai dimenticato la password?</a>
+                        </div>
+                        <p> </p>
+                        <div class="row">
+                            <input class="btn btn-success" type="submit" value="Conferma">
+                            <input class="btn btn-danger" type="reset" value="Annulla">
+                        </div>
                     </div>
                 </div>
             </div>
