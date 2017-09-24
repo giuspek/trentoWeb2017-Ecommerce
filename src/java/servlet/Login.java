@@ -101,7 +101,7 @@ public class Login extends HttpServlet {
                 u.setFirstName(rs.getString(2));
                 u.setLastName(rs.getString(3));
                 s.setAttribute("user", u);
-                response.sendRedirect("register.jsp");
+                response.sendRedirect("homepage.jsp");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

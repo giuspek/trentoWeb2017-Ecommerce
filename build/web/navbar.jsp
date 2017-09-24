@@ -49,6 +49,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nome e Cognome<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Profilo</a></li>
+                        <li><a href="#">Il vostro negozio</a></li>
                         <li><a href="Logout">Esci</a></li>
                     </ul>
                 <li><a href="#">Notifiche</a></li>

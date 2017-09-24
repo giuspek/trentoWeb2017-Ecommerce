@@ -4,7 +4,11 @@
     Author     : Giuseppe
 --%>
 
+<%@page import="beans.Utente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,6 +17,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     </head>
     <body>
+        <% if( ( (Utente) session.getAttribute("user")).getFirstName() != null)
+            response.sendRedirect("homepage.jsp");
+        %>
         <jsp:include page="navbar.jsp"/>
         <form action="Login" method="POST">
             <div class="form-group">
