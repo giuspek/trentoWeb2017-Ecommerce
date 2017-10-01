@@ -5,30 +5,40 @@
 --%>
 <jsp:useBean id="user" class="beans.Utente" scope="session" /> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $("#descriptionfilter").click(function(){
+        $("#filter").val("description");
+    });
+    $("#namefilter").click(function(){
+        $("#filter").val("name");
+    });
+});
+</script>
 <nav class="navbar navbar-inverse">
     <div class="navbar-header">
         <a class="navbar-brand"> Guappo </a>
     </div>
     <div class="col-md-3 col-sm-3">
-        <form class="navbar-form">
+        <form class="navbar-form" method="GET" action="risultati.jsp">
             <div class="input-group">
                 <div class="input-group-btn search-panel">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span id="search_concept">Filter by</span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#contains">Per oggetto</a></li>
-                        <li><a href="#its_equal">Per categoria</a></li>
+                        <li><a href="#" id="namefilter" > Per oggetto</a></li>
+                        <li><a href="#" id="descriptionfilter">Per descrizione</a></li>
                         <li><a href="#greather_than">Greather than ></a></li>
                         <li><a href="#less_than">Less than < </a></li>
                         <li class="divider"></li>
                         <li><a href="#all">Anything</a></li>
                     </ul>
                 </div>
-
-                <input type="text" class="form-control" name="x" placeholder="Search term...">
+                <input type="hidden" id="filter" name="filter" value="name">
+                <input type="text" class="form-control" name="oggetto" placeholder="Search term..." required="required">
                 <div class="input-group-btn search-panel">
-                <button class="btn btn-default form-control" type="button">
+                    <button class="btn btn-default form-control" type="submit" >
                     <span class="glyphicon glyphicon-search">
                         
                     </span>
