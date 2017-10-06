@@ -14,6 +14,44 @@
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#priceorder").click(function () {
+            $("#order").val("price");
+            document.getElementById("ordertext").textContent = "Per prezzo";
+
+        });
+        $("#revieworder").click(function () {
+            $("#order").val("review");
+            document.getElementById("ordertext").textContent = "Per rating";
+        });
+        $("#nearorder").click(function () {
+            $("#order").val("near");
+            document.getElementById("ordertext").textContent = "Per vicinanza";
+        });
+        $("#nameorder").click(function () {
+            $("#order").val("name");
+            document.getElementById("ordertext").textContent = "Per nome";
+        });
+        $("#sender").click(function () {
+            $("#oggetto").val(findGetParameter("oggetto"));
+            $("#filtro").val(findGetParameter("filter"));
+        });
+
+        function findGetParameter(parameterName) {
+            var result = null,
+                    tmp = [];
+            var items = location.search.substr(1).split("&");
+            for (var index = 0; index < items.length; index++) {
+                tmp = items[index].split("=");
+                if (tmp[0] === parameterName)
+                    result = decodeURIComponent(tmp[1]);
+            }
+            return result;
+        }
+    });
+</script>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,7 +61,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from PRODUCTS WHERE LOWER(${param.filter}) LIKE LOWER('%${param.oggetto}%')
+            SELECT * from PRODUCTS WHERE LOWER(${param.filter}) LIKE LOWER('%${param.oggetto}%') ORDER BY ${param.orderparam}
         </sql:query>
         <div class="container">
             <div class="row">
@@ -36,43 +74,47 @@
                             <div class="row">
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                        <span id="search_concept">Ordina:</span> <span class="caret"></span>
+                                        <span id="ordertext">Ordina per</span> <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="#" id="priceorder" >Per prezzo</a></li>
                                         <li><a href="#" id="revieworder">Per review</a></li>      
                                         <li><a href="#" id="nearorder">Per vicinanza</a></li>
+                                        <li><a href="#" id="nameorder">Per nome</a></li>
                                     </ul>
                                 </div>
                             </div>
+                            <input type="hidden" id="order" name="order" value="name">
+                            <input type="hidden" id="oggetto" name="oggetto" value="">
+                            <input type="hidden" id="filtro" name="filtro" value="price">
                             <div class="row">
-                                <input class="btn btn-success" type="submit" value="Conferma">
+                                <input class="btn btn-success" id="sender" type="submit" value="Conferma">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-9">
-                    
-                <c:forEach items="${result.rows}" var="row">
-                    <div class="jumbotron">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <img src="img/Ansia.png" width="150" height="100">
+
+                    <c:forEach items="${result.rows}" var="row">
+                        <div class="jumbotron">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="img/Ansia.png" width="150" height="100">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <b> <c:out value="${row.name}" /> </b>
+                                    </div>
+                                    <div class="row">
+                                        <p> € <c:out value="${row.price}" /> </p>
+                                    </div>
+                                    <div class="row">
+                                        <a href="#">Vedi Prodotto</a>
+                                    </div>
+                                </div>  
                             </div>
-                            <div class="col-md-9">
-                                <div class="row">
-                                    <b> <c:out value="${row.name}" /> </b>
-                                </div>
-                                <div class="row">
-                                    <p> € <c:out value="${row.price}" /> </p>
-                                </div>
-                                <div class="row">
-                                    <a href="#">Vedi Prodotto</a>
-                                </div>
-                            </div>  
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
                 </div>
             </div>
         </div>

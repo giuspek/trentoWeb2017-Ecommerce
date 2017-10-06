@@ -24,6 +24,7 @@
     </div>
     <div class="col-md-3 col-sm-3">
         <form class="navbar-form" method="GET" action="risultati2.jsp">
+             <input type="hidden" id="orderparam" name="orderparam" value="name">
             <div class="input-group">
                 <div class="input-group-btn search-panel">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -35,6 +36,7 @@
                     </ul>
                 </div>
                 <input type="hidden" id="filter" name="filter" value="name">
+               
                 <input type="text" class="form-control" name="oggetto" placeholder="Search term..." required="required">
                 <div class="input-group-btn search-panel">
                     <button class="btn btn-default form-control" type="submit" >
