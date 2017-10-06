@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -62,7 +63,7 @@ public class Login extends HttpServlet {
             HttpSession s=request.getSession();
             Utente u=(Utente) s.getAttribute("user");
             //Utente u=
-            Connection con = null;
+        /**    Connection con = null;
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (ClassNotFoundException ex) {
@@ -72,8 +73,8 @@ public class Login extends HttpServlet {
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/guappo", "root", "root");
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        } */
+        Connection con = (Connection) getServletContext().getAttribute("db");
         PreparedStatement ps=null;
         try {
             ps = con.prepareStatement("SELECT * FROM Users WHERE username = ? AND password = ?"); //con is a Connection object
@@ -91,21 +92,31 @@ public class Login extends HttpServlet {
         
         try {
             if (!rs.next()){
-                 response.setContentType("text/html");
-                 PrintWriter out = response.getWriter();
-                 out.print("Prova: " + request.getParameter("username") + " - " + request.getParameter("password"));
-                 out.close();
+                 response.sendRedirect("loginPage.jsp");
             }
             else{
-                u.setIsRegistered(true);
                 u.setFirstName(rs.getString(2));
                 u.setLastName(rs.getString(3));
+                u.setTypeOfAccount(rs.getString("TypeOfUser"));
+                /**
+                switch(x){
+                    case 'R':
+                        u.setIsRegistered(true);
+                    break;
+                    case 'S':
+                        u.setIsSeller(true);
+                    break;
+                    case 'A':
+                        u.setIsAdmin(true);
+                    break;
+                }  */
                 s.setAttribute("user", u);
                 response.sendRedirect("homepage.jsp");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**

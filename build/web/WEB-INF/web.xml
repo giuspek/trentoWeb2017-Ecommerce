@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name> dburl </param-name>
+        <param-value> jdbc:derby://localhost:1527/guappo </param-value>
+    </context-param>
+    <context-param>
+        <param-name> pass </param-name>
+        <param-value> root </param-value>
+    </context-param>
+    <context-param>
+        <param-name> admin </param-name>
+        <param-value> root </param-value>
+    </context-param>
+    <listener>
+        <description>ServletContextListener</description>
+        <listener-class>filters.Init</listener-class>
+    </listener>
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>servlet.Login</servlet-class>

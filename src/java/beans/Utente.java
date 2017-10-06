@@ -15,9 +15,7 @@ public class Utente implements Serializable{
     private int id;
     private String firstName;
     private String lastName;
-    private boolean isAdmin;
-    private boolean isRegistered;
-    private boolean isSeller;
+    private String typeOfAccount;
     
     public void setId(int i){
         this.id=i;
@@ -43,28 +41,12 @@ public class Utente implements Serializable{
         return this.lastName;
     }
     
-    public void setIsAdmin(boolean b){
-        this.isAdmin=b;
+    public void setTypeOfAccount(String s){
+        this.typeOfAccount=s;
     }
     
-    public boolean getIsAdmin(){
-        return this.isAdmin;
-    }
-    
-    public void setIsRegistered(boolean b){
-        this.isRegistered=b;
-    }
-    
-    public boolean getIsRegister(){
-        return this.isRegistered;
-    }
-    
-    public void setIsSeller(boolean b){
-        this.isSeller=b;
-    }
-    
-    public boolean getIsSeller(){
-        return this.isSeller;
+    public String getTypeOfAccount(){
+        return this.typeOfAccount;
     }
     
 }

@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Giuseppe/Desktop/WEBproject/TrueGuappo/web/homepage.jsp</file>
+            <file>file:/C:/Users/Giuseppe/Desktop/WEBproject/TrueGuappo/src/java/beans/Utente.java</file>
+            <file>file:/C:/Users/Giuseppe/Desktop/WEBproject/TrueGuappo/web/risultati.jsp</file>
             <file>file:/C:/Users/Giuseppe/Desktop/WEBproject/TrueGuappo/src/java/servlet/Login.java</file>
-            <file>file:/C:/Users/Giuseppe/Desktop/WEBproject/TrueGuappo/web/bellofigo.js</file>
-            <file>file:/C:/Users/Giuseppe/Desktop/WEBproject/TrueGuappo/web/loginPage.jsp</file>
-            <file>file:/C:/Users/Giuseppe/Desktop/WEBproject/TrueGuappo/src/java/servlet/Logout.java</file>
             <file>file:/C:/Users/Giuseppe/Desktop/WEBproject/TrueGuappo/web/navbar.jsp</file>
+            <file>file:/C:/Users/Giuseppe/Desktop/WEBproject/TrueGuappo/src/java/filters/Init.java</file>
         </group>
     </open-files>
 </project-private>
