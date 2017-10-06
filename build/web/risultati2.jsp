@@ -99,7 +99,7 @@
                         <div class="jumbotron">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img src="img/Ansia.png" width="150" height="100">
+                                    <img src="img/Ansia.png" width="150" height="100" class="img-rounded">
                                 </div>
                                 <div class="col-md-9">
                                     <div class="row">
@@ -109,7 +109,7 @@
                                         <p> € <c:out value="${row.price}" /> </p>
                                     </div>
                                     <div class="row">
-                                        <a href="#">Vedi Prodotto</a>
+                                        <a href="prodotto.jsp?prodotto=${row.id}">Vedi Prodotto</a>
                                     </div>
                                 </div>  
                             </div>
