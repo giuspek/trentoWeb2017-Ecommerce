@@ -1,6 +1,6 @@
 <%-- 
-    Document   : prodotto.jsp
-    Created on : 6-ott-2017, 14.30.34
+    Document   : mappa
+    Created on : 14-ott-2017, 22.19.05
     Author     : Giuseppe
 --%>
 
@@ -13,17 +13,18 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
+<sql:query dataSource = "${snapshot}" var = "result">
+            SELECT * FROM SHOPS WHERE ID = ${param.map}
+</sql:query>
+<sql:query dataSource = "${snapshot}" var = "coordinates">
+            SELECT * FROM COORDINATES WHERE ID = (SELECT ID_COORDINATE FROM SHOP_COORDINATE WHERE ID_SHOP = ${param.map})
+</sql:query>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from PRODUCTS WHERE id = ${param.prodotto}
-        </sql:query>
-        <title>
-            <c:out value="${result.rows[0].name}" />
-        </title>
+        <title>JSP Page</title>
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
@@ -36,17 +37,12 @@
                     <div class="col-md-8">
                         <div class="row">
                             <h1> <c:out value="${result.rows[0].name}" /> </h1>
-                            <p> Rating: 3/5 </p>
-                            <p> Numero di recensioni: 0 </p>
+                            <p> Rating: <c:out value="${result.rows[0].global_value}" /> </p>
+                            <a href="<c:out value="${result.rows[0].web_site_URL}" />"> Visita il sito web del negozio</a>
 
-                            <a href="mappa.jsp?map=<c:out value="${result.rows[0].id_shop}" />">Guarda la mappa</a>
-
-
-                            <p> € <c:out value="${result.rows[0].price}" /> </p>
-                            <p> </p>
-                            <button class="btn btn-success">
-                                Aggiungi al carrello
-                            </button>
+                            <p> Latitudine: <c:out value="${coordinates.rows[0].latitude}" /> </p>
+                            <p> Longitudine <c:out value="${coordinates.rows[0].longitude}" /> </p>
+                            <p> Address <c:out value="${coordinates.rows[0].address}" /> </p>
                         </div>
                     </div>
                 </div>
