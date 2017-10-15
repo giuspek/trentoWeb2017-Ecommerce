@@ -38,7 +38,10 @@
                             <h1> <c:out value="${result.rows[0].name}" /> </h1>
                             <p> Rating: 3/5 </p>
                             <p> Numero di recensioni: 0 </p>
-                            <a href="#">Guarda la mappa</a>
+
+                            <a href="mappa.jsp?map=<c:out value="${result.rows[0].id_shop}" />">Guarda la mappa</a>
+
+
                             <p> € <c:out value="${result.rows[0].price}" /> </p>
                             <p> </p>
                             <button class="btn btn-success">
