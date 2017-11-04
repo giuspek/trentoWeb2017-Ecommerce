@@ -32,6 +32,10 @@
         <servlet-name>ApplyFilter</servlet-name>
         <servlet-class>servlet.ApplyFilter</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Registration</servlet-name>
+        <servlet-class>servlet.Registration</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -48,9 +52,18 @@
         <servlet-name>ApplyFilter</servlet-name>
         <url-pattern>/ApplyFilter</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Registration</servlet-name>
+        <url-pattern>/Registration</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <dependency>
+        <groupId>com.sun.mail</groupId>
+        <artifactId>javax.mail</artifactId>
+        <version>1.5.6</version>
+    </dependency>
 </web-app>
