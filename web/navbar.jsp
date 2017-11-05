@@ -88,7 +88,7 @@
             </ul>
         </div>
     </c:when>
-    <c:when test="${user.typeOfAccount == 'R'}">
+    <c:when test="${user.typeOfAccount == 'R' && user.active== true}">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">    
                 <li class="dropdown">

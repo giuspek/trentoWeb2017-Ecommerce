@@ -36,17 +36,23 @@
                 <div class="container">
                     <div class="jumbotron">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="nome">
                                     Nome
                                 </label>
                                 <input class="form-control" type="text" id="nome" name="nome" required="required">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="cognome">
                                     Cognome
                                 </label>
                                 <input class="form-control" type="text" id="cognome" name="cognome" required="required">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="username">
+                                    Username
+                                </label>
+                                <input class="form-control" type="text" id="username" name="username" required="required">
                             </div>
                         </div>
                         <div class="row">

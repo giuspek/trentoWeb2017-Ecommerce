@@ -16,6 +16,7 @@ public class Utente implements Serializable{
     private String firstName;
     private String lastName;
     private String typeOfAccount;
+    private boolean active;
     
     public void setId(int i){
         this.id=i;
@@ -47,6 +48,10 @@ public class Utente implements Serializable{
     
     public String getTypeOfAccount(){
         return this.typeOfAccount;
+    }
+    
+    public boolean isActive(){
+        return this.active;
     }
     
 }
