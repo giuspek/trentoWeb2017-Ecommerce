@@ -49,10 +49,7 @@
         </form>
     </div>
 </div>
-
 <c:choose>
-
-
     <c:when test="${user.typeOfAccount == 'S'}">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">    
@@ -88,7 +85,7 @@
             </ul>
         </div>
     </c:when>
-    <c:when test="${user.typeOfAccount == 'R' && user.active== true}">
+    <c:when test="${user.typeOfAccount == 'R' && user.active == true}">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">    
                 <li class="dropdown">
@@ -104,7 +101,6 @@
                         <li role="separator" class="divider"></li>
                         <li><a href="Logout">Esci</a></li>
                     </ul>
-
                 </li>
             </ul>
         </div>

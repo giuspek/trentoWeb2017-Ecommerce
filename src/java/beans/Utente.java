@@ -50,6 +50,10 @@ public class Utente implements Serializable{
         return this.typeOfAccount;
     }
     
+    public void setActive(boolean x){
+        active=x;
+    }
+    
     public boolean isActive(){
         return this.active;
     }

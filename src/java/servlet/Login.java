@@ -77,16 +77,18 @@ public class Login extends HttpServlet {
         Connection con = (Connection) getServletContext().getAttribute("db");
         PreparedStatement ps=null;
         try {
-            ps = con.prepareStatement("SELECT * FROM Users WHERE username = ? AND password = ?"); //con is a Connection object
-            ps.setString(1, request.getParameter("username"));
+            ps = con.prepareStatement("SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?"); //con is a Connection object
+            ps.setString(1, request.getParameter("usrname"));
             ps.setString(2, request.getParameter("password"));
         } catch (SQLException ex) {
+            response.sendRedirect("loginPage.jsp");
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         ResultSet rs=null;
         try {
              rs = ps.executeQuery();
         } catch (SQLException ex) {
+            response.sendRedirect("loginPage.jsp");
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -95,9 +97,11 @@ public class Login extends HttpServlet {
                  response.sendRedirect("loginPage.jsp");
             }
             else{
-                u.setFirstName(rs.getString(2));
-                u.setLastName(rs.getString(3));
-                u.setTypeOfAccount(rs.getString("TypeOfUser"));
+                if(rs.getBoolean(8) == true){
+                    u.setFirstName(rs.getString(2));
+                    u.setLastName(rs.getString(3));
+                    u.setTypeOfAccount(rs.getString(5));
+                    u.setActive(rs.getBoolean(8));
                 /**
                 switch(x){
                     case 'R':
@@ -110,10 +114,13 @@ public class Login extends HttpServlet {
                         u.setIsAdmin(true);
                     break;
                 }  */
-                s.setAttribute("user", u);
-                response.sendRedirect("homepage.jsp");
+                    s.setAttribute("user", u);
+                    response.sendRedirect("homepage.jsp");
+                }
+                else response.sendRedirect("loginPage.jsp");
             }
         } catch (SQLException ex) {
+            response.sendRedirect("loginPage.jsp");
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         

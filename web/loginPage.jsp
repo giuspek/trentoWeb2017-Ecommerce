@@ -30,7 +30,7 @@
                                 <label for="username">
                                     Username
                                 </label>
-                                <input class="form-control" type="text" id="username" name="username">
+                                <input class="form-control" type="text" id="usrname" name="usrname">
                             </div>
                             <div class="col-md-6">
                                 <label for="password">
