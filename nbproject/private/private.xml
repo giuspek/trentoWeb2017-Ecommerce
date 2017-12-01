@@ -5,12 +5,9 @@
         <group>
             <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/TrueGuappo/Guappo/src/java/servlet/Login.java</file>
             <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/TrueGuappo/Guappo/web/navbar.jsp</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/TrueGuappo/Guappo/web/confirm.jsp</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/TrueGuappo/Guappo/src/java/beans/Utente.java</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/TrueGuappo/Guappo/web/waitingconfirm.jsp</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/TrueGuappo/Guappo/web/cart.jsp</file>
             <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/TrueGuappo/Guappo/web/prodotto.jsp</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/TrueGuappo/Guappo/web/register.jsp</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/TrueGuappo/Guappo/src/java/servlet/Registration.java</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/TrueGuappo/Guappo/web/risultati2.jsp</file>
         </group>
     </open-files>
 </project-private>

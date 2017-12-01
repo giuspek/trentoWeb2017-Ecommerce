@@ -11,7 +11,9 @@
 <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+<script src="js/star-rating.js" type="text/javascript"></script>
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 
 <!DOCTYPE html>
@@ -36,7 +38,7 @@
                     <div class="col-md-8">
                         <div class="row">
                             <h1> <c:out value="${result.rows[0].name}" /> </h1>
-                            <p> Rating: 3/5 </p>
+                            <p> Rating: <input id="rating-system" type="number" class="rating" min="0" max="5" step="1"> </p>
                             <p> Numero di recensioni: 0 </p>
 
                             <a href="mappa.jsp?map=<c:out value="${result.rows[0].id_shop}" />">Guarda la mappa</a>
@@ -54,3 +56,8 @@
         </div>
     </body>
 </html>
+
+<script type="text/css"> 
+    $('#input-id').rating('update',5);
+
+</script>
