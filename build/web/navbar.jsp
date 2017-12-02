@@ -81,7 +81,7 @@
                         <jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" />
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profilo</a></li>
+                        <li><a href="profile.jsp">Profilo</a></li>
                         <li><a href="#">Il vostro negozio</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="Logout">Esci</a></li>
@@ -99,7 +99,7 @@
                         <jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" />
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profilo</a></li>
+                        <li><a href="profile.jsp">Profilo</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="Logout">Esci</a></li>
                     </ul>
@@ -118,9 +118,10 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profilo</a></li>
+                        <li><a href="profile.jsp">Profilo</a></li>
                         <li><a href="#">Segnala anomalie</a></li>
                         <li><a href="cart.jsp">Carrello</a></li>
+                        <li><a href="ordini.jsp">I miei ordini</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="Logout">Esci</a></li>
                     </ul>
