@@ -9,6 +9,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.Prodotto"%>
 <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
+<jsp:useBean id="cart" class="beans.Carrello" scope="session" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -46,9 +47,14 @@
 
                             <p> € <c:out value="${result.rows[0].price}" /> </p>
                             <p> </p>
-                            <button class="btn btn-success">
-                                Aggiungi al carrello
-                            </button>
+                            <form action="addCart" method="POST">
+                                <input class="btn btn-success" type="submit">
+                                    Aggiungi al carrello
+                                </input>
+                                <input type="hidden" name="nomeProdotto" value="${result.rows[0].name}" />
+                                <input type="hidden" name="prezzoProdotto" value="${result.rows[0].price}" />
+                                <input type="number" name="quantita" min="1" step="1" />
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -57,7 +63,6 @@
     </body>
 </html>
 
-<script type="text/css"> 
+<script type="text/js"> 
     $('#input-id').rating('update',5);
-
 </script>

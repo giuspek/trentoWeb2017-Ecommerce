@@ -36,6 +36,18 @@
         <servlet-name>Registration</servlet-name>
         <servlet-class>servlet.Registration</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>resetPassword</servlet-name>
+        <servlet-class>servlet.resetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addCart</servlet-name>
+        <servlet-class>servlet.addCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminateFromCart</servlet-name>
+        <servlet-class>servlet.EliminateFromCart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
         <url-pattern>/Registration</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>resetPassword</servlet-name>
+        <url-pattern>/resetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addCart</servlet-name>
+        <url-pattern>/addCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminateFromCart</servlet-name>
+        <url-pattern>/EliminateFromCart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

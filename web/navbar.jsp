@@ -4,6 +4,7 @@
     Author     : Giuseppe
 --%>
 <jsp:useBean id="user" class="beans.Utente" scope="session" /> 
+<jsp:useBean id="cart" class="beans.Carrello" scope="session" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
 <link href="http://code.jquery.com/ui/1.11.4/themes/redmond/jquery-ui.css" rel="stylesheet">
@@ -119,7 +120,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">Profilo</a></li>
                         <li><a href="#">Segnala anomalie</a></li>
-                        <li><a href="#">Carrello</a></li>
+                        <li><a href="cart.jsp">Carrello</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="Logout">Esci</a></li>
                     </ul>
@@ -133,7 +134,7 @@
                 <li class="dropdown">
                 <li><a href="register.jsp">Registrati</a></li>
                 <li><a href="loginPage.jsp">Accedi</a></li>
-                <li><a href="#">Carrello</a></li>
+                <li><a href="cart.jsp">Carrello</a></li>
                 </li>
             </ul>
         </div>
