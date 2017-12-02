@@ -31,7 +31,7 @@
             response.sendRedirect("homepage.jsp");
         %>
         <jsp:include page="navbar.jsp"/>
-        <form action="Registration">
+        <form action="Registration" method="POST">
             <div class="form-group">
                 <div class="container">
                     <div class="jumbotron">

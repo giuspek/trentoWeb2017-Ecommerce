@@ -44,7 +44,7 @@ public class Registration extends HttpServlet {
         final String host = "smtp.gmail.com";
         final String port = "465";
         final String username = "giuseppespallitta@gmail.com";
-        final String password = "qyeomjyhpyokjqzv";
+        final String password = "fxpapaaxyjcqjvso";
         Properties props = System.getProperties();
         props.setProperty("mail.smtp.host", host);
         props.setProperty("mail.smtp.port", port);
@@ -60,7 +60,6 @@ public class Registration extends HttpServlet {
                 return new PasswordAuthentication(username, password);
             }
         });
-
         // Controlla se esiste già un account con quella mail
         PreparedStatement ps = null;
         try {
@@ -69,17 +68,17 @@ public class Registration extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (rs == null) {
+        if (rs.next()) {
             response.sendRedirect("register.jsp");
         }
 
-        
         // Crea valore hash di conferma
         MessageDigest md = MessageDigest.getInstance("MD5");
         String hashable=request.getParameter("nickname") + "2" + request.getParameter("cognome") + "?0" + request.getParameter("pass1");
