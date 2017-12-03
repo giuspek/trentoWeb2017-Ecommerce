@@ -60,6 +60,10 @@
         <servlet-name>ChangeProfile</servlet-name>
         <servlet-class>servlet.ChangeProfile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateReview</servlet-name>
+        <servlet-class>servlet.CreateReview</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>ChangeProfile</servlet-name>
         <url-pattern>/ChangeProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateReview</servlet-name>
+        <url-pattern>/CreateReview</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

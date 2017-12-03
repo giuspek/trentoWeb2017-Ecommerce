@@ -44,7 +44,7 @@
                         </div>
                         <div class="row">
                             <c:if test="${!(row.reviewed)}" >
-                                <form action="makeReview.jsp" method="POST">
+                                <form action="writeReview.jsp" method="POST">
                                     <input type="submit" value="Valuta il prodotto" class="btn btn-primary">
                                     <input type="hidden" name="sell" value="${row.id}">
                                     <input type="hidden" name="nameProduct" value="${row.name}">
