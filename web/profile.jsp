@@ -19,6 +19,7 @@
         <title>Profilo</title>
     </head>
     <body>
+        <jsp:include page="navbar.jsp"/>
         <div class="container">
             <h1>I miei dati personali</h1>
             <div class="jumbotron">
@@ -32,11 +33,13 @@
                     <p> Username: <c:out value="${user.username}" /> </p> 
                 </div>
                 <div class="row">
-                    <form action="changeUsername.jsp" method="GET">
+                    <form action="changeUsername.jsp" method="POST">
                         <input type="submit" value="Cambia username" class="btn btn-primary">
+                        <input type="hidden" name="n" value="${user.username}">
                     </form> 
-                    <form action="changeName.jsp" method="GET">
+                    <form action="changeProfile.jsp" method="GET">
                         <input type="submit" value="Cambia nome/cognome" class="btn btn-primary">
+                        <input type="hidden" name="n" value="${user.username}">
                     </form> 
                 </div>
             </div>

@@ -1,9 +1,9 @@
 <%-- 
-    Document   : errorPage
-    Created on : 2-dic-2017, 14.50.46
+    Document   : changeUsernameOK
+    Created on : 3-dic-2017, 13.04.04
     Author     : Giuseppe
 --%>
-<%@page isErrorPage="true"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="navbar.jsp" />
-        <h1>ErrorPage!</h1>
+       <jsp:include page="navbar.jsp"/>
+        <h1>Profilo cambiato con successo! </h1>
     </body>
 </html>

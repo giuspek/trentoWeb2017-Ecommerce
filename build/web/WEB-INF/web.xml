@@ -52,6 +52,14 @@
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>servlet.ChangePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangeUsername</servlet-name>
+        <servlet-class>servlet.ChangeUsername</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeProfile</servlet-name>
+        <servlet-class>servlet.ChangeProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeUsername</servlet-name>
+        <url-pattern>/ChangeUsername</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeProfile</servlet-name>
+        <url-pattern>/ChangeProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
