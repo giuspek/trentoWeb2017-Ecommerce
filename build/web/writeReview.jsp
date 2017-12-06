@@ -51,8 +51,8 @@
                                 </div>
                                 <div class="row">
                                     <p> Descrizione </p>
-                                    <textarea name="description" form="mainForm" rows="8" cols="150">
-                                    </textarea>
+                                    <textarea name="description" form="mainForm" rows="8" cols="150"></textarea>
+                                    
                                 </div>
                                 <div class="row">
                                     <input type="submit" class="btn btn-warning" value="Invia recensione">

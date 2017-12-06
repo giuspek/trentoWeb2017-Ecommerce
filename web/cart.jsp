@@ -53,14 +53,14 @@
          
         </c:forEach>
             <hr>
-            <c:if test="${(empty user.id)}">
+            <c:if test="${(empty user.username)}">
             <div class="container">
                 <div class="jumbotron">
                     <p> Non puoi ancora acquistare: prima <a href="register.jsp"> registrati </a> o <a href="loginPage.jsp" > accedi. </a>
                 </div>
             </div>
         </c:if>
-            <c:if test="${!(empty user.id) && (cart.number > 0)}">
+            <c:if test="${!(empty user.username) && (cart.number > 0)}">
             <div class="container">
                 <div class="jumbotron">
                     <form action="shippingPage.jsp">
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </c:if>
-        <c:if test="${!(empty user.id) && (cart.number == 0)}">
+            <c:if test="${!(empty user.username) && (cart.number == 0)}">
             <div class="container">
                 <div class="jumbotron">
                     <h1> Il tuo carrello è vuoto! </h1>

@@ -18,7 +18,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>I miei ordini</title>
         <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
-                   sql="select P.name, P.price,S.id, S.date, S.reviewed from PRODUCTS P, SELLS S where P.ID = S.ID_PRODUCT AND P.ID IN (SELECT ID_PRODUCT FROM SELLS WHERE ID_BUYER = ?)" >
+                   sql="select P.name, P.price,S.id, S.date, S.reviewed, S.id_product from PRODUCTS P, SELLS S where P.ID = S.ID_PRODUCT AND P.ID IN (SELECT ID_PRODUCT FROM SELLS WHERE ID_BUYER = ?)" >
             <sql:param value="${user.id}"/>
         </sql:query>
     </head>
@@ -50,6 +50,12 @@
                                     <input type="hidden" name="nameProduct" value="${row.name}">
                                 </form>
                             </c:if>
+                            <form action="segnalazione.jsp" method="POST">
+                                    <input type="submit" value="Segnala anomalia" class="btn btn-danger">
+                                    <input type="hidden" name="sell" value="${row.id}">
+                                    <input type="hidden" name="nameProduct" value="${row.name}">
+                                    <input type="hidden" name="idProduct" value="${row.id_product}">
+                            </form>
                         </div>
                     </div>  
                 </div>

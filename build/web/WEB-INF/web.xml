@@ -64,6 +64,14 @@
         <servlet-name>CreateReview</servlet-name>
         <servlet-class>servlet.CreateReview</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateAnomaly</servlet-name>
+        <servlet-class>servlet.CreateAnomaly</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAnomaly</servlet-name>
+        <servlet-class>servlet.ManageAnomaly</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>CreateReview</servlet-name>
         <url-pattern>/CreateReview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateAnomaly</servlet-name>
+        <url-pattern>/CreateAnomaly</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAnomaly</servlet-name>
+        <url-pattern>/ManageAnomaly</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
