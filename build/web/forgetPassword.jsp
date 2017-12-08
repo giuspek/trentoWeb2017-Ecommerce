@@ -29,7 +29,7 @@
                                     <div class="col-md-2"> </div>
                                     <div class="col-md-8">
                                         <span class="usericon">
-                                            <input type="text" class="form-control" placeholder="E-mail...">
+                                            <input type="text" name="mail" class="form-control" placeholder="E-mail...">
                                         </span>
                                     </div>
                                 </div>

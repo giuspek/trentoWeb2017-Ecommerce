@@ -98,9 +98,11 @@ public class Login extends HttpServlet {
             }
             else{
                 if(rs.getBoolean(8) == true){
+                    u.setId(rs.getInt(1));
                     u.setFirstName(rs.getString(2));
                     u.setLastName(rs.getString(3));
                     u.setTypeOfAccount(rs.getString(5));
+                    u.setUsername(rs.getString(4));
                     u.setActive(rs.getBoolean(8));
                 /**
                 switch(x){

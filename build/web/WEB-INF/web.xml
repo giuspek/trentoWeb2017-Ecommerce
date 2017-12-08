@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
-        <param-name> dburl </param-name>
+        <param-name> db </param-name>
         <param-value> jdbc:derby://localhost:1527/guappo </param-value>
     </context-param>
     <context-param>
@@ -36,6 +36,42 @@
         <servlet-name>Registration</servlet-name>
         <servlet-class>servlet.Registration</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>resetPassword</servlet-name>
+        <servlet-class>servlet.resetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addCart</servlet-name>
+        <servlet-class>servlet.addCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminateFromCart</servlet-name>
+        <servlet-class>servlet.EliminateFromCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>servlet.ChangePassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeUsername</servlet-name>
+        <servlet-class>servlet.ChangeUsername</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeProfile</servlet-name>
+        <servlet-class>servlet.ChangeProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateReview</servlet-name>
+        <servlet-class>servlet.CreateReview</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateAnomaly</servlet-name>
+        <servlet-class>servlet.CreateAnomaly</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAnomaly</servlet-name>
+        <servlet-class>servlet.ManageAnomaly</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -55,6 +91,42 @@
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
         <url-pattern>/Registration</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>resetPassword</servlet-name>
+        <url-pattern>/resetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addCart</servlet-name>
+        <url-pattern>/addCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminateFromCart</servlet-name>
+        <url-pattern>/EliminateFromCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/ChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeUsername</servlet-name>
+        <url-pattern>/ChangeUsername</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeProfile</servlet-name>
+        <url-pattern>/ChangeProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateReview</servlet-name>
+        <url-pattern>/CreateReview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateAnomaly</servlet-name>
+        <url-pattern>/CreateAnomaly</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAnomaly</servlet-name>
+        <url-pattern>/ManageAnomaly</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
