@@ -15,6 +15,7 @@ public class Utente implements Serializable{
     private int id;
     private String firstName;
     private String lastName;
+    private String username;
     private String typeOfAccount;
     private boolean active;
     
@@ -24,6 +25,14 @@ public class Utente implements Serializable{
     
     public int getId(){
         return this.id;
+    }
+    
+    public void setUsername(String s){
+        this.username=s;
+    }
+    
+    public String getUsername(){
+        return this.username;
     }
     
     public void setFirstName(String s){
