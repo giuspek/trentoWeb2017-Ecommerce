@@ -13,12 +13,18 @@ public class Elemento {
     private String name;
     private double price;
     private int quantity, id;
+    private String shopName;
+    private String shopAddress;
+    private int idProduct;
     
     public Elemento(){
         name=null;
         price=0;
         quantity=0;
         id=0;
+        shopName=null;
+        shopAddress=null;
+        idProduct=0;
     }
     
     public int getId(){
@@ -51,5 +57,28 @@ public class Elemento {
     
     public void setQuantity(int q){
         this.quantity=q;
+    }
+    
+     public String getShopName(){
+        return this.shopName;
+    }
+    
+    public void setShopName(String s){
+        this.shopName=s;
+    }
+     public String getShopAddress(){
+        return this.shopAddress;
+    }
+    
+    public void setShopAddress(String s){
+        this.shopAddress=s;
+    }
+    
+     public int getIdProduct(){
+        return this.idProduct;
+    }
+    
+    public void setIdProduct(int i){
+        this.idProduct=i;
     }
 }

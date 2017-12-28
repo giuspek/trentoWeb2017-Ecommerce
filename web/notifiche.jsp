@@ -93,7 +93,7 @@
                                                 </li>
                                             </ul>
                                         </c:if>
-                                        <c:if test="${row.solution == 7}">
+                                        <c:if test="${row.solution == 6}">
                                             <ul>
                                                 <li>
                                                     Richiesta rispedizione prodotto
@@ -103,7 +103,7 @@
                                                 </li>
                                             </ul>
                                         </c:if>
-                                        <c:if test="${row.solution == 8}">
+                                        <c:if test="${row.solution == 7}">
                                             <ul>
                                                 <li>
                                                     Richiesta di rimborso accolta

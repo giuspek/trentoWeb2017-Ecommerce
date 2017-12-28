@@ -60,10 +60,12 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            //Connection con = (Connection) getServletContext().getAttribute("db");
+            PreparedStatement ps=null;
             HttpSession s=request.getSession();
             Utente u=(Utente) s.getAttribute("user");
             //Utente u=
-        /**    Connection con = null;
+           Connection con = null;
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (ClassNotFoundException ex) {
@@ -73,9 +75,8 @@ public class Login extends HttpServlet {
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/guappo", "root", "root");
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } */
-        Connection con = (Connection) getServletContext().getAttribute("db");
-        PreparedStatement ps=null;
+        } 
+        
         try {
             ps = con.prepareStatement("SELECT * FROM USERS WHERE USERNAME = ? AND PASSWORD = ?"); //con is a Connection object
             ps.setString(1, request.getParameter("usrname"));

@@ -41,6 +41,7 @@ public class CreateAnomaly extends HttpServlet {
         HttpSession s = request.getSession();
         Utente u = (Utente) s.getAttribute("user");
         Connection con = (Connection) getServletContext().getAttribute("db");
+         response.sendRedirect("errorPage.jsp"); response.sendRedirect("errorPage.jsp");
         PreparedStatement ps = null;
         ResultSet rs = null;
         int idVendita = 0, idVenditore = 0;

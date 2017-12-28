@@ -7,8 +7,16 @@ package servlet;
 
 import beans.Carrello;
 import beans.Elemento;
+import beans.Utente;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Giuseppe
  */
-public class addCart extends HttpServlet {
+public class AddToSells extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,32 +39,27 @@ public class addCart extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String name = request.getParameter("nomeProdotto");
-        double price = Double.parseDouble(request.getParameter("prezzoProdotto"));
-        int quantita = Integer.parseInt(request.getParameter("quantita"));
-        int idProduct = Integer.parseInt(request.getParameter("idProduct"));
-        /*Elemento e = new Elemento();
-        e.setName(name);
-        e.setPrice(price);
-        e.setQuantity(quantita);*/
+            throws ServletException, IOException, SQLException {
+        
         HttpSession session=request.getSession();
         Carrello cart = (Carrello) request.getSession().getAttribute("cart");
-        if (cart == null) {
-            //response.sendRedirect("pepepep.jsp");
-            cart = new Carrello();
-            
-            System.out.println(cart);
-            
+        Utente u = (Utente) session.getAttribute("user");
+        Connection con = (Connection) getServletContext().getAttribute("db");
+        ArrayList<Elemento> list = cart.getList();
+        PreparedStatement ps = null;
+        java.sql.Date t = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        
+        for (int i=0; i<list.size();i++){
+            ps = con.prepareStatement("INSERT INTO SELLS VALUES(DEFAULT,?,?,false,?)");
+            ps.setInt(1, u.getId());
+            ps.setInt(2, list.get(i).getIdProduct());
+            ps.setDate(3, t);
+            ps.executeUpdate();
         }
-        if(request.getParameter("deposit").equals("T")){
-            cart.addElement(name, price, quantita, request.getParameter("shopName"), request.getParameter("shopAddress"), idProduct);
-        }
-        else{
-            cart.addElement(name, price, quantita, idProduct );              
-        }
-        session.setAttribute("cart", cart);
-        response.sendRedirect("addedObject.jsp");
+        
+        session.setAttribute("cart", null);
+        response.sendRedirect("homepage.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -71,7 +74,11 @@ public class addCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddToSells.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -85,7 +92,11 @@ public class addCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddToSells.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

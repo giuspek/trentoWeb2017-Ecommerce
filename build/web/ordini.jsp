@@ -18,7 +18,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>I miei ordini</title>
         <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
-                   sql="select P.name, P.price,S.id, S.date, S.reviewed, S.id_product from PRODUCTS P, SELLS S where P.ID = S.ID_PRODUCT AND P.ID IN (SELECT ID_PRODUCT FROM SELLS WHERE ID_BUYER = ?)" >
+                   sql="select P.name, P.price,S.id, S.date, S.reviewed, S.id_product from PRODUCTS P, SELLS S where P.ID = S.ID_PRODUCT AND S.ID_BUYER = ?" >
             <sql:param value="${user.id}"/>
         </sql:query>
     </head>

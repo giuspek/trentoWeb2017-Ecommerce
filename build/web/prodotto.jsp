@@ -22,8 +22,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from PRODUCTS WHERE id = ${param.prodotto}
+            SELECT P.*, S.name AS shopName, S.deposit, C.address from PRODUCTS P, SHOPS S, SHOP_COORDINATE X, COORDINATES C WHERE P.id = ${param.prodotto} AND P.ID_SHOP = S.ID AND S.ID = X.ID_SHOP AND X.ID_COORDINATE = C.ID
         </sql:query>
+        <sql:query dataSource = "${snapshot}" var = "reviews">
+            SELECT * FROM REVIEWS WHERE ID_PRODUCT = ${param.prodotto} ORDER BY DATE_CREATION DESC
+        </sql:query>
+        <sql:query dataSource = "${snapshot}" var = "rating">
+            SELECT AVG(CAST(GLOBAL_VALUE AS FLOAT)) AS media FROM REVIEWS WHERE ID_PRODUCT = ${param.prodotto} GROUP BY ID_PRODUCT
+        </sql:query>
+
         <title>
             <c:out value="${result.rows[0].name}" />
         </title>
@@ -38,31 +45,58 @@
                     </div>
                     <div class="col-md-8">
                         <div class="row">
-                            <h1> <c:out value="${result.rows[0].name}" /> </h1>
-                            <p> Rating: <input id="rating-system" type="number" class="rating" min="0" max="5" step="1"> </p>
-                            <p> Numero di recensioni: 0 </p>
-
-                            <a href="mappa.jsp?map=<c:out value="${result.rows[0].id_shop}" />">Guarda la mappa</a>
-
+                            <h1><c:out value="${result.rows[0].name}" /> </h1>
+                            <div class="row">
+                                <input id="ratingOverall" type="number" class="rating" value="${rating.rows[0].media}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
+                            </div>
+                            <div class="row">
+                                <p> Venditore: <c:out value="${result.rows[0].shopName}" /> 
+                            </div>
+                            
+                            <div class="row">
+                                <a href="mappa.jsp?map=<c:out value="${result.rows[0].id_shop}" />">Guarda la mappa</a>
+                            </div>
 
                             <p> € <c:out value="${result.rows[0].price}" /> </p>
                             <p> </p>
                             <form action="addCart" method="POST">
                                 <input class="btn btn-success" type="submit">
-                                    Aggiungi al carrello
+                                Aggiungi al carrello
                                 </input>
                                 <input type="hidden" name="nomeProdotto" value="${result.rows[0].name}" />
                                 <input type="hidden" name="prezzoProdotto" value="${result.rows[0].price}" />
+                                <input type="hidden" name="deposit" value="${result.rows[0].deposit}" />
+                                <input type="hidden" name="shopName" value="${result.rows[0].shopName}" />
+                                <input type="hidden" name="shopAddress" value="${result.rows[0].address}" />
+                                <input type="hidden" name="idProduct" value="${result.rows[0].id}" />
+
                                 <input type="number" name="quantita" min="1" step="1" />
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="jumbotron">
+                <h2>Recensioni </h2>
+                    <c:forEach items="${reviews.rows}" var="row">
+                    <p> ------------------------------------------------------------------------------------------------ <p>
+                        <div class="row">
+                            <h3>Titolo: <c:out value="${row.name}"/></h3>
+                        </div>
+                        <div class="row">
+                            <p> Qualità del prodotto </p> <input id="ratingQuality" type="number" class="rating" value="${row.quality}" data-size="xs" data-readonly="true">
+                        </div>
+                        <div class="row">
+                            <p> Servizio </p> <input id="ratingService" type="number" class="rating" value="${row.service}" data-size="xs" data-readonly="true">                      
+                        </div>
+                        <div class="row">
+                            <p> Rapporto qualità/prezzo </p> <input id="ratingMoney" type="number" class="rating" value="${row.value_for_money}" data-size="xs" data-readonly="true">                           
+                        </div>
+                        <div class="row">
+                            <p> Descrizione: <c:out value="${row.description}" /> </p>
+                        </div>
+                    </c:forEach>
+            </div>
         </div>
     </body>
 </html>
-
-<script type="text/js"> 
-    $('#input-id').rating('update',5);
-</script>
