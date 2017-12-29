@@ -25,7 +25,7 @@
             SELECT P.*, S.name AS shopName, S.deposit, C.address from PRODUCTS P, SHOPS S, SHOP_COORDINATE X, COORDINATES C WHERE P.id = ${param.prodotto} AND P.ID_SHOP = S.ID AND S.ID = X.ID_SHOP AND X.ID_COORDINATE = C.ID
         </sql:query>
         <sql:query dataSource = "${snapshot}" var = "reviews">
-            SELECT * FROM REVIEWS WHERE ID_PRODUCT = ${param.prodotto} ORDER BY DATE_CREATION DESC
+            SELECT R.*, U.username FROM REVIEWS R, USERS U WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = ${param.prodotto} ORDER BY DATE_CREATION DESC
         </sql:query>
         <sql:query dataSource = "${snapshot}" var = "rating">
             SELECT AVG(CAST(GLOBAL_VALUE AS FLOAT)) AS media FROM REVIEWS WHERE ID_PRODUCT = ${param.prodotto} GROUP BY ID_PRODUCT
@@ -81,7 +81,8 @@
                     <c:forEach items="${reviews.rows}" var="row">
                     <p> ------------------------------------------------------------------------------------------------ <p>
                         <div class="row">
-                            <h3>Titolo: <c:out value="${row.name}"/></h3>
+                            <h3><b><c:out value="${row.name}"/></b></h3>
+                            <p> <c:out value="${row.username}" /> --- <c:out value="${row.date_creation}" /> </p>
                         </div>
                         <div class="row">
                             <p> Qualità del prodotto </p> <input id="ratingQuality" type="number" class="rating" value="${row.quality}" data-size="xs" data-readonly="true">

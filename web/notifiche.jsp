@@ -17,10 +17,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Le mie notifiche</title>
-        <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
-                   sql="SELECT A.*, P.name FROM ANOMALIES A, SELLS S, PRODUCTS P WHERE ID_SELLER = ? AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID" >
-            <sql:param value="${user.id}"/>
-        </sql:query>
+        <c:choose>
+            <c:when test="${user.typeOfAccount == 'S'}">
+                <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
+                           sql="SELECT A.*, P.name FROM ANOMALIES A, SELLS S, PRODUCTS P WHERE ID_SELLER = ? AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID" >
+                    <sql:param value="${user.id}"/>
+                </sql:query>
+            </c:when>
+            <c:otherwise>
+                <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
+                           sql="SELECT A.*, P.name FROM ANOMALIES A, SELLS S, PRODUCTS P WHERE A.ID_BUYER = ? AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID" >
+                    <sql:param value="${user.id}"/>
+                </sql:query>
+            </c:otherwise>
+        </c:choose>
+
+
+
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
@@ -63,9 +76,9 @@
                                         <b> Risolto </b>
                                         <c:if test="${row.solution == 0}">
                                             <p> Anomalia rigettata: <c:out value="${row.rejection}" />
-                                        </c:if>
-                                        <c:if test="${row.solution == 1}">
-                                        <p> Richiesta di rimborso accolta </p>
+                                            </c:if>
+                                            <c:if test="${row.solution == 1}">
+                                            <p> Richiesta di rimborso accolta </p>
                                         </c:if>  
                                         <c:if test="${row.solution == 2}">
                                             <p> Richiesta rispedizione prodotto </p>
@@ -116,7 +129,7 @@
                                                 </li>
                                             </ul>
                                         </c:if>
-                                        </c:otherwise>
+                                    </c:otherwise>
                                 </c:choose>
                             </div>
                         </div>  

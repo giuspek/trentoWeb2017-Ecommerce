@@ -126,6 +126,7 @@
                         <li role="separator" class="divider"></li>
                         <li><a href="Logout">Esci</a></li>
                     </ul>
+                    <li><a href="notifiche.jsp">Notifiche</a></li>
                 </li>
             </ul>
         </div>

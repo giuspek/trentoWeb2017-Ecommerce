@@ -41,7 +41,6 @@ public class CreateAnomaly extends HttpServlet {
         HttpSession s = request.getSession();
         Utente u = (Utente) s.getAttribute("user");
         Connection con = (Connection) getServletContext().getAttribute("db");
-         response.sendRedirect("errorPage.jsp"); response.sendRedirect("errorPage.jsp");
         PreparedStatement ps = null;
         ResultSet rs = null;
         int idVendita = 0, idVenditore = 0;
@@ -52,7 +51,7 @@ public class CreateAnomaly extends HttpServlet {
 
         if (rs.next()) {
             idVenditore = rs.getInt("id");
-            ps = con.prepareStatement("INSERT INTO ANOMALIES VALUES (DEFAULT,?,?,?,?,?,?,null)");
+            ps = con.prepareStatement("INSERT INTO ANOMALIES VALUES (DEFAULT,?,?,?,?,?,?,null,null)");
 
             ps.setString(1, request.getParameter("type"));
             ps.setString(2, request.getParameter("description"));
