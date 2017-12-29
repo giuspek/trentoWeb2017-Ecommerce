@@ -121,12 +121,12 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="profile.jsp">Profilo</a></li>
-                        <li><a href="#">Segnala anomalie</a></li>
                         <li><a href="cart.jsp">Carrello</a></li>
                         <li><a href="ordini.jsp">I miei ordini</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="Logout">Esci</a></li>
                     </ul>
+                    <li><a href="notifiche.jsp">Notifiche</a></li>
                 </li>
             </ul>
         </div>

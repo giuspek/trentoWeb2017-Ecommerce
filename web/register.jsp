@@ -12,13 +12,13 @@
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <!DOCTYPE html>
 <script type="text/javascript">
-    $(document).ready(function(){
-    $("#privacy").click(function(){
-        document.getElementById("confirm").disabled=false;
-        
+    $(document).ready(function () {
+        $("#privacy").click(function () {
+            document.getElementById("confirm").disabled = false;
 
+
+        });
     });
-});
 </script>
 <html>
     <head>
@@ -27,13 +27,25 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     </head>
     <body style="background-color:#a0522d">
-        <% if( ( (Utente) session.getAttribute("user")).getFirstName() != null)
-            response.sendRedirect("homepage.jsp");
+        <% if (((Utente) session.getAttribute("user")).getFirstName() != null) {
+                response.sendRedirect("homepage.jsp");
+            }
         %>
         <jsp:include page="navbar.jsp"/>
+
         <form action="Registration" method="POST">
             <div class="form-group">
                 <div class="container">
+                    <c:if test="${param.e == '1'}" >
+                        <div class="alert alert-danger">
+                            <strong>Registrazione negata</strong> Le password non coincidono, riprova!
+                        </div>
+                    </c:if>
+                    <c:if test="${param.e == '2'}" >
+                        <div class="alert alert-danger">
+                            <strong>Registrazione negata</strong> La mail usata è già in uso, scegline un'altra!
+                        </div>
+                    </c:if>
                     <div class="jumbotron">
                         <div class="row">
                             <div class="col-md-4">
@@ -90,12 +102,12 @@
                         </div>
                         <input class="btn btn-success" id="confirm" type="submit" value="Conferma" disabled="true">
                         <input class="btn btn-danger" type="reset" value="Annulla">
-                        
+
                     </div>
                 </div>
             </div>
         </form>
-        
+
     </body>
 </html>
 

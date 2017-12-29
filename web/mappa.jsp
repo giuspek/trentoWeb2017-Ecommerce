@@ -12,6 +12,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+<script src="js/star-rating.js" type="text/javascript"></script>
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 <sql:query dataSource = "${snapshot}" var = "result">
     SELECT * FROM SHOPS WHERE ID = ${param.map}
@@ -59,12 +61,9 @@
                     <div class="col-md-8">
                         <div class="row">
                             <h1> <c:out value="${result.rows[0].name}" /> </h1>
-                            <p> Rating: <c:out value="${result.rows[0].global_value}" /> </p>
+                            <p> <input id="ratingOverall" type="number" class="rating" value="${result.rows[0].global_value}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
                             <a href="<c:out value="${result.rows[0].web_site_URL}" />"> Visita il sito web del negozio</a>
-
-                            <p> Latitudine: <c:out value="${coordinates.rows[0].latitude}" /> </p>
-                            <p> Longitudine <c:out value="${coordinates.rows[0].longitude}" /> </p>
-                            <p> Address <c:out value="${coordinates.rows[0].address}" /> </p>
+                            <p> Indirizzo: <c:out value="${coordinates.rows[0].address}" /> </p>
                         </div>
                     </div>
                 </div>

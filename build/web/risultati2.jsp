@@ -12,6 +12,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+<script src="js/star-rating.js" type="text/javascript"></script>
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 
 <script type="text/javascript">
@@ -85,7 +87,7 @@
                                 </div>
                             </div>
                             <input type="hidden" id="order" name="order" value="name">
-                            <input type="hidden" id="oggetto" name="oggetto" value="">
+                            <input type="hidden" id="oggetto" name="oggetto" value="${param.oggetto}">
                             <input type="hidden" id="filtro" name="filtro" value="price">
                             <div class="row">
                                 <input class="btn btn-success" id="sender" type="submit" value="Conferma">
@@ -107,6 +109,9 @@
                                     </div>
                                     <div class="row">
                                         <p> € <c:out value="${row.price}" /> </p>
+                                    </div>
+                                    <div class="row">
+                                        <input id="ratingOverall" type="number" class="rating" value="${row.global_value}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
                                     </div>
                                     <div class="row">
                                         <a href="prodotto.jsp?prodotto=${row.id}">Vedi Prodotto</a>

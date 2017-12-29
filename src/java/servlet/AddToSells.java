@@ -5,13 +5,16 @@
  */
 package servlet;
 
+import beans.Carrello;
+import beans.Elemento;
 import beans.Utente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -24,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Giuseppe
  */
-public class CreateAnomaly extends HttpServlet {
+public class AddToSells extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,35 +40,26 @@ public class CreateAnomaly extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-
-        HttpSession s = request.getSession();
-        Utente u = (Utente) s.getAttribute("user");
+        
+        HttpSession session=request.getSession();
+        Carrello cart = (Carrello) request.getSession().getAttribute("cart");
+        Utente u = (Utente) session.getAttribute("user");
         Connection con = (Connection) getServletContext().getAttribute("db");
+        ArrayList<Elemento> list = cart.getList();
         PreparedStatement ps = null;
-        ResultSet rs = null;
-        int idVendita = 0, idVenditore = 0;
-
-        ps = con.prepareStatement("SELECT U.ID FROM USERS U, SELLS S, PRODUCTS P, SHOPS T WHERE S.ID = ? AND S.ID_PRODUCT = P.ID AND P.ID_SHOP = T.ID AND T.ID_OWNER = U.ID");
-        ps.setInt(1, Integer.parseInt(request.getParameter("sell")));
-        rs = ps.executeQuery();
-
-        if (rs.next()) {
-            idVenditore = rs.getInt("id");
-            ps = con.prepareStatement("INSERT INTO ANOMALIES VALUES (DEFAULT,?,?,?,?,?,?,null,null)");
-
-            ps.setString(1, request.getParameter("type"));
-            ps.setString(2, request.getParameter("description"));
-            ps.setBoolean(3, false);
-            ps.setInt(4, Integer.parseInt(request.getParameter("sell")));
-            ps.setInt(5, u.getId());
-            ps.setInt(6, idVenditore);
-
+        java.sql.Date t = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        
+        for (int i=0; i<list.size();i++){
+            ps = con.prepareStatement("INSERT INTO SELLS VALUES(DEFAULT,?,?,false,?)");
+            ps.setInt(1, u.getId());
+            ps.setInt(2, list.get(i).getIdProduct());
+            ps.setDate(3, t);
             ps.executeUpdate();
-            response.sendRedirect("changeProfileOK.jsp");
-        } else {
-            response.sendRedirect("errorPage.jsp");
         }
-
+        
+        session.setAttribute("cart", null);
+        response.sendRedirect("homepage.jsp");
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -83,7 +77,7 @@ public class CreateAnomaly extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CreateAnomaly.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddToSells.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -101,7 +95,7 @@ public class CreateAnomaly extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CreateAnomaly.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddToSells.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

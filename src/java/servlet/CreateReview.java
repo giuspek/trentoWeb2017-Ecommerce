@@ -44,6 +44,7 @@ public class CreateReview extends HttpServlet {
         Utente u = (Utente) s.getAttribute("user");
         Connection con = (Connection) getServletContext().getAttribute("db");
         PreparedStatement ps = null;
+        int i=0; float media=0;
         ResultSet rs = null;
         java.sql.Date t = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         //java.sql.Date t = new java.sql.Date(today.YEAR, today.MONTH, today.DATE);
@@ -85,16 +86,36 @@ public class CreateReview extends HttpServlet {
                         ps.setInt(8, p);
                         ps.setInt(9, u.getId());
                         ps.executeUpdate();
-                        
                         //Segna che il prodotto è stato recensito
                         ps = con.prepareStatement("UPDATE SELLS SET REVIEWED = true WHERE ID = ?");
                         ps.setInt(1, Integer.parseInt(request.getParameter("sell")));
                         ps.executeUpdate();
                         
+                        ps = con.prepareStatement("SELECT AVG(CAST(R.GLOBAL_VALUE AS FLOAT)) AS media FROM REVIEWS R, PRODUCTS P WHERE P.ID = R.ID_PRODUCT AND P.ID IN (SELECT P1.ID FROM PRODUCTS P1, SELLS S WHERE S.ID_PRODUCT = P1.ID AND S.ID = ?) GROUP BY P.ID");
+                        ps.setInt(1, Integer.parseInt(request.getParameter("sell")));
+                        rs = ps.executeQuery();
+                        
+                        rs.next();
+                        media = rs.getFloat("media") ;
+                        ps = con.prepareStatement("UPDATE PRODUCTS SET GLOBAL_VALUE = ? WHERE ID IN (SELECT P1.ID FROM PRODUCTS P1, SELLS S WHERE S.ID_PRODUCT = P1.ID AND S.ID = ?)");
+                        ps.setFloat(1, media);
+                        ps.setString(2, request.getParameter("sell"));
+                        ps.executeUpdate();
+                        
+                        ps = con.prepareStatement("SELECT AVG(CAST(R.GLOBAL_VALUE AS FLOAT)) AS media FROM REVIEWS R, PRODUCTS P WHERE P.ID = R.ID_PRODUCT AND P.ID_SHOP IN (SELECT P1.ID_SHOP FROM PRODUCTS P1, SELLS S WHERE S.ID_PRODUCT = P1.ID AND S.ID = ?) GROUP BY P.ID_SHOP");
+                        ps.setInt(1, Integer.parseInt(request.getParameter("sell")));
+                        rs = ps.executeQuery();
+                        
+                        rs.next();
+                        media = rs.getFloat("media") ;
+                        ps = con.prepareStatement("UPDATE SHOPS SET GLOBAL_VALUE = ? WHERE ID IN (SELECT P1.ID_SHOP FROM PRODUCTS P1, SELLS S WHERE S.ID_PRODUCT = P1.ID AND S.ID = ?)");
+                        ps.setFloat(1, media);
+                        ps.setString(2, request.getParameter("sell"));
+                        ps.executeUpdate();
                         response.sendRedirect("changeProfileOK.jsp");
                         
                     } catch (SQLException ex) {
-                        response.sendRedirect("errorPagebg.jsp");
+                        response.sendRedirect("errorPagebg.jsp" + media);
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
 

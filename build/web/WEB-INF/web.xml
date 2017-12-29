@@ -72,6 +72,10 @@
         <servlet-name>ManageAnomaly</servlet-name>
         <servlet-class>servlet.ManageAnomaly</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddToSells</servlet-name>
+        <servlet-class>servlet.AddToSells</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>ManageAnomaly</servlet-name>
         <url-pattern>/ManageAnomaly</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToSells</servlet-name>
+        <url-pattern>/AddToSells</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

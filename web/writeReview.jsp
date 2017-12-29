@@ -33,25 +33,25 @@
 
                             <div class="jumbotron">
                                 <div class="row">
-                                    <p> Qualità del prodotto <input name="ratingQuality" type="number" class="rating" min="0" max="5" step="1"> </p>
+                                    <p> Qualità del prodotto <input name="ratingQuality" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
                                 </div>
                                 <div class="row">
-                                    <p> Qualità del servizio <input name="ratingService" type="number" class="rating" min="0" max="5" step="1"> </p>
+                                    <p> Qualità del servizio <input name="ratingService" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
                                 </div>
                                 <div class="row">
-                                    <p> Rapporto qualità/prezzo <input name="ratingPrice" type="number" class="rating" min="0" max="5" step="1"> </p>
+                                    <p> Rapporto qualità/prezzo <input name="ratingPrice" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
                                 </div>
                                 <div class="row">
-                                    <p> Valore globale <input name="overall" id="overall" type="number" class="rating" min="0" max="5" step="1"> </p>
+                                    <p> Valore globale <input name="overall" id="overall" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <p> Titolo recensione* </p>
-                                    <input type="text" name="title" maxlength="25">
+                                    <input type="text" name="title" maxlength="25" required="required">
                                 </div>
                                 <div class="row">
                                     <p> Descrizione </p>
-                                    <textarea name="description" form="mainForm" rows="8" cols="150"></textarea>
+                                    <textarea name="description" form="mainForm" rows="8" cols="150" required="required"></textarea>
                                     
                                 </div>
                                 <div class="row">
