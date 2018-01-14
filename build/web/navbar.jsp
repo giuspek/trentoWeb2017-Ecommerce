@@ -38,7 +38,7 @@ $(document).ready(function () {
     document.getElementById("search_concept").textContent = "Per nome";
   });
 
-  $("#oggetto").autocomplete({
+  $("#search").autocomplete({
     source: lista,
     minLength: 3
   });
@@ -60,7 +60,7 @@ $(document).ready(function () {
       <div class="col s10 m10 l5">
         <div class="row"style="padding-left: 87px">
           <div class="left">
-            <form>
+            <form method="GET" action="Search">
                 <div class="input-field col s4" id="filter" name="filter">
                 <select>
                   <option value="" disabled selected>Filtra</option>
@@ -69,11 +69,12 @@ $(document).ready(function () {
                 </select>
               </div>
               <div class="input-field col s8">
-                <input id="search" placeholder="Cerca un Gioco" style="font-size: 20px;" type="search" required>
+                <input id="search" name="search" placeholder="Cerca un Gioco" style="font-size: 20px;" type="search" required>
                 <label class="label-icon" for="search"><i class="material-icons" style="font-size: 35px; left: 10px; top:-15px; position: relative;">search</i>
                 </label>
                 <i class="material-icons closed" style="font-size: 35px;">close</i>
               </div>
+                <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
             </form>
           </div>
         </div>

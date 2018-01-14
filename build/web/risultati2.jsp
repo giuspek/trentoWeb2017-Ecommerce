@@ -63,7 +63,7 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from PRODUCTS WHERE LOWER(${param.filter}) LIKE LOWER('%${param.oggetto}%') ORDER BY ${param.orderparam}
+            SELECT * from PRODUCTS WHERE LOWER(NAME) LIKE LOWER('%${param.cercando}%') ORDER BY ${param.filter}
         </sql:query>
         <div class="container">
             <div class="row">
