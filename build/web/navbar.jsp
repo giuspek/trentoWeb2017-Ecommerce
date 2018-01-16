@@ -23,21 +23,36 @@
 					"${listaOggetti.rows[i].name}",
 			</c:forEach>
 				];
-
+                                
+    
+    var categorie = [
+        "ACTION",
+        "SHOOTER",
+        "PLATFORM"
+    ]
+    
     $(document).ready(function () {
         $("#pricefilter").click(function () {
-            $("#filter").val("price");
-            document.getElementById("search_concept").textContent = "Per prezzo";
+            $("#filter").val("first_genre");
+            document.getElementById("search_concept").textContent = "Per categoria";
+            $("#oggetto").autocomplete({
+            source: categorie,
+            minLength: 1
+        });
         });
 
         $("#namefilter").click(function () {
             $("#filter").val("name");
             document.getElementById("search_concept").textContent = "Per nome";
+            $("#oggetto").autocomplete({
+            source: lista,
+            minLength: 1
+        });
         });
 
         $("#oggetto").autocomplete({
             source: lista,
-            minLength: 3
+            minLength: 1
         });
     });
 </script>

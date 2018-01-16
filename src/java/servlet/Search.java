@@ -78,7 +78,8 @@ public class Search extends HttpServlet {
         HttpSession s=request.getSession();
         s.setAttribute("items", i); */
         String a=request.getParameter("oggetto");
-        response.sendRedirect("risultati.jsp?cercando="+a);
+        String b=request.getParameter("oggetto");
+        response.sendRedirect("risultati.jsp?oggetto="+a);
        
     }
 
