@@ -18,7 +18,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Le mie notifiche</title>
         <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
-                   sql="SELECT A.*, P.name FROM ANOMALIES A, SELLS S, PRODUCTS P WHERE A.MANAGED = false AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID" >
+                   sql="SELECT A.*, P.name, U.first_name, U.last_name, S1.name AS nomeNegozio FROM ANOMALIES A, SELLS S, PRODUCTS P, SHOPS S1, USERS U WHERE A.MANAGED = false AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID AND S1.ID = P.ID_SHOP AND U.ID = S.ID_BUYER" >
         </sql:query>
     </head>
     <body>
@@ -30,6 +30,8 @@
                     <div class="row">
                             <div class="row">
                                 <b> Ticket n. <c:out value="${row.id}" /> per la vendita n. <c:out value="${row.id_sell}" />: <c:out value="${row.name}" /> </b>
+                                <b>, venduto da <a href="mappa.jsp?map=<c:out value="${row.idNegozio}" /> " > <c:out value="${row.nomeNegozio}" /></a> </b>
+                                <b>, comprato da <c:out value="${row.first_name}" /> <c:out value="${row.last_name}" /> </b>
                             </div>
                             <div class="row">
                                 <p> Tipologia:

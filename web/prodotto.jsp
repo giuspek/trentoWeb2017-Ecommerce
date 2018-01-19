@@ -8,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.Prodotto"%>
+<jsp:useBean id="user" class="beans.Utente" scope="session" /> 
 <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
 <jsp:useBean id="cart" class="beans.Carrello" scope="session" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -22,7 +23,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT P.*, S.name AS shopName, S.deposit, C.address from PRODUCTS P, SHOPS S, SHOP_COORDINATE X, COORDINATES C WHERE P.id = ${param.prodotto} AND P.ID_SHOP = S.ID AND S.ID = X.ID_SHOP AND X.ID_COORDINATE = C.ID
+            SELECT P.*, S.name as shopName, S.id_owner AS shopSeller, S.deposit, C.address from PRODUCTS P, SHOPS S, SHOP_COORDINATE X, COORDINATES C WHERE P.id = ${param.prodotto} AND P.ID_SHOP = S.ID AND S.ID = X.ID_SHOP AND X.ID_COORDINATE = C.ID
         </sql:query>
         <sql:query dataSource = "${snapshot}" var = "reviews">
             SELECT R.*, U.username FROM REVIEWS R, USERS U WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = ${param.prodotto} ORDER BY DATE_CREATION DESC
@@ -32,7 +33,7 @@
         </sql:query>
 
         <title>
-            <c:out value="${result.rows[0].name}" />
+            <c:out value="${result.rows[0].name}" /> 
         </title>
     </head>
     <body>
@@ -42,10 +43,17 @@
                 <div class="row">
                     <div class="col-md-4">
                         <img src="${result.rows[0].path}" height="280" width="250" class="img-rounded">
+                        <c:if test="${user.id == result.rows[0].shopSeller}">
+                            <form action="UploadPhoto" method="POST" ENCTYPE="multipart/form-data">
+                                <p> <u>Aggiorna immagine: </u></p>
+                                <input name="myFile" type="file" accept=".jpg">
+                                <input type="submit" value="Aggiorna foto">
+                            </form> 
+                        </c:if>
                     </div>
                     <div class="col-md-8">
                         <div class="row">
-                            <h1><c:out value="${result.rows[0].name}" /> </h1>
+                            <h1><c:out value="${result.rows[0].name}" /> <span class="badge badge-info"><c:out value="${result.rows[0].first_genre}" /></span></h1>
                             <div class="row">
                                 <input id="ratingOverall" type="number" class="rating" value="${rating.rows[0].media}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
                             </div>

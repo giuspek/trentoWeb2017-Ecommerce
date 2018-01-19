@@ -28,8 +28,32 @@
     var categorie = [
         "ACTION",
         "SHOOTER",
-        "PLATFORM"
+        "PLATFORM",
+        "TPS"
     ];
+    
+    function applyFilter(x){
+        if(x == "first_genre")
+            $("#oggetto").autocomplete({
+                source: categorie,
+                minLength: 1
+            });
+        else{
+           $("#oggetto").autocomplete({
+                source: lista,
+                minLength: 1
+            }); 
+        }
+    }
+        
+        
+        
+    function applyName(){
+            $("#oggetto").autocomplete({
+                source: categorie,
+                minLength: 1
+            });
+        }
 
     $(document).ready(function () {
         $("#pricefilter").click(function () {
@@ -40,7 +64,8 @@
                 minLength: 1
             });
         });
-
+        
+        
         $("#namefilter").click(function () {
             $("#filter").val("name");
             document.getElementById("search_concept").textContent = "Per nome";
@@ -111,7 +136,7 @@
                                 <li><a href="Logout">Esci</a></li>
                             </ul>
                         </li>                     
-                        <li><a href="notifiche.jsp">Notifiche</a></li>
+                        <li><a href="notificheAdmin.jsp">Notifiche</a></li>
                     </ul>
                 </div>
             </c:when>
@@ -145,8 +170,12 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                                <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
+                                    <option disabled >Filtra i risultati</option>
+                                    <option value="name" default>Ricerca per nome</option>
+                                    <option value="first_genre">Ricerca per categoria</option>
+                                </select>
                                 <input class="form-control " type="search" id="oggetto" name="oggetto" placeholder="Search" aria-label="Search">
-                                <input type="hidden" name="filter" value="name">
                                 <input type="hidden" name="orderparam" value="price">
                                 <button class="btn btn-outline-success " type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
                             </form>

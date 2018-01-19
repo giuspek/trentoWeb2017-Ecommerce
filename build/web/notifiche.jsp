@@ -20,13 +20,13 @@
         <c:choose>
             <c:when test="${user.typeOfAccount == 'S'}">
                 <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
-                           sql="SELECT A.*, P.name FROM ANOMALIES A, SELLS S, PRODUCTS P WHERE ID_SELLER = ? AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID" >
+                           sql="SELECT A.*, P.name, U.first_name, U.last_name FROM ANOMALIES A, SELLS S, PRODUCTS P, USERS U WHERE ID_SELLER = ? AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID AND S.ID_BUYER = U.ID" >
                     <sql:param value="${user.id}"/>
                 </sql:query>
             </c:when>
             <c:otherwise>
                 <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
-                           sql="SELECT A.*, P.name FROM ANOMALIES A, SELLS S, PRODUCTS P WHERE A.ID_BUYER = ? AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID" >
+                           sql="SELECT A.*, P.name, S1.name AS nomeNegozio, S1.id AS idNegozio FROM ANOMALIES A, SELLS S, PRODUCTS P, SHOPS S1 WHERE A.ID_BUYER = ? AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID AND P.ID_SHOP = S1.ID" >
                     <sql:param value="${user.id}"/>
                 </sql:query>
             </c:otherwise>
@@ -44,10 +44,19 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <b> Ticket n. <c:out value="${row.id}" /> </b>
+                                <b> Ticket n. <c:out value="${row.id}" />: <a href="prodotto.jsp?id=<c:out value="${row.id}" /> " > <c:out value="${row.name}" /> </a> </b>
+                                <c:choose>
+                                    <c:when test="${user.typeOfAccount == 'R'}" >
+                                        <b>, venduto da <a href="mappa.jsp?map=<c:out value="${row.idNegozio}" /> " > <c:out value="${row.nomeNegozio}" /></a> </b>
+                                    </c:when>
+                                    <c:when test="${user.typeOfAccount == 'S'}" >
+                                        <b>, comprato da <c:out value="${row.first_name}" /> <c:out value="${row.last_name}" /> </b>
+                                    </c:when>
+                                </c:choose>
+                                <b>  </b>
                             </div>
                             <div class="row">
-                                <p> Tipologia:
+                                <p> <b> <u>Tipologia</u> </b>:
                                     <c:choose>
                                         <c:when test="${row.type == 'anomalia1'}" >
                                             Prodotto non arrivato
@@ -62,10 +71,10 @@
                                             Altro
                                         </c:when>
                                     </c:choose>
-                                    <c:out value="${row.price}" /> </p>
+                                            <c:out value="${row.price}" /> </p> </b>
                             </div>
                             <div class="row">
-                                <p>  <c:out value="${row.description}" />   <p>
+                                <p>  <c:out value="${row.description}" />   <p> 
                             </div>
                             <div class="row">
                                 <c:choose>

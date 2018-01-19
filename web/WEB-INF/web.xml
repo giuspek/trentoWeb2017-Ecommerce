@@ -76,6 +76,10 @@
         <servlet-name>AddToSells</servlet-name>
         <servlet-class>servlet.AddToSells</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploadPhoto</servlet-name>
+        <servlet-class>servlet.UploadPhoto</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>AddToSells</servlet-name>
         <url-pattern>/AddToSells</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadPhoto</servlet-name>
+        <url-pattern>/UploadPhoto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
