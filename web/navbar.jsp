@@ -17,37 +17,37 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-    
+
     var lista = [
-			<c:forEach var = "i" begin = '0' end = "${listaOggetti.getRowCount()}">
-					"${listaOggetti.rows[i].name}",
-			</c:forEach>
-				];
-                                
-    
+    <c:forEach var = "i" begin = '0' end = "${listaOggetti.getRowCount()}">
+        "${listaOggetti.rows[i].name}",
+    </c:forEach>
+    ];
+
+
     var categorie = [
         "ACTION",
         "SHOOTER",
         "PLATFORM"
-    ]
-    
+    ];
+
     $(document).ready(function () {
         $("#pricefilter").click(function () {
             $("#filter").val("first_genre");
             document.getElementById("search_concept").textContent = "Per categoria";
             $("#oggetto").autocomplete({
-            source: categorie,
-            minLength: 1
-        });
+                source: categorie,
+                minLength: 1
+            });
         });
 
         $("#namefilter").click(function () {
             $("#filter").val("name");
             document.getElementById("search_concept").textContent = "Per nome";
             $("#oggetto").autocomplete({
-            source: lista,
-            minLength: 1
-        });
+                source: lista,
+                minLength: 1
+            });
         });
 
         $("#oggetto").autocomplete({
@@ -56,106 +56,107 @@
         });
     });
 </script>
-<nav class="navbar navbar-inverse">
-    <div class="navbar-header">
-        <a class="navbar-brand" href="homepage.jsp"> Guappo </a>
-    </div>
-    <div class="col-md-3 col-sm-3">
-        <form class="navbar-form" method="GET" action="risultati2.jsp">
-            <input type="hidden" id="orderparam" name="orderparam" value="name">
-            <div class="input-group">
-                <div class="input-group-btn search-panel">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span id="search_concept">Filter by</span> <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#" id="namefilter" >Per nome</a></li>
-                        <li><a href="#" id="pricefilter">Per categoria</a></li>
+<nav class="navbar navbar-inverse justify-content-between">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="homepage.jsp">Guappo</a>
+        </div>
+        <c:choose>
+            <c:when test="${user.typeOfAccount == 'S'}">
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                                <input class="form-control " type="search" id="oggetto" name="oggetto" placeholder="Search" aria-label="Search">
+                                <input type="hidden" name="filter" value="name">
+                                <input type="hidden" name="orderparam" value="price">
+                                <button class="btn btn-outline-success " type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                            </form>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" /> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="cart.jsp">Il mio Carrello</a></li>
+                                <li><a href="#">Il mio Negozio</a></li>
+                                <li><a href="profile.jsp">Il mio Profilo</a></li>
+                                <li><a href="ordini.jsp">I miei Ordini</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="Logout">Esci</a></li>
+                            </ul>
+                        </li>                     
+                        <li><a href="notifiche.jsp">Notifiche</a></li>
                     </ul>
                 </div>
-                <input type="hidden" id="filter" name="filter" value="name">
-
-                <input type="text" class="form-control" name="oggetto" id="oggetto" placeholder="Search term..." required="required">
-                <div class="input-group-btn search-panel">
-                    <button class="btn btn-default form-control" type="submit" >
-                        <span class="glyphicon glyphicon-search">
-
-                        </span>
-                    </button>
+            </c:when>
+            <c:when test="${user.typeOfAccount == 'A'}">
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                                <input class="form-control " type="search" id="oggetto" name="oggetto" placeholder="Search" aria-label="Search">
+                                <input type="hidden" name="filter" value="name">
+                                <input type="hidden" name="orderparam" value="price">
+                                <button class="btn btn-outline-success " type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                            </form>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" /> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="profile.jsp">Il mio Profilo</a></li>                              
+                                <li><a href="Logout">Esci</a></li>
+                            </ul>
+                        </li>                     
+                        <li><a href="notifiche.jsp">Notifiche</a></li>
+                    </ul>
                 </div>
-            </div>
-        </form>
+            </c:when>
+            <c:when test="${user.typeOfAccount == 'R' && user.active == true}">
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                                <input class="form-control " type="search" id="oggetto" name="oggetto" placeholder="Search" aria-label="Search">
+                                <input type="hidden" name="filter" value="name">
+                                <input type="hidden" name="orderparam" value="price">
+                                <button class="btn btn-outline-success " type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                            </form>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" /> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="cart.jsp">Il mio Carrello</a></li>
+                                <li><a href="profile.jsp">Il mio Profilo</a></li>
+                                <li><a href="ordini.jsp">I miei Ordini</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="Logout">Esci</a></li>
+                            </ul>
+                        </li>                     
+                        <li><a href="notifiche.jsp">Notifiche</a></li>
+                    </ul>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                                <input class="form-control " type="search" id="oggetto" name="oggetto" placeholder="Search" aria-label="Search">
+                                <input type="hidden" name="filter" value="name">
+                                <input type="hidden" name="orderparam" value="price">
+                                <button class="btn btn-outline-success " type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                            </form>
+                        </li>
+                        <li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="loginPage.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="cart.jsp">Carrello</a></li>
+                    </ul>
+                </div>
+            </c:otherwise>
+        </c:choose>
     </div>
-<c:choose>
-    <c:when test="${user.typeOfAccount == 'S'}">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">    
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" />
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="profile.jsp">Profilo</a></li>
-                        <li><a href="#">Il vostro negozio</a></li>
-                        <li><a href="cart.jsp">Carrello</a></li>
-                        <li><a href="ordini.jsp">I miei ordini</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="Logout">Esci</a></li>
-                    </ul>
-                <li><a href="notifiche.jsp">Notifiche</a></li>
-                </li>
-            </ul>
-        </div>
-    </c:when>
-    <c:when test="${user.typeOfAccount == 'A'}">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">    
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" />
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="profile.jsp">Profilo</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="Logout">Esci</a></li>
-                    </ul>
-                <li><a href="notificheAdmin.jsp">Notifiche</a></li>
-                
-            </ul>
-        </div>
-    </c:when>
-    <c:when test="${user.typeOfAccount == 'R' && user.active == true}">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">    
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" />
-                        <span class="caret">   
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="profile.jsp">Profilo</a></li>
-                        <li><a href="cart.jsp">Carrello</a></li>
-                        <li><a href="ordini.jsp">I miei ordini</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="Logout">Esci</a></li>
-                    </ul>
-                    <li><a href="notifiche.jsp">Notifiche</a></li>
-                </li>
-            </ul>
-        </div>
-    </c:when>
-    <c:otherwise>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">    
-                <li class="dropdown">
-                <li><a href="register.jsp">Registrati</a></li>
-                <li><a href="loginPage.jsp">Accedi</a></li>
-                <li><a href="cart.jsp">Carrello</a></li>
-                
-            </ul>
-        </div>
-    </c:otherwise>
-</c:choose>
-
 </nav>
