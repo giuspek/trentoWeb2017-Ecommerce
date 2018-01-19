@@ -41,7 +41,7 @@
             <div class="jumbotron">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="img/Ansia.png" height="280" width="250" class="img-rounded">
+                        <img src="${result.rows[0].path}" height="280" width="250" class="img-rounded">
                     </div>
                     <div class="col-md-8">
                         <div class="row">

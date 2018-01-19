@@ -86,7 +86,6 @@
             </div>
         </form>
     </div>
-</div>
 <c:choose>
     <c:when test="${user.typeOfAccount == 'S'}">
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -121,7 +120,7 @@
                         <li><a href="Logout">Esci</a></li>
                     </ul>
                 <li><a href="notificheAdmin.jsp">Notifiche</a></li>
-                </li>
+                
             </ul>
         </div>
     </c:when>
@@ -153,7 +152,7 @@
                 <li><a href="register.jsp">Registrati</a></li>
                 <li><a href="loginPage.jsp">Accedi</a></li>
                 <li><a href="cart.jsp">Carrello</a></li>
-                </li>
+                
             </ul>
         </div>
     </c:otherwise>
