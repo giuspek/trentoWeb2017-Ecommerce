@@ -18,7 +18,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>I miei ordini</title>
         <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
-                   sql="select P.name, P.price,S.id, S.date, S.reviewed, S.id_product from PRODUCTS P, SELLS S where P.ID = S.ID_PRODUCT AND S.ID_BUYER = ?" >
+                   sql="select P.name, P.price, P.path ,S.id, S.date, S.reviewed, S.id_product from PRODUCTS P, SELLS S where P.ID = S.ID_PRODUCT AND S.ID_BUYER = ?" >
             <sql:param value="${user.id}"/>
         </sql:query>
     </head>
@@ -30,7 +30,7 @@
             <div class="jumbotron">
                 <div class="row">
                     <div class="col-md-3">
-                        <img src="img/Ansia.png" width="150" height="100" class="img-rounded">
+                        <img src="${row.path}" width="150" height="100" class="img-rounded"alt="Nessuna immagine disponibile al momento">
                     </div>
                     <div class="col-md-9">
                         <div class="row">

@@ -17,7 +17,18 @@
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 
 <script type="text/javascript">
+    function prova() {
+        if (document.getElementById('theButton').checked) {
+            $("#extraFilter").show();
+        } else {
+            $("#extraFilter").hide();
+        }
+    }
+    ;
+
     $(document).ready(function () {
+        $("#extraFilter").hide();
+
         $("#priceorder").click(function () {
             $("#order").val("price ASC");
             document.getElementById("ordertext").textContent = "Per prezzo";
@@ -34,6 +45,12 @@
         $("#sender").click(function () {
             $("#oggetto").val(findGetParameter("oggetto"));
             $("#filtro").val(findGetParameter("filter"));
+        });
+
+        $('#theButton').click(function () {
+            $("#extraFilter").toggle(this.checked);
+            $("#region").val("");
+            $("#rangePrice").val("");
         });
 
         function findGetParameter(parameterName) {
@@ -58,9 +75,29 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <sql:query dataSource = "${snapshot}" var = "result">
-            SELECT * from PRODUCTS WHERE LOWER(${param.filter}) LIKE LOWER('%${param.oggetto}%') ORDER BY ${param.orderparam}
-        </sql:query>
+        <c:choose>
+            <c:when test="${!(empty param.da) && !(empty param.a)&& !(empty param.region)}">
+                <sql:query dataSource = "${snapshot}" var = "result">
+                    SELECT P.* from PRODUCTS P, SHOP_COORDINATE S, COORDINATES C  WHERE LOWER(${param.filter}) LIKE LOWER('%${param.oggetto}%') AND P.ID_SHOP = S.ID_SHOP AND S.ID_COORDINATE = C.ID AND LOWER(C.REGIONE) = LOWER('${param.region}') AND P.PRICE < ${param.a} AND P.PRICE >= ${param.da} ORDER BY ${param.orderparam}
+                </sql:query>
+            </c:when>
+            <c:when test="${!(empty param.da) && !(empty param.a) && empty param.region}">
+                <sql:query dataSource = "${snapshot}" var = "result">
+                    SELECT P.* from PRODUCTS P  WHERE LOWER(${param.filter}) LIKE LOWER('%${param.oggetto}%') AND P.PRICE < ${param.a} AND P.PRICE >= ${param.da} ORDER BY ${param.orderparam}
+                </sql:query>
+            </c:when>
+            <c:when test="${!(empty param.region)}">
+                <sql:query dataSource = "${snapshot}" var = "result">
+                    SELECT P.* from PRODUCTS P, SHOP_COORDINATE S, COORDINATES C  WHERE LOWER(${param.filter}) LIKE LOWER('%${param.oggetto}%') AND P.ID_SHOP = S.ID_SHOP AND S.ID_COORDINATE = C.ID AND LOWER(C.REGIONE) = LOWER('${param.region}') ORDER BY ${param.orderparam}
+                </sql:query>
+            </c:when>
+            <c:otherwise>
+                <sql:query dataSource = "${snapshot}" var = "result">
+                    SELECT * from PRODUCTS WHERE LOWER(${param.filter}) LIKE LOWER('%${param.oggetto}%') ORDER BY ${param.orderparam}
+                </sql:query>
+            </c:otherwise>
+        </c:choose>
+
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
@@ -80,6 +117,39 @@
                                         <li><a href="#" id="nameorder">Per nome</a></li>
                                     </ul>
                                 </div>
+                            </div>
+                            <h3> <input type="checkbox" id="theButton" name="theButton" > Filtri avanzati </h3>
+                            <div id="extraFilter" >
+                                <p> Regione per il ritiro della merce al negozio</p>
+                                <select class="form-control" id="region" name="region">
+                                    <option default value="" >Regione:</option>
+                                    <option value="abruzzo" >Abruzzo</option>
+                                    <option value="basilicata">Basilicata</option>
+                                    <option value="calabria" >Calabria</option>
+                                    <option value="campania" >Campania</option>
+                                    <option value="emilia romagna" >Emilia Romagna</option>
+                                    <option value="friuli venezia giulia" >Friuli Venezia Giulia</option>
+                                    <option value="lazio" >Lazio</option>
+                                    <option value="liguria" >Liguria</option>
+                                    <option value="lombardia">Lombardia</option>
+                                    <option value="marche" >Marche</option>
+                                    <option value="molise" >Molise</option>
+                                    <option value="piemonte" >Piemonte</option>
+                                    <option value="puglia" >Puglia</option>
+                                    <option value="sardegna" >Sardegna</option>
+                                    <option value="sicilia" >Sicilia</option>
+                                    <option value="toscana" >Toscana</option>
+                                    <option value="trentino alto adige" >Trentino alto adige</option>
+                                    <option value="umbria" >Umbria</option>
+                                    <option value="valle daosta" >Valle d'aosta</option>
+                                    <option value="veneto" >Veneto</option>
+                                </select>
+                                <select class="form-control" id="rangePrice" name="rangePrice">
+                                    <option default value="" >Fascia di prezzo</option>
+                                    <option value="low" >Da €0 a €29.99</option>
+                                    <option value="mid">Da €30 a €69.99</option>
+                                    <option value="high" >Da €70 in su</option>
+                                </select>
                             </div>
                             <input type="hidden" id="order" name="order" value="name">
                             <input type="hidden" id="oggetto" name="oggetto" value="${param.oggetto}">
