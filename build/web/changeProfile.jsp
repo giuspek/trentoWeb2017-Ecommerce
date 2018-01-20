@@ -46,6 +46,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <input type="submit" class="btn btn-success" value="Cambia dati">
+                                        <input type="hidden" name="id" value="${user.id}">
                                     </div>
                                 </div>
 

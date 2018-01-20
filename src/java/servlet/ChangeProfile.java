@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -42,12 +42,12 @@ public class ChangeProfile extends HttpServlet {
         Utente u = (Utente) s.getAttribute("user");
         Connection con = (Connection) getServletContext().getAttribute("db");
         PreparedStatement ps = null;
-
+        
         try {
-            ps = con.prepareStatement("UPDATE USERS SET FIRST_NAME = ?, LAST_NAME = ? WHERE USERNAME = ?");
+            ps = con.prepareStatement("UPDATE USERS SET FIRST_NAME = ?, LAST_NAME = ? WHERE ID = ?");
             ps.setString(1, request.getParameter("name"));
             ps.setString(2, request.getParameter("surname"));
-            ps.setString(3, u.getUsername());
+            ps.setString(3, request.getParameter("id"));
             ps.executeUpdate();
             u.setFirstName(request.getParameter("name"));
             u.setLastName(request.getParameter("surname"));
@@ -71,7 +71,7 @@ public class ChangeProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       response.sendRedirect("errorPage.jsp");
     }
 
     /**

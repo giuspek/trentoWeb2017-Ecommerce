@@ -91,13 +91,8 @@ public class ManageAnomaly extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ManageAnomaly.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        response.sendRedirect("errorPage.jsp");
     }
 
     /**

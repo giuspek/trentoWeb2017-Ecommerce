@@ -49,6 +49,11 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
 
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        response.sendRedirect("errorPage.jsp");
+    }
     /**
      * Handles the HTTP <code>POST</code> method.
      *
