@@ -40,6 +40,7 @@ public class Carrello {
         e.setPrice(price);
         e.setQuantity(quantita);
         e.setIdProduct(idProduct);
+        e.setShopName("null");
         list.add(e);
         number++;
     }

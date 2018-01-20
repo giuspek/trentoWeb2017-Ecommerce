@@ -42,9 +42,9 @@
             <div class="jumbotron">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="${result.rows[0].path}" height="280" width="250" class="img-rounded">
+                        <img src="${result.rows[0].path}" height="280" width="250" class="img-rounded" alt="Nessuna foto del prodotto disponibile">
                         <c:if test="${user.id == result.rows[0].shopSeller}">
-                            <form action="UploadPhoto" method="POST" ENCTYPE="multipart/form-data">
+                            <form action="UploadPhoto?idPhoto=${param.prodotto}" method="POST" ENCTYPE="multipart/form-data">
                                 <p> <u>Aggiorna immagine: </u></p>
                                 <input name="myFile" type="file" accept=".jpg">
                                 <input type="submit" value="Aggiorna foto">

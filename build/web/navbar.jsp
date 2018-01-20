@@ -33,15 +33,17 @@
     ];
     
     function applyFilter(x){
-        if(x == "first_genre")
+        if(x === "first_genre")
             $("#oggetto").autocomplete({
                 source: categorie,
-                minLength: 1
+                minLength: 1,
+                limit: 10
             });
         else{
            $("#oggetto").autocomplete({
                 source: lista,
-                minLength: 1
+                minLength: 1,
+                limit: 10
             }); 
         }
     }
@@ -51,7 +53,8 @@
     function applyName(){
             $("#oggetto").autocomplete({
                 source: categorie,
-                minLength: 1
+                minLength: 1,
+                limit: 10
             });
         }
 
@@ -77,7 +80,8 @@
 
         $("#oggetto").autocomplete({
             source: lista,
-            minLength: 1
+            minLength: 1,
+            limit: 10
         });
     });
 </script>
@@ -97,6 +101,11 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                                <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
+                                    <option disabled >Filtra i risultati</option>
+                                    <option value="name" default>Ricerca per nome</option>
+                                    <option value="first_genre">Ricerca per categoria</option>
+                                </select>
                                 <input class="form-control " type="search" id="oggetto" name="oggetto" placeholder="Search" aria-label="Search">
                                 <input type="hidden" name="filter" value="name">
                                 <input type="hidden" name="orderparam" value="price">
@@ -123,6 +132,11 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                                <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
+                                    <option disabled >Filtra i risultati</option>
+                                    <option value="name" default>Ricerca per nome</option>
+                                    <option value="first_genre">Ricerca per categoria</option>
+                                </select>
                                 <input class="form-control " type="search" id="oggetto" name="oggetto" placeholder="Search" aria-label="Search">
                                 <input type="hidden" name="filter" value="name">
                                 <input type="hidden" name="orderparam" value="price">
@@ -145,6 +159,11 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                                <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
+                                    <option disabled >Filtra i risultati</option>
+                                    <option value="name" default>Ricerca per nome</option>
+                                    <option value="first_genre">Ricerca per categoria</option>
+                                </select>
                                 <input class="form-control " type="search" id="oggetto" name="oggetto" placeholder="Search" aria-label="Search">
                                 <input type="hidden" name="filter" value="name">
                                 <input type="hidden" name="orderparam" value="price">

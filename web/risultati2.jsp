@@ -19,17 +19,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#priceorder").click(function () {
-            $("#order").val("price");
+            $("#order").val("price ASC");
             document.getElementById("ordertext").textContent = "Per prezzo";
 
         });
         $("#revieworder").click(function () {
-            $("#order").val("review");
+            $("#order").val("global_value DESC");
             document.getElementById("ordertext").textContent = "Per rating";
-        });
-        $("#nearorder").click(function () {
-            $("#order").val("near");
-            document.getElementById("ordertext").textContent = "Per vicinanza";
         });
         $("#nameorder").click(function () {
             $("#order").val("name");
@@ -80,8 +76,7 @@
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="#" id="priceorder" >Per prezzo</a></li>
-                                        <li><a href="#" id="revieworder">Per review</a></li>      
-                                        <li><a href="#" id="nearorder">Per vicinanza</a></li>
+                                        <li><a href="#" id="revieworder">Per rating</a></li> 
                                         <li><a href="#" id="nameorder">Per nome</a></li>
                                     </ul>
                                 </div>
@@ -101,7 +96,7 @@
                         <div class="jumbotron">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <img src="img/Ansia.png" width="150" height="100" class="img-rounded">
+                                    <img src="<c:out value="${row.path}" /> " width="150" height="100" class="img-rounded" alt="Nessuna foto del prodotto disponibile">
                                 </div>
                                 <div class="col-md-9">
                                     <div class="row">

@@ -11,6 +11,11 @@
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script>
+    function active(){
+        document.getElementById("theButton").disabled = false;
+    }
+</script>
 <!DOCTYPE html>
 <html>
     <head>
@@ -79,18 +84,18 @@
                     </div>
                     <div class="col-md-6">   
                         <form action="AddToSells" method="POST">
-                            <h3>Ritira in negozio </h3>
+                            <h3>Ritira in negozio tutta la merce:</h3>
                             <c:forEach items="${cart.list}" var="row">
-                                <c:if test="${!empty row.shopName}">
+                                <c:if test="${!empty row.shopName && row.shopName != 'null'}">
                                     <div class="row">
-                                        <input type="radio" value="${row.shopName}"> <c:out value="${row.shopName}" />, <c:out value="${row.shopAddress}" />
+                                        <input type="radio" name="location" onclick="active()" value="${row.shopName}"> <c:out value="${row.shopName}" />, <c:out value="${row.shopAddress}" />
                                     </div>
                                 </c:if>
 
                             </c:forEach>
                             <div class="row">
                                 <p> Pagherai direttamente al negozio! </p>
-                                <input type="submit" class="btn btn-warning" value="Completa acquisto">
+                                <input type="submit" id="theButton" class="btn btn-warning" value="Completa acquisto" disabled="disabled">
                             </div>
 
 
