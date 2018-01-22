@@ -12,7 +12,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script>
-    function active(){
+    function active() {
         document.getElementById("theButton").disabled = false;
     }
 </script>
@@ -23,6 +23,14 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+            if(request.getMethod().equals("GET")){
+                response.sendRedirect("errorPage1.jsp");
+            }
+        %>
+        <c:if test="${user.typeOfAccount != 'S' && user.typeOfAccount != 'R' && user.typeOfAccount != 'A' }">
+            <jsp:forward page="errorPage.jsp" />
+        </c:if>
         <jsp:include page="navbar.jsp" />
         <div class="container">
             <div class="jumbotron">

@@ -15,6 +15,9 @@
         <title>Mail inviata!</title>
     </head>
     <body>
+        <c:if test="${user.typeOfAccount == 'S' || user.typeOfAccount == 'R' || user.typeOfAccount == 'A'}">
+            <c:redirect url="errorPage.jsp" />
+        </c:if>
          <jsp:include page="navbar.jsp" />
         <div class="container">
             <div class="jumbotron">

@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="user" scope="session" class="beans.Utente"/>
 
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 <!DOCTYPE html>
@@ -25,8 +26,8 @@
         <jsp:include page="navbar.jsp" />
         <c:choose>
 
-            <c:when test="${theuser.rows[0].username != param.u || theuser.rows[0].hash != param.h }">
-                <
+            <c:when test="${theuser.rows[0].username != param.u || theuser.rows[0].hash != param.h}">
+                <jsp:forward page="errorPage.jsp" />
             </c:when>
             <c:otherwise>
                 

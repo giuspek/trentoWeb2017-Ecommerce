@@ -63,7 +63,7 @@
             <c:if test="${!(empty user.username) && (cart.number > 0)}">
             <div class="container">
                 <div class="jumbotron">
-                    <form action="shippingPage.jsp">
+                    <form action="shippingPage.jsp" method="POST">
                         <input type="submit" class="btn btn-success" value="Vai alla pagina di pagamento" />
                     </form>
                 </div>

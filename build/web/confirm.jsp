@@ -23,21 +23,24 @@
         </sql:query>
     </head>
     <body>
+       <c:if test="${user.typeOfAccount == 'S' || user.typeOfAccount == 'R' || user.typeOfAccount == 'A'}">
+            <c:redirect url="errorPage.jsp" />
+        </c:if>
         <jsp:include page="navbar.jsp" />
         <div class="container">
             <div class="jumbotron">
                 <c:choose>
                         
                     <c:when test = "${theuser.rows[0].username != param.u}">
-                        <h1> Utente non trovato </h1>
+                        <c:redirect url="errorPage.jsp" />
                     </c:when>
 
                     <c:when test = "${theuser.rows[0].active}">
-                        <h1> Utente già attivo </h1>
+                        <c:redirect url="errorPage.jsp" />
                     </c:when>
                     
                     <c:when test = "${theuser.rows[0].hash != param.h}">
-                        <h1> Errore </h1>
+                        <c:redirect url="errorPage.jsp" />
                     </c:when>
 
                     <c:otherwise>
