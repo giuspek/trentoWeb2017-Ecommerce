@@ -112,10 +112,10 @@ public class CreateReview extends HttpServlet {
                         ps.setFloat(1, media);
                         ps.setString(2, request.getParameter("sell"));
                         ps.executeUpdate();
-                        response.sendRedirect("changeProfileOK.jsp");
+                        response.sendRedirect("prodotto.jsp?prodotto="+p);
                         
                     } catch (SQLException ex) {
-                        response.sendRedirect("errorPagebg.jsp" + media);
+                        response.sendRedirect("errorPage.jsp" + media);
                         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
@@ -123,7 +123,7 @@ public class CreateReview extends HttpServlet {
             //}
 
         } catch (SQLException ex) {
-            response.sendRedirect("zulu444.jsp");
+            response.sendRedirect("errorPage.jsp");
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
 

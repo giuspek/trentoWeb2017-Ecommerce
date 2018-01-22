@@ -16,8 +16,9 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <h1>Oggetto acquistato!</h1>
         <div class="container">
+            <h1>Oggetto acquistato!</h1>
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="jumbotron">

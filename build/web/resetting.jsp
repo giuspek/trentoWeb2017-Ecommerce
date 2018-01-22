@@ -26,11 +26,7 @@
         <c:choose>
 
             <c:when test="${theuser.rows[0].username != param.u || theuser.rows[0].hash != param.h }">
-                <div class="container">
-                    <div class="jumbotron">
-                        <h1> Errore! </h1>
-                    </div>
-                </div>
+                <
             </c:when>
             <c:otherwise>
                 

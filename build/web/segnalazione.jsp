@@ -6,16 +6,25 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Segnala anomalia</title>
+        <sql:query dataSource="${snapshot}" var="result" scope="page"
+               sql="select S.ID_BUYER AS value from SELLS S where S.ID = ?" >
+        <sql:param value="${param.sell}"/>
+    </sql:query>
     </head>
     <body>
+        <c:if test="${empty param.nameProduct || empty param.sell || user.id != result.rows[0].value}">
+            <c:redirect url="errorPage.jsp" />
+        </c:if>
         <jsp:include page="navbar.jsp" />
         <div class="container">
             <h1>Segnala anomalia per: <c:out value="${param.nameProduct}" /></h1>

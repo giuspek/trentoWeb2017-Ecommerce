@@ -13,6 +13,9 @@
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 <jsp:useBean id="user" scope="session" class="beans.Utente"/>
 <!DOCTYPE html>
+<c:if test="${user.typeOfAccount != 'S' && user.typeOfAccount != 'R' }">
+    <jsp:forward page="errorPage.jsp" />
+</c:if>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

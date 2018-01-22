@@ -16,7 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="navbar.jsp" />
+        
         <h1>ErrorPage!</h1>
     </body>
 </html>

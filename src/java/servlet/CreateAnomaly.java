@@ -61,7 +61,7 @@ public class CreateAnomaly extends HttpServlet {
             ps.setInt(6, idVenditore);
 
             ps.executeUpdate();
-            response.sendRedirect("changeProfileOK.jsp");
+            response.sendRedirect("notifiche.jsp");
         } else {
             response.sendRedirect("errorPage.jsp");
         }

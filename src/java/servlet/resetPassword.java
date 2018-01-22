@@ -55,8 +55,8 @@ public class resetPassword extends HttpServlet {
         Connection con = (Connection) getServletContext().getAttribute("db");
         final String host = "smtp.gmail.com";
         final String port = "465";
-        final String username = "giuseppespallitta@gmail.com";
-        final String password = "fxpapaaxyjcqjvso";
+        final String username = "guappoonline@gmail.com";
+        final String password = "ybqihiwhirmwlltw";
         Properties props = System.getProperties();
         props.setProperty("mail.smtp.host", host);
         props.setProperty("mail.smtp.port", port);

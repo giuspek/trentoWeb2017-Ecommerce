@@ -13,12 +13,17 @@
 
 
 <!DOCTYPE html>
+<c:if test="${user.typeOfAccount != 'S' && user.typeOfAccount != 'A'  && user.typeOfAccount != 'R' }">
+    <jsp:forward page="errorPage.jsp" />
+</c:if>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Profilo</title>
     </head>
     <body>
+
         <jsp:include page="navbar.jsp"/>
         <div class="container">
             <h1>I miei dati personali</h1>

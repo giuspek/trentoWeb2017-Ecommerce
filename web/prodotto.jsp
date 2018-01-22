@@ -46,7 +46,7 @@
                         <c:if test="${user.id == result.rows[0].shopSeller}">
                             <form action="UploadPhoto?idPhoto=${param.prodotto}" method="POST" ENCTYPE="multipart/form-data">
                                 <p> <u>Aggiorna immagine: </u></p>
-                                <input name="myFile" type="file" accept=".jpg">
+                                <input name="myFile" type="file" accept=".jpg" required="required">
                                 <input type="submit" value="Aggiorna foto">
                             </form> 
                         </c:if>

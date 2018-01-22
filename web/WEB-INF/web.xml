@@ -80,6 +80,10 @@
         <servlet-name>UploadPhoto</servlet-name>
         <servlet-class>servlet.UploadPhoto</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploadPhotoShop</servlet-name>
+        <servlet-class>servlet.UploadPhotoShop</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -144,6 +148,10 @@
         <servlet-name>UploadPhoto</servlet-name>
         <url-pattern>/UploadPhoto</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadPhotoShop</servlet-name>
+        <url-pattern>/UploadPhotoShop</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -154,4 +162,17 @@
         <artifactId>javax.mail</artifactId>
         <version>1.5.6</version>
     </dependency>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/errorPage.jsp</location>
+    </error-page>
+    
 </web-app>

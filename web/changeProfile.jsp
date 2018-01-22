@@ -11,7 +11,11 @@
 <jsp:useBean id="user" class="beans.Utente" scope="session" /> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page errorPage = "errorPage.jsp" %>
+
 <!DOCTYPE html>
+<c:if test="${user.typeOfAccount != 'S' && user.typeOfAccount != 'A'  && user.typeOfAccount != 'R' }">
+    <jsp:forward page="errorPage.jsp" />
+</c:if>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

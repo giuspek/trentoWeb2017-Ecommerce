@@ -8,6 +8,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
 <link href="http://code.jquery.com/ui/1.11.4/themes/redmond/jquery-ui.css" rel="stylesheet">
+<link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
+<script src="js/star-rating.js" type="text/javascript"></script>
 
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 <sql:query dataSource = "${snapshot}" var = "listaOggetti">
@@ -116,7 +118,7 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" /> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="cart.jsp">Il mio Carrello</a></li>
-                                <li><a href="#">Il mio Negozio</a></li>
+                                <li><a href="business.jsp">Il mio Business</a></li>
                                 <li><a href="profile.jsp">Il mio Profilo</a></li>
                                 <li><a href="ordini.jsp">I miei Ordini</a></li>
                                 <li role="separator" class="divider"></li>
@@ -201,7 +203,7 @@
                         </li>
                         <li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                         <li><a href="loginPage.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <li><a class="dropdown-toggle" data-toggle="dropdown" href="cart.jsp">Carrello</a></li>
+                        <li><a href="cart.jsp">Carrello</a></li>
                     </ul>
                 </div>
             </c:otherwise>

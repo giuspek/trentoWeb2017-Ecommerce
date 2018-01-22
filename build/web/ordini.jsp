@@ -23,6 +23,9 @@
         </sql:query>
     </head>
     <body>
+        <c:if test="${user.typeOfAccount != 'S' && user.typeOfAccount != 'R' && user.typeOfAccount != 'A'}">
+            <c:redirect url="errorPage.jsp" />
+        </c:if>
         <jsp:include page="navbar.jsp" />
         <div class="container">
         <h1>I miei ordini <c:out value="${user.id}" /></h1>

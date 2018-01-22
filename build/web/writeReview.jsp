@@ -12,57 +12,63 @@
 <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 <script src="js/star-rating.js" type="text/javascript"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
 <%@ page errorPage = "errorPage.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Scrivi recensione</title>
-    </head>
-    <body>
-        <jsp:include page="navbar.jsp" />
-        <c:choose>
-            <c:when test="${empty param.sell}" >
-                <c:redirect url="errorPage.jsp" />
-            </c:when>
-            <c:otherwise>
-                <div class="container">
-                    <h1>Recensione per: <c:out value="${param.nameProduct}" /></h1>
-                    <form action="CreateReview" method="POST" id="mainForm">
-                        <div class="form-group">
+    <sql:query dataSource="${snapshot}" var="result" scope="page"
+               sql="select S.ID_BUYER AS value from SELLS S where S.ID = ?" >
+        <sql:param value="${param.sell}"/>
+    </sql:query>
+</head>
+<body>
 
-                            <div class="jumbotron">
-                                <div class="row">
-                                    <p> Qualità del prodotto <input name="ratingQuality" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
-                                </div>
-                                <div class="row">
-                                    <p> Qualità del servizio <input name="ratingService" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
-                                </div>
-                                <div class="row">
-                                    <p> Rapporto qualità/prezzo <input name="ratingPrice" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
-                                </div>
-                                <div class="row">
-                                    <p> Valore globale <input name="overall" id="overall" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <p> Titolo recensione* </p>
-                                    <input type="text" name="title" maxlength="25" required="required">
-                                </div>
-                                <div class="row">
-                                    <p> Descrizione </p>
-                                    <textarea name="description" form="mainForm" rows="8" cols="150" required="required"></textarea>
-                                    
-                                </div>
-                                <div class="row">
-                                    <input type="submit" class="btn btn-warning" value="Invia recensione">
-                                    <input type="hidden" name="sell" value="${param.sell}">
-                                </div>
+    <jsp:include page="navbar.jsp" />
+    <c:choose>
+        <c:when test="${empty param.sell || empty param.nameProduct || user.id != result.rows[0].value}" >
+            <c:redirect url="errorPage.jsp" />
+        </c:when>
+        <c:otherwise>
+            <div class="container">
+                <h1>Recensione per: <c:out value="${param.nameProduct}" /></h1>
+                <form action="CreateReview" method="POST" id="mainForm">
+                    <div class="form-group">
+
+                        <div class="jumbotron">
+                            <div class="row">
+                                <p> Qualità del prodotto <input name="ratingQuality" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
+                            </div>
+                            <div class="row">
+                                <p> Qualità del servizio <input name="ratingService" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
+                            </div>
+                            <div class="row">
+                                <p> Rapporto qualità/prezzo <input name="ratingPrice" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
+                            </div>
+                            <div class="row">
+                                <p> Valore globale <input name="overall" id="overall" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <p> Titolo recensione* </p>
+                                <input type="text" name="title" maxlength="25" required="required">
+                            </div>
+                            <div class="row">
+                                <p> Descrizione </p>
+                                <textarea name="description" form="mainForm" rows="8" cols="150" required="required"></textarea>
+
+                            </div>
+                            <div class="row">
+                                <input type="submit" class="btn btn-warning" value="Invia recensione">
+                                <input type="hidden" name="sell" value="${param.sell}">
                             </div>
                         </div>
-                    </form>
-                </div>
-            </c:otherwise>
-        </c:choose>
-    </body>
+                    </div>
+                </form>
+            </div>
+        </c:otherwise>
+    </c:choose>
+</body>
 </html>

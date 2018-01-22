@@ -20,6 +20,9 @@
         });
     });
 </script>
+<c:if test="${user.typeOfAccount != 'S' && user.typeOfAccount != 'A'  && user.typeOfAccount != 'R' }">
+    <jsp:forward page="errorPage.jsp" />
+</c:if>
 <html>
     <head>
         <title>Guappo</title>
