@@ -8,8 +8,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,41 +23,45 @@
             }
         %>
         <jsp:include page="navbar.jsp"/>
-        <form action="Login" method="POST">
-            <div class="form-group">
-                <div class="container">
-                    <c:if test="${param.e == '1'}" >
-                        <div class="alert alert-danger">
-                            <strong>Login non effettuato</strong> Username/password non trovati
-                        </div>
-                    </c:if>
-                    <div class="jumbotron">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="username">
-                                    Username
-                                </label>
-                                <input class="form-control" type="text" id="usrname" name="usrname">
+        <div class="container">
+            <div class="panel panel-primary">
+                <c:if test="${param.e == '1'}" >
+                    <div class="alert alert-danger">
+                        <strong>Login non effettuato</strong> Username/password non trovati
+                    </div>
+                </c:if>
+                <div class="panel-heading">Login</div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <form action="Login" method="POST">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="usrname"><span class="glyphicon glyphicon-user"></span> Username:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="usrname" name="usrname" placeholder="Enter username">
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <label for="password">
-                                    Password
-                                </label>
-                                <input class="form-control" type="password" id="password" name="password">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="password"><span class="glyphicon glyphicon-lock"></span> Password:</label>
+
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                                </div>
                             </div>
-                        </div>
-                        <p> </P>
-                        <div class="row">
-                            <a href="forgetPassword.jsp" >Hai dimenticato la password?</a>
-                        </div>
-                        <p> </p>
-                        <div class="row">
-                            <input class="btn btn-success" type="submit" value="Conferma">
-                            <button class="btn btn-danger" type="reset" onclick="window.location.href='<%=request.getHeader("Referer")%>'">Annulla </button>
-                        </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+
+                                    <button type="submit" class="btn btn-success pull-left"><span class="glyphicon glyphicon-send"></span> Submit</button>
+                                    <button class="btn btn-danger pull-left" type="reset" onclick="window.location.href = '<%=request.getHeader("Referer")%>'">Annulla </button>
+
+                                </div>
+                            </div>
+                        </form>
+                        <form action="forgetPassword.jsp" method="GET">
+                            <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-send"></span> Hai dimenticato la password?</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </form>
     </body>
 </html>

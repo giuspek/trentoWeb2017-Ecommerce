@@ -38,7 +38,7 @@ public class Registration extends HttpServlet {
             throws ServletException, IOException, SQLException, NoSuchAlgorithmException {
 
         //Controlla se i campi password sono uguali
-        if (request.getParameter("mail1") != request.getParameter("mail2")) {
+        if (!(request.getParameter("mail1").equals(request.getParameter("mail2"))) || !(request.getParameter("pass1").equals(request.getParameter("pass2")))) {
             response.sendRedirect("register.jsp?e=1");
         } else {
 
@@ -71,61 +71,79 @@ public class Registration extends HttpServlet {
                 ps = con.prepareStatement("SELECT * FROM Users WHERE email = ?"); //con is a Connection object
                 ps.setString(1, request.getParameter("mail1"));
             } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                response.sendRedirect("errorPage.jsp");
             }
 
             ResultSet rs = null;
             try {
                 rs = ps.executeQuery();
             } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                response.sendRedirect("errorPage.jsp");
             }
             if (rs.next()) {
                 response.sendRedirect("register.jsp?e=2");
             } else {
-                // Crea valore hash di conferma
-                MessageDigest md = MessageDigest.getInstance("MD5");
-                String hashable = request.getParameter("nickname") + "2" + request.getParameter("cognome") + "?0" + request.getParameter("pass1");
-                if (Charset.isSupported("CP1252")) {
-                    md.update(hashable.getBytes(Charset.forName("CP1252")));
-                } else {
-                    md.update(hashable.getBytes(Charset.forName("ISO-8859-1")));
-                }
-                byte[] bytes = md.digest();
-                StringBuilder str = new StringBuilder();
-                for (int i = 0; i < bytes.length; i++) {
-                    str.append(Integer.toHexString((bytes[i] & 0xFF) | 0x100).substring(1, 3));
-                }
-                hashable = str.toString();
-
-                // Aggiungi account non attivo aspettando mail di conferma
-                ps = con.prepareStatement("INSERT INTO USERS VALUES(DEFAULT,?,?,?,?,?,?,DEFAULT,?)");
-                ps.setString(1, request.getParameter("nome"));
-                ps.setString(2, request.getParameter("cognome"));
-                ps.setString(3, request.getParameter("username"));
-                ps.setString(4, "R");
-                ps.setString(5, request.getParameter("mail1"));
-                ps.setString(6, request.getParameter("pass1"));
-                ps.setString(7, hashable);
-                ps.executeUpdate();
-
-                //Invia mail per confermare la registrazione
-                Message msg = new MimeMessage(session);
+                // Controlla se esiste già un account con quell'username
                 try {
-                    msg.setFrom(new InternetAddress("giuseppespallitta@gmail.com"));
-                    msg.setRecipients(Message.RecipientType.TO,
-                            InternetAddress.parse(request.getParameter("mail1"), false));
-
-                    msg.setSubject("Completa registrazione");
-                    String content = "<h1> Benvenuto su True Guappo </h1> <p> Apri questo link per confermare </p> <a href=\"http://localhost:8084/TrueGuappo/confirm.jsp?u=" + request.getParameter("username") + "&h=" + hashable + "\"> Attiva account </a>";
-                    msg.setContent(content, "text/html; charset=utf-8");
-                    msg.setSentDate(new Date());
-                    Transport.send(msg);
-                } catch (MessagingException me) {
-//TODO: log the exception
-                    me.printStackTrace(System.err);
+                    ps = con.prepareStatement("SELECT * FROM Users WHERE username = ?"); //con is a Connection object
+                    ps.setString(1, request.getParameter("username"));
+                } catch (SQLException ex) {
+                    response.sendRedirect("errorPage.jsp");
                 }
-                response.sendRedirect("waitingconfirm.jsp");
+
+                rs = null;
+                try {
+                    rs = ps.executeQuery();
+                } catch (SQLException ex) {
+                    response.sendRedirect("errorPage.jsp");
+                }
+                if (rs.next()) {
+                    response.sendRedirect("register.jsp?e=3");
+                } else {
+                    // Crea valore hash di conferma
+                    MessageDigest md = MessageDigest.getInstance("MD5");
+                    String hashable = request.getParameter("nickname") + "2" + request.getParameter("cognome") + "?0" + request.getParameter("pass1");
+                    if (Charset.isSupported("CP1252")) {
+                        md.update(hashable.getBytes(Charset.forName("CP1252")));
+                    } else {
+                        md.update(hashable.getBytes(Charset.forName("ISO-8859-1")));
+                    }
+                    byte[] bytes = md.digest();
+                    StringBuilder str = new StringBuilder();
+                    for (int i = 0; i < bytes.length; i++) {
+                        str.append(Integer.toHexString((bytes[i] & 0xFF) | 0x100).substring(1, 3));
+                    }
+                    hashable = str.toString();
+
+                    // Aggiungi account non attivo aspettando mail di conferma
+                    ps = con.prepareStatement("INSERT INTO USERS VALUES(DEFAULT,?,?,?,?,?,?,DEFAULT,?)");
+                    ps.setString(1, request.getParameter("nome"));
+                    ps.setString(2, request.getParameter("cognome"));
+                    ps.setString(3, request.getParameter("username"));
+                    ps.setString(4, "R");
+                    ps.setString(5, request.getParameter("mail1"));
+                    ps.setString(6, request.getParameter("pass1"));
+                    ps.setString(7, hashable);
+                    ps.executeUpdate();
+
+                    //Invia mail per confermare la registrazione
+                    Message msg = new MimeMessage(session);
+                    try {
+                        msg.setFrom(new InternetAddress("giuseppespallitta@gmail.com"));
+                        msg.setRecipients(Message.RecipientType.TO,
+                                InternetAddress.parse(request.getParameter("mail1"), false));
+
+                        msg.setSubject("Completa registrazione");
+                        String content = "<h1> Benvenuto su True Guappo </h1> <p> Apri questo link per confermare </p> <a href=\"http://localhost:8084/TrueGuappo/confirm.jsp?u=" + request.getParameter("username") + "&h=" + hashable + "\"> Attiva account </a>";
+                        msg.setContent(content, "text/html; charset=utf-8");
+                        msg.setSentDate(new Date());
+                        Transport.send(msg);
+                    } catch (MessagingException me) {
+//TODO: log the exception
+                        response.sendRedirect("errorPage.jsp");
+                    }
+                    response.sendRedirect("waitingconfirm.jsp");
+                }
             }
         }
     }
@@ -159,9 +177,9 @@ public class Registration extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Search.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("errorPage.jsp");
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
+           response.sendRedirect("errorPage.jsp");
         }
     }
 }

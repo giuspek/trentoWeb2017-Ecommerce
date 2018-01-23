@@ -7,11 +7,15 @@
 <%@page import="beans.Utente"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
 <!DOCTYPE html>
 <script type="text/javascript">
+    function app() {
+        document.getElementById("confirm").disabled = false;
+    }
+    function app2() {
+        document.getElementById("confirm").disabled = true;
+    }
     $(document).ready(function () {
         $("#privacy").click(function () {
             document.getElementById("confirm").disabled = false;
@@ -19,6 +23,7 @@
 
         });
     });
+
 </script>
 <c:if test="${user.typeOfAccount == 'S' || user.typeOfAccount == 'A'  || user.typeOfAccount == 'R' }">
     <jsp:forward page="errorPage.jsp" />
@@ -27,89 +32,109 @@
     <head>
         <title>Guappo</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
-    <body style="background-color:#a0522d">
+
+    <body>
         <% if (((Utente) session.getAttribute("user")).getFirstName() != null) {
                 response.sendRedirect("homepage.jsp");
             }
         %>
         <jsp:include page="navbar.jsp"/>
-        <form action="Registration" method="POST">
-            <div class="form-group">
-                <div class="container">
-                    <c:if test="${param.e == '1'}" >
-                        <div class="alert alert-danger">
-                            <strong>Registrazione negata</strong> Le password non coincidono, riprova!
-                        </div>
-                    </c:if>
-                    <c:if test="${param.e == '2'}" >
-                        <div class="alert alert-danger">
-                            <strong>Registrazione negata</strong> La mail usata è già in uso, scegline un'altra!
-                        </div>
-                    </c:if>
-                    <div class="jumbotron">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label for="nome">
-                                    Nome
-                                </label>
-                                <input class="form-control" type="text" id="nome" name="nome" required="required">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="cognome">
-                                    Cognome
-                                </label>
-                                <input class="form-control" type="text" id="cognome" name="cognome" required="required">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="username">
-                                    Username
-                                </label>
-                                <input class="form-control" type="text" id="username" name="username" required="required">
+        <div class="container">
+            <c:if test="${param.e == '1'}" >
+                <div class="alert alert-danger">
+                    <strong>Registrazione non effettuata</strong> Le mail o le password nei campi non coincidono!
+                </div>
+            </c:if>
+            <c:if test="${param.e == '2'}" >
+                <div class="alert alert-danger">
+                    <strong>Registrazione non effettuata</strong> L'indirizzo mail è gia stato usato
+                </div>
+            </c:if>
+            <c:if test="${param.e == '3'}" >
+                <div class="alert alert-danger">
+                    <strong>Registrazione non effettuata</strong> L'username è gia stato usato
+                </div>
+            </c:if>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Registrati</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" action="Registration" method="POST">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="nome"><span class="glyphicon glyphicon-user"></span> Nome:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Enter First Name">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="mail1">
-                                    Indirizzo mail
-                                </label>
-                                <input class="form-control" type="text" id="mail1" name="mail1" required="required">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="mail2">
-                                    Conferma mail
-                                </label>
-                                <input class="form-control" type="text" id="mail2" name="mail2" required="required">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="cognome"><span class="glyphicon glyphicon-user"></span> Cognome:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="cognome" name="cognome" placeholder="Enter Last Name">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="pass1">
-                                    Password
-                                </label>
-                                <input class="form-control" type="password" id="pass1" name="pass1" required="required">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="pass2">
-                                    Conferma password
-                                </label>
-                                <input class="form-control" type="password" id="pass2" name="pass2" required="required">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="username"><span class="glyphicon glyphicon-user"></span> Username:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p> <input type="checkbox" id="privacy" name="privacy" > Accetto le <a href="normative.html"> normative sulla privacy </a> conformi al 2017</p>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="mail1"><span class="glyphicon glyphicon-user"></span> Mail:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="mail1" name="mail1" placeholder="Enter Mail">
+                            </div>
+                        </div><div class="form-group">
+                            <label class="control-label col-sm-2" for="mail2"><span class="glyphicon glyphicon-user"></span> Conferma mail:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="mail2" name="mail2" placeholder="Confirm Mail">
                             </div>
                         </div>
-                        <input class="btn btn-success" id="confirm" type="submit" value="Conferma" disabled="true">
-                        <button class="btn btn-danger" type="reset" onclick="window.location.href='<%=request.getHeader("Referer")%>'">Annulla </button>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="pass1"><span class="glyphicon glyphicon-lock"></span> Password:</label>
 
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="pass2"><span class="glyphicon glyphicon-lock"></span> Conferma Password:</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button id="confirm" type="submit" class="btn btn-success pull-left" disabled="true" ><span class="glyphicon glyphicon-send"></span> Submit</button>
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" id="button" class="btn btn-primary btn pull-right" data-toggle="modal" data-target="#myModal">Acceta le condizioni</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="app()" class="btn btn-success" data-toggle="modal" data-target="#myModal">YES</button>
+                        <button type="button" onclick="app2()" class="btn btn-danger" data-toggle="modal" data-target="#myModal">NO</button>
                     </div>
                 </div>
             </div>
-        </form>
-
+        </div>
     </body>
+
 </html>
 

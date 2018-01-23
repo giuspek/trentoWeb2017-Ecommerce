@@ -11,12 +11,36 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        
-        <h1>ErrorPage!</h1>
-    </body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>404-Guappo Not Found</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/modern-business.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <!-- Page Content -->
+    <div class="container">
+      <!-- Page Heading/Breadcrumbs -->
+        <h1 align="center">404 Page not Found</h1>
+        <p align="center">
+          <button class="btn btn-outline-secondary" onclick="window.location.href='homepage.jsp'">HomePage</button>
+        </p>
+      <img src="img/404.jpg" class="img-responsive center-block" alt="404">
+
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
 </html>

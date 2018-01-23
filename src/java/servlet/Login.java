@@ -94,13 +94,13 @@ public class Login extends HttpServlet {
         try {
              rs = ps.executeQuery();
         } catch (SQLException ex) {
-            response.sendRedirect("loginPage.jsp?e=1");
+            response.sendRedirect("loginPage.jsp?e=2");
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         try {
             if (!rs.next()){
-                 response.sendRedirect("loginPage.jsp?e=1");
+                 response.sendRedirect("loginPage.jsp?e=3"+ request.getParameter("usrname") + request.getParameter("password"));
             }
             else{
                 if(rs.getBoolean(8) == true){
@@ -125,10 +125,10 @@ public class Login extends HttpServlet {
                     s.setAttribute("user", u);
                     response.sendRedirect("homepage.jsp");
                 }
-                else response.sendRedirect("loginPage.jsp?e=1");
+                else response.sendRedirect("loginPage.jsp?e=4");
             }
         } catch (SQLException ex) {
-            response.sendRedirect("loginPage.jsp?e=1");
+            response.sendRedirect("loginPage.jsp?e=5");
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         
