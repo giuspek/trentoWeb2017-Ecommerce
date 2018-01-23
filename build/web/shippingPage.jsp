@@ -39,7 +39,7 @@
                 <h2> Scegli il metodo di pagamento </h2>
                 <div class="row">
                     <div class="col-md-6">
-                        <form action="AddtoSells" method="POST">
+                        <form action="AddToSells" method="POST">
                             <h3> Spedizione online </h3>
                             <div class="row">
                                 <label for="cardID"> Numero carta </label>
