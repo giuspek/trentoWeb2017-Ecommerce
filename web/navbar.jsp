@@ -95,14 +95,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="homepage.jsp">Guappo</a>
+            <a class="navbar-brand" href="homepage.jsp" style="font-size: 35px">Guappo</a>
         </div>
         <c:choose>
             <c:when test="${user.typeOfAccount == 'S'}">
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 10px">
                                 <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
                                     <option disabled >Filtra i risultati</option>
                                     <option value="name" default>Ricerca per nome</option>
@@ -133,7 +133,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 10px">
                                 <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
                                     <option disabled >Filtra i risultati</option>
                                     <option value="name" default>Ricerca per nome</option>
@@ -160,7 +160,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 10px">
                                 <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
                                     <option disabled >Filtra i risultati</option>
                                     <option value="name" default>Ricerca per nome</option>
@@ -190,7 +190,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 10px">
                                 <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
                                     <option disabled >Filtra i risultati</option>
                                     <option value="name" default>Ricerca per nome</option>
@@ -198,12 +198,12 @@
                                 </select>
                                 <input class="form-control " type="search" id="oggetto" name="oggetto" placeholder="Search" aria-label="Search">
                                 <input type="hidden" name="orderparam" value="price">
-                                <button class="btn btn-outline-success " type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                                <button class="btn btn-outline-success" type="submit" style="font-size: 16px"><span class="glyphicon glyphicon-search"></span> Search</button>
                             </form>
                         </li>
-                        <li><a href="register.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="loginPage.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <li><a href="cart.jsp">Carrello</a></li>
+                        <li><a href="register.jsp" style="font-size: 20px"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="loginPage.jsp" style="font-size: 20px"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="cart.jsp" style="font-size: 20px"><span class="glyphicon glyphicon-shopping-cart"></span>Carrello</a></li>
                     </ul>
                 </div>
             </c:otherwise>
