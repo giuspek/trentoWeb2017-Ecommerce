@@ -35,25 +35,25 @@ public class ApplyFilter extends HttpServlet {
         if(!(request.getParameter("region").isEmpty()) && !(request.getParameter("rangePrice").isEmpty())){
             String d=request.getParameter("region");
             if(request.getParameter("rangePrice").equals("low"))
-                response.sendRedirect("risultati2.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&region="+d+"&da=0&a=30");
+                response.sendRedirect("risultati3.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&region="+d+"&da=0&a=30");
             else if(request.getParameter("rangePrice").equals("mid"))
-                response.sendRedirect("risultati2.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&region="+d+"&da=30&a=70");
+                response.sendRedirect("risultati3.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&region="+d+"&da=30&a=70");
             else
-                response.sendRedirect("risultati2.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&region="+d+"&da=70&a=4000");
+                response.sendRedirect("risultati3.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&region="+d+"&da=70&a=4000");
         }
         else if(!(request.getParameter("region").isEmpty())){
             String d=request.getParameter("region");
-            response.sendRedirect("risultati2.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&region="+d);
+            response.sendRedirect("risultati3.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&region="+d);
         }
         else if(!(request.getParameter("rangePrice").isEmpty())){
             if(request.getParameter("rangePrice").equals("low"))
-                response.sendRedirect("risultati2.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&da=0&a=30");
+                response.sendRedirect("risultati3.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&da=0&a=30");
             else if(request.getParameter("rangePrice").equals("mid"))
-                response.sendRedirect("risultati2.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&da=30&a=70");
+                response.sendRedirect("risultati3.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&da=30&a=70");
             else
-                response.sendRedirect("risultati2.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&da=70&a=4000");
+                response.sendRedirect("risultati3.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b+"&da=70&a=4000");
         }else{
-            response.sendRedirect("risultati2.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b);
+            response.sendRedirect("risultati3.jsp?&orderparam="+c+"&filter="+a+"&oggetto="+b);
         }
         
     }

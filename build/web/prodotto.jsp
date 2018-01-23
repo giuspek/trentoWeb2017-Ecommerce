@@ -77,7 +77,7 @@
                                 <input type="hidden" name="shopName" value="${result.rows[0].shopName}" />
                                 <input type="hidden" name="shopAddress" value="${result.rows[0].address}" />
                                 <input type="hidden" name="idProduct" value="${result.rows[0].id}" />
-
+                                <input type="hidden" name="path" value="${result.rows[0].path}" />
                                 <input type="number" name="quantita" min="1" step="1" />
                             </form>
                         </div>

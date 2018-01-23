@@ -33,7 +33,7 @@ public class Carrello {
         return this.number;
     }
     
-    public void addElement(String name, double price, int quantita, int idProduct){
+    public void addElement(String name, double price, int quantita, int idProduct, String path){
         Elemento e=new Elemento();
         e.setId(number);
         e.setName(name);
@@ -41,11 +41,12 @@ public class Carrello {
         e.setQuantity(quantita);
         e.setIdProduct(idProduct);
         e.setShopName("null");
+        e.setPath(path);
         list.add(e);
         number++;
     }
     
-    public void addElement(String name, double price, int quantita, String shopName, String shopAddress, int idProduct){
+    public void addElement(String name, double price, int quantita, String shopName, String shopAddress, int idProduct, String path){
         Elemento e=new Elemento();
         e.setId(number);
         e.setName(name);
@@ -54,6 +55,7 @@ public class Carrello {
         e.setShopName(shopName);
         e.setShopAddress(shopAddress);
         e.setIdProduct(idProduct);
+        e.setPath(path);
         list.add(e);
         number++;
     }

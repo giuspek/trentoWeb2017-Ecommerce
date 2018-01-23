@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <b> Ticket n. <c:out value="${row.id}" />: <a href="prodotto.jsp?id=<c:out value="${row.id}" /> " > <c:out value="${row.name}" /> </a> </b>
+                                <b> Ticket n. <c:out value="${row.id}" />: <a href="prodotto.jsp?prodotto=<c:out value="${row.id}" /> " > <c:out value="${row.name}" /> </a> </b>
                                 <c:choose>
                                     <c:when test="${user.typeOfAccount == 'R'}" >
                                         <b>, venduto da <a href="mappa.jsp?map=<c:out value="${row.idNegozio}" /> " > <c:out value="${row.nomeNegozio}" /></a> </b>

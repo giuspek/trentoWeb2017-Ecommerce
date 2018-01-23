@@ -53,7 +53,7 @@
                         <p> </p>
                         <div class="row">
                             <input class="btn btn-success" type="submit" value="Conferma">
-                            <input class="btn btn-danger" type="reset" value="Annulla">
+                            <button class="btn btn-danger" type="reset" onclick="window.location.href='<%=request.getHeader("Referer")%>'">Annulla </button>
                         </div>
                     </div>
                 </div>

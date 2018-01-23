@@ -3,15 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/errorPage.jsp</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/src/java/servlet/Logout.java</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/src/java/servlet/Registration.java</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/src/java/servlet/resetPassword.java</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/register.jsp</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/src/java/beans/Carrello.java</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/src/java/beans/Elemento.java</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/risultati3.jsp</file>
             <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/navbar.jsp</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/resetting.jsp</file>
-            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/src/java/servlet/Login.java</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/prodotto.jsp</file>
             <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/loginPage.jsp</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/cart.jsp</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/writeReview.jsp</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/ordini.jsp</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/register.jsp</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/risultati2.jsp</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/src/java/servlet/addCart.java</file>
+            <file>file:/C:/Users/Giuseppe/Documents/NetBeansProjects/FinalGuappo/Guappo/web/segnalazione.jsp</file>
         </group>
     </open-files>
 </project-private>

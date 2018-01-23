@@ -20,7 +20,7 @@
         });
     });
 </script>
-<c:if test="${user.typeOfAccount != 'S' && user.typeOfAccount != 'A'  && user.typeOfAccount != 'R' }">
+<c:if test="${user.typeOfAccount == 'S' || user.typeOfAccount == 'A'  || user.typeOfAccount == 'R' }">
     <jsp:forward page="errorPage.jsp" />
 </c:if>
 <html>
@@ -35,7 +35,6 @@
             }
         %>
         <jsp:include page="navbar.jsp"/>
-
         <form action="Registration" method="POST">
             <div class="form-group">
                 <div class="container">
@@ -104,7 +103,7 @@
                             </div>
                         </div>
                         <input class="btn btn-success" id="confirm" type="submit" value="Conferma" disabled="true">
-                        <input class="btn btn-danger" type="reset" value="Annulla">
+                        <button class="btn btn-danger" type="reset" onclick="window.location.href='<%=request.getHeader("Referer")%>'">Annulla </button>
 
                     </div>
                 </div>

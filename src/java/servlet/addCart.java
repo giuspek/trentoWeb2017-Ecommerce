@@ -37,6 +37,7 @@ public class addCart extends HttpServlet {
         int quantita = Integer.parseInt(request.getParameter("quantita"));
         int idProduct = Integer.parseInt(request.getParameter("idProduct"));
         String shopName= request.getParameter("shopName");
+        String path=request.getParameter("path");
         /*Elemento e = new Elemento();
         e.setName(name);
         e.setPrice(price);
@@ -58,15 +59,15 @@ public class addCart extends HttpServlet {
                 }
             }
             if(!x){
-               cart.addElement(name, price, quantita, shopName, request.getParameter("shopAddress"), idProduct); 
+               cart.addElement(name, price, quantita, shopName, request.getParameter("shopAddress"), idProduct,path); 
             }
             else{
-                cart.addElement(name, price, quantita, idProduct );   
+                cart.addElement(name, price, quantita, idProduct, path );   
             }
             
         }
         else{
-            cart.addElement(name, price, quantita, idProduct );              
+            cart.addElement(name, price, quantita, idProduct,path );              
         }
         session.setAttribute("cart", cart);
         response.sendRedirect("addedObject.jsp");

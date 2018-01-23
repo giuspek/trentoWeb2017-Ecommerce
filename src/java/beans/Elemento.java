@@ -16,6 +16,7 @@ public class Elemento {
     private String shopName;
     private String shopAddress;
     private int idProduct;
+    private String path;
     
     public Elemento(){
         name=null;
@@ -25,6 +26,7 @@ public class Elemento {
         shopName=null;
         shopAddress=null;
         idProduct=0;
+        path=null;
     }
     
     public int getId(){
@@ -41,6 +43,14 @@ public class Elemento {
     
     public void setName(String s){
         this.name=s;
+    }
+    
+    public String getPath(){
+        return this.path;
+    }
+    
+    public void setPath(String s){
+        this.path=s;
     }
     
     public double getPrice(){

@@ -102,7 +102,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 5px">
                                 <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
                                     <option disabled >Filtra i risultati</option>
                                     <option value="name" default>Ricerca per nome</option>
@@ -133,7 +133,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 5px">
                                 <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
                                     <option disabled >Filtra i risultati</option>
                                     <option value="name" default>Ricerca per nome</option>
@@ -160,7 +160,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 5px">
                                 <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
                                     <option disabled >Filtra i risultati</option>
                                     <option value="name" default>Ricerca per nome</option>
@@ -190,7 +190,7 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <form action="risultati2.jsp" method="GET" class="form-inline" style="padding-top: 5px">
+                            <form action="risultati3.jsp" method="GET" class="form-inline" style="padding-top: 5px">
                                 <select class="form-control" id="filter" name="filter" onchange="applyFilter(this.value)">
                                     <option disabled >Filtra i risultati</option>
                                     <option value="name" default>Ricerca per nome</option>
