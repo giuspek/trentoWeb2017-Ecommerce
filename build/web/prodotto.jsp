@@ -26,7 +26,7 @@
             SELECT P.*, S.name as shopName, S.id_owner AS shopSeller, S.deposit, C.address from PRODUCTS P, SHOPS S, SHOP_COORDINATE X, COORDINATES C WHERE P.id = ${param.prodotto} AND P.ID_SHOP = S.ID AND S.ID = X.ID_SHOP AND X.ID_COORDINATE = C.ID
         </sql:query>
         <sql:query dataSource = "${snapshot}" var = "reviews">
-            SELECT R.*, U.username FROM REVIEWS R, USERS U WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = ${param.prodotto} ORDER BY DATE_CREATION DESC
+            SELECT R.*, U.username FROM REVIEWS R, USERS U WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = ${param.prodotto} ORDER BY DATE_CREATION, R.ID DESC
         </sql:query>
         <sql:query dataSource = "${snapshot}" var = "rating">
             SELECT AVG(CAST(GLOBAL_VALUE AS FLOAT)) AS media FROM REVIEWS WHERE ID_PRODUCT = ${param.prodotto} GROUP BY ID_PRODUCT

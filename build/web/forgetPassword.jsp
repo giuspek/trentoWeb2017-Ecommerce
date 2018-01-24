@@ -16,40 +16,29 @@
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <div class="row">
-            <div class="container">
-                <div class="col-md-6">
-                    <form action="resetPassword" method="POST">
-                        <div class="form-group">
-
-                            <div class="jumbotron">
-                                <h1> Hai dimenticato la password? </h1>
-                                <p> Non preoccuparti! Inserisci la tua mail e ti spediremo un link per riaggiornare la tua password: </p>
-                                <div class="row">
-                                    <div class="col-md-2"> </div>
-                                    <div class="col-md-8">
-                                        <span class="usericon">
-                                            <input type="text" name="mail" class="form-control" placeholder="E-mail...">
-                                        </span>
-                                    </div>
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Recupera password</div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <form action="resetPassword" method="POST">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="mail"><span class="glyphicon glyphicon-lock"></span> Email:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="mail" name="mail" placeholder="Enter e-mail:">
                                 </div>
-                                <div class="row"> </div>
-                                <div class="row">
-                                    <div class="col-md-4"> </div>
-                                    <div class="col-md-3">
-                                        <input type="submit" class="btn btn-warning form-control" value="Continua">
-                                    </div>
-                                </div>
-
                             </div>
-                        </div>
-                    </form>
-
-            </div>
-                <div class="col-md-6">
-                    <img src="img/Ansia.png" height="500" width="500">
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success pull-left"><span class="glyphicon glyphicon-send"></span> Submit</button>
+                                    <button class="btn btn-danger pull-left" type="reset" onclick="window.location.href = '<%=request.getHeader("Referer")%>'">Annulla </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

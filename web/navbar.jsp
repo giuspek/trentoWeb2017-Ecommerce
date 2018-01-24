@@ -13,7 +13,7 @@
 
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 <sql:query dataSource = "${snapshot}" var = "listaOggetti">
-    SELECT NAME from PRODUCTS
+    SELECT DISTINCT NAME from PRODUCTS
 </sql:query>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -31,7 +31,16 @@
         "ACTION",
         "SHOOTER",
         "PLATFORM",
-        "TPS"
+        "TPS",
+        "HORROR",
+        "PICCHIADURO",
+        "JRPG",
+        "FPS",
+        "STEALTH",
+        "RACING",
+        "SPORT",
+        "RPG",
+        "STRATEGICO"
     ];
     
     function applyFilter(x){

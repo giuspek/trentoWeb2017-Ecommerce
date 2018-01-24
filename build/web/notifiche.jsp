@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href='css/notice.css'>
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 <jsp:useBean id="user" scope="session" class="beans.Utente"/>
 <!DOCTYPE html>
@@ -41,45 +42,36 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-            <h1>Le mie notifiche</h1> 
             <c:forEach items="${theproducts.rows}" var="row">
-                <div class="jumbotron">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <b> Ticket n. <c:out value="${row.id}" />: <a href="prodotto.jsp?prodotto=<c:out value="${row.id}" /> " > <c:out value="${row.name}" /> </a> </b>
-                                <c:choose>
-                                    <c:when test="${user.typeOfAccount == 'R'}" >
-                                        <b>, venduto da <a href="mappa.jsp?map=<c:out value="${row.idNegozio}" /> " > <c:out value="${row.nomeNegozio}" /></a> </b>
+                <c:choose>
+                    <c:when test="${!(row.managed)}">
+                        <div class="notice notice-warning">
+                            <b> Ticket n. <c:out value="${row.id}" /> </b>: <a href="prodotto.jsp?prodotto=<c:out value="${row.id}" /> " > <c:out value="${row.name}" /> </a> </b>
+                            <c:choose>
+                                <c:when test="${user.typeOfAccount == 'R'}" >
+                                    , venduto da <a href="mappa.jsp?map=<c:out value="${row.idNegozio}" /> " > <c:out value="${row.nomeNegozio}" /></a>
+                                </c:when>
+                                <c:when test="${user.typeOfAccount == 'S'}" >
+                                    , comprato da <c:out value="${row.first_name}" /> <c:out value="${row.last_name}" />
+                                </c:when>
+                            </c:choose>
+                            <p> <b> <u>Tipologia</u> </b>:
+                                        <c:choose>
+                                            <c:when test="${row.type == 'anomalia1'}" >
+                                        Prodotto non arrivato
                                     </c:when>
-                                    <c:when test="${user.typeOfAccount == 'S'}" >
-                                        <b>, comprato da <c:out value="${row.first_name}" /> <c:out value="${row.last_name}" /> </b>
+                                    <c:when test="${row.type == 'anomalia2'}" >
+                                        Difetti nel prodotto
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia3'}" >
+                                        Prodotto diverso da quello descritto
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia4'}" >
+                                        Altro
                                     </c:when>
                                 </c:choose>
-                                <b>  </b>
-                            </div>
-                            <div class="row">
-                                <p> <b> <u>Tipologia</u> </b>:
-                                    <c:choose>
-                                        <c:when test="${row.type == 'anomalia1'}" >
-                                            Prodotto non arrivato
-                                        </c:when>
-                                        <c:when test="${row.type == 'anomalia2'}" >
-                                            Difetti nel prodotto
-                                        </c:when>
-                                        <c:when test="${row.type == 'anomalia3'}" >
-                                            Prodotto diverso da quello descritto
-                                        </c:when>
-                                        <c:when test="${row.type == 'anomalia4'}" >
-                                            Altro
-                                        </c:when>
-                                    </c:choose>
-                                            <c:out value="${row.price}" /> </p> </b>
-                            </div>
-                            <div class="row">
-                                <p>  <c:out value="${row.description}" />   <p> 
-                            </div>
-                            <div class="row">
+                                <c:out value="${row.price}" /> 
+                            <p>  <c:out value="${row.description}" />   <p>
                                 <c:choose>
                                     <c:when test="${!(row.managed)}" >
                                         <b> Non risolto </b>
@@ -87,67 +79,442 @@
                                     <c:otherwise>
                                         <b> Risolto </b>
                                         <c:if test="${row.solution == 0}">
-                                            <p> Anomalia rigettata: <c:out value="${row.rejection}" />
-                                            </c:if>
-                                            <c:if test="${row.solution == 1}">
-                                            <p> Richiesta di rimborso accolta </p>
-                                        </c:if>  
-                                        <c:if test="${row.solution == 2}">
-                                            <p> Richiesta rispedizione prodotto </p>
+                                        <p> Anomalia rigettata: <c:out value="${row.rejection}" />
                                         </c:if>
-                                        <c:if test="${row.solution == 4}">
-                                            <p> Valutazione negozio diminuita </p>
-                                        </c:if>
-                                        <c:if test="${row.solution == 3}">
-                                            <ul>
-                                                <li>
-                                                    Richiesta di rimborso accolta
-                                                </li>
-                                                <li>
-                                                    Richiesta rispedizione prodotto
-                                                </li>
-                                            </ul>
-                                        </c:if>
-                                        <c:if test="${row.solution == 5}">
-                                            <ul>
-                                                <li>
-                                                    Richiesta di rimborso accolta
-                                                </li>
-                                                <li>
-                                                    Valutazione negozio diminuita
-                                                </li>
-                                            </ul>
-                                        </c:if>
-                                        <c:if test="${row.solution == 6}">
-                                            <ul>
-                                                <li>
-                                                    Richiesta rispedizione prodotto
-                                                </li>
-                                                <li>
-                                                    Valutazione negozio diminuita
-                                                </li>
-                                            </ul>
-                                        </c:if>
-                                        <c:if test="${row.solution == 7}">
-                                            <ul>
-                                                <li>
-                                                    Richiesta di rimborso accolta
-                                                </li>
-                                                <li>
-                                                    Richiesta rispedizione prodotto
-                                                </li>
-                                                <li>
-                                                    Valutazione negozio diminuita
-                                                </li>
-                                            </ul>
-                                        </c:if>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                        </div>  
-                    </div>
-                </div>
+                                        <c:if test="${row.solution == 1}">
+                                        <p> Richiesta di rimborso accolta </p>
+                                    </c:if>  
+                                    <c:if test="${row.solution == 2}">
+                                        <p> Richiesta rispedizione prodotto </p>
+                                    </c:if>
+                                    <c:if test="${row.solution == 4}">
+                                        <p> Valutazione negozio diminuita </p>
+                                    </c:if>
+                                    <c:if test="${row.solution == 3}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 5}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 6}">
+                                        <ul>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 7}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                </c:otherwise>
 
+                            </c:choose>
+                        </div>
+                    </c:when>
+                    <c:when test="${row.solution == 0 && user.typeOfAccount == 'S'}">
+                        <div class="notice notice-success">
+                            <b> Ticket n. <c:out value="${row.id}" /> </b>: <a href="prodotto.jsp?prodotto=<c:out value="${row.id}" /> " > <c:out value="${row.name}" /> </a> </b>
+                            <c:choose>
+                                <c:when test="${user.typeOfAccount == 'R'}" >
+                                    , venduto da <a href="mappa.jsp?map=<c:out value="${row.idNegozio}" /> " > <c:out value="${row.nomeNegozio}" /></a>
+                                </c:when>
+                                <c:when test="${user.typeOfAccount == 'S'}" >
+                                    , comprato da <c:out value="${row.first_name}" /> <c:out value="${row.last_name}" />
+                                </c:when>
+                            </c:choose>
+                            <p> <b> <u>Tipologia</u> </b>:
+                                        <c:choose>
+                                            <c:when test="${row.type == 'anomalia1'}" >
+                                        Prodotto non arrivato
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia2'}" >
+                                        Difetti nel prodotto
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia3'}" >
+                                        Prodotto diverso da quello descritto
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia4'}" >
+                                        Altro
+                                    </c:when>
+                                </c:choose>
+                                <c:out value="${row.price}" /> 
+                            <p>  <c:out value="${row.description}" />   <p>
+                                <c:choose>
+                                    <c:when test="${!(row.managed)}" >
+                                        <b> Non risolto </b>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <b> Risolto </b>
+                                        <c:if test="${row.solution == 0}">
+                                        <p> Anomalia rigettata: <c:out value="${row.rejection}" />
+                                        </c:if>
+                                        <c:if test="${row.solution == 1}">
+                                        <p> Richiesta di rimborso accolta </p>
+                                    </c:if>  
+                                    <c:if test="${row.solution == 2}">
+                                        <p> Richiesta rispedizione prodotto </p>
+                                    </c:if>
+                                    <c:if test="${row.solution == 4}">
+                                        <p> Valutazione negozio diminuita </p>
+                                    </c:if>
+                                    <c:if test="${row.solution == 3}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 5}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 6}">
+                                        <ul>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 7}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                </c:otherwise>
+
+                            </c:choose>
+                        </div>
+                    </c:when>
+                    <c:when test="${row.solution == 0 && user.typeOfAccount == 'R'}">
+                        <div class="notice notice-danger">
+                            <b> Ticket n. <c:out value="${row.id}" /> </b>: <a href="prodotto.jsp?prodotto=<c:out value="${row.id}" /> " > <c:out value="${row.name}" /> </a> </b>
+                            <c:choose>
+                                <c:when test="${user.typeOfAccount == 'R'}" >
+                                    , venduto da <a href="mappa.jsp?map=<c:out value="${row.idNegozio}" /> " > <c:out value="${row.nomeNegozio}" /></a>
+                                </c:when>
+                                <c:when test="${user.typeOfAccount == 'S'}" >
+                                    , comprato da <c:out value="${row.first_name}" /> <c:out value="${row.last_name}" />
+                                </c:when>
+                            </c:choose>
+                            <p> <b> <u>Tipologia</u> </b>:
+                                        <c:choose>
+                                            <c:when test="${row.type == 'anomalia1'}" >
+                                        Prodotto non arrivato
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia2'}" >
+                                        Difetti nel prodotto
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia3'}" >
+                                        Prodotto diverso da quello descritto
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia4'}" >
+                                        Altro
+                                    </c:when>
+                                </c:choose>
+                                <c:out value="${row.price}" /> 
+                            <p>  <c:out value="${row.description}" />   <p>
+                                <c:choose>
+                                    <c:when test="${!(row.managed)}" >
+                                        <b> Non risolto </b>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <b> Risolto </b>
+                                        <c:if test="${row.solution == 0}">
+                                        <p> Anomalia rigettata: <c:out value="${row.rejection}" />
+                                        </c:if>
+                                        <c:if test="${row.solution == 1}">
+                                        <p> Richiesta di rimborso accolta </p>
+                                    </c:if>  
+                                    <c:if test="${row.solution == 2}">
+                                        <p> Richiesta rispedizione prodotto </p>
+                                    </c:if>
+                                    <c:if test="${row.solution == 4}">
+                                        <p> Valutazione negozio diminuita </p>
+                                    </c:if>
+                                    <c:if test="${row.solution == 3}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 5}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 6}">
+                                        <ul>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 7}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                </c:otherwise>
+
+                            </c:choose>
+                        </div>
+                    </c:when>
+                    <c:when test="${row.solution != 0 && user.typeOfAccount == 'S'}">
+                        <div class="notice notice-danger">
+                            <b> Ticket n. <c:out value="${row.id}" /> </b>: <a href="prodotto.jsp?prodotto=<c:out value="${row.id}" /> " > <c:out value="${row.name}" /> </a> </b>
+                            <c:choose>
+                                <c:when test="${user.typeOfAccount == 'R'}" >
+                                    , venduto da <a href="mappa.jsp?map=<c:out value="${row.idNegozio}" /> " > <c:out value="${row.nomeNegozio}" /></a>
+                                </c:when>
+                                <c:when test="${user.typeOfAccount == 'S'}" >
+                                    , comprato da <c:out value="${row.first_name}" /> <c:out value="${row.last_name}" />
+                                </c:when>
+                            </c:choose>
+                            <p> <b> <u>Tipologia</u> </b>:
+                                        <c:choose>
+                                            <c:when test="${row.type == 'anomalia1'}" >
+                                        Prodotto non arrivato
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia2'}" >
+                                        Difetti nel prodotto
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia3'}" >
+                                        Prodotto diverso da quello descritto
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia4'}" >
+                                        Altro
+                                    </c:when>
+                                </c:choose>
+                                <c:out value="${row.price}" /> 
+                            <p>  <c:out value="${row.description}" />   <p>
+                                <c:choose>
+                                    <c:when test="${!(row.managed)}" >
+                                        <b> Non risolto </b>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <b> Risolto </b>
+                                        <c:if test="${row.solution == 0}">
+                                        <p> Anomalia rigettata: <c:out value="${row.rejection}" />
+                                        </c:if>
+                                        <c:if test="${row.solution == 1}">
+                                        <p> Richiesta di rimborso accolta </p>
+                                    </c:if>  
+                                    <c:if test="${row.solution == 2}">
+                                        <p> Richiesta rispedizione prodotto </p>
+                                    </c:if>
+                                    <c:if test="${row.solution == 4}">
+                                        <p> Valutazione negozio diminuita </p>
+                                    </c:if>
+                                    <c:if test="${row.solution == 3}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 5}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 6}">
+                                        <ul>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 7}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                </c:otherwise>
+
+                            </c:choose>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="notice notice-success">
+                            <b> Ticket n. <c:out value="${row.id}" /> </b>: <a href="prodotto.jsp?prodotto=<c:out value="${row.id}" /> " > <c:out value="${row.name}" /> </a> </b>
+                            <c:choose>
+                                <c:when test="${user.typeOfAccount == 'R'}" >
+                                    , venduto da <a href="mappa.jsp?map=<c:out value="${row.idNegozio}" /> " > <c:out value="${row.nomeNegozio}" /></a>
+                                </c:when>
+                                <c:when test="${user.typeOfAccount == 'S'}" >
+                                    , comprato da <c:out value="${row.first_name}" /> <c:out value="${row.last_name}" />
+                                </c:when>
+                            </c:choose>
+                            <p> <b> <u>Tipologia</u> </b>:
+                                        <c:choose>
+                                            <c:when test="${row.type == 'anomalia1'}" >
+                                        Prodotto non arrivato
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia2'}" >
+                                        Difetti nel prodotto
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia3'}" >
+                                        Prodotto diverso da quello descritto
+                                    </c:when>
+                                    <c:when test="${row.type == 'anomalia4'}" >
+                                        Altro
+                                    </c:when>
+                                </c:choose>
+                                <c:out value="${row.price}" /> 
+                            <p>  <c:out value="${row.description}" />   <p>
+                                <c:choose>
+                                    <c:when test="${!(row.managed)}" >
+                                        <b> Non risolto </b>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <b> Risolto </b>
+                                        <c:if test="${row.solution == 0}">
+                                        <p> Anomalia rigettata: <c:out value="${row.rejection}" />
+                                        </c:if>
+                                        <c:if test="${row.solution == 1}">
+                                        <p> Richiesta di rimborso accolta </p>
+                                    </c:if>  
+                                    <c:if test="${row.solution == 2}">
+                                        <p> Richiesta rispedizione prodotto </p>
+                                    </c:if>
+                                    <c:if test="${row.solution == 4}">
+                                        <p> Valutazione negozio diminuita </p>
+                                    </c:if>
+                                    <c:if test="${row.solution == 3}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 5}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 6}">
+                                        <ul>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                    <c:if test="${row.solution == 7}">
+                                        <ul>
+                                            <li>
+                                                Richiesta di rimborso accolta
+                                            </li>
+                                            <li>
+                                                Richiesta rispedizione prodotto
+                                            </li>
+                                            <li>
+                                                Valutazione negozio diminuita
+                                            </li>
+                                        </ul>
+                                    </c:if>
+                                </c:otherwise>
+
+                            </c:choose>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </div>
 

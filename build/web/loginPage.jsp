@@ -58,10 +58,12 @@
                         </form>
                         <form action="forgetPassword.jsp" method="GET">
                             <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-send"></span> Hai dimenticato la password?</button>
+                                <button type="submit" class="btn btn-warning pull-right"><span class="glyphicon glyphicon-send"></span> Hai dimenticato la password?</button>
                         </form>
                     </div>
                 </div>
             </div>
-    </body>
+        </div>
+    </div>
+</body>
 </html>
