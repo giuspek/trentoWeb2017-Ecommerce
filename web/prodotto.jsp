@@ -12,8 +12,8 @@
 <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
 <jsp:useBean id="cart" class="beans.Carrello" scope="session" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 <script src="js/star-rating.js" type="text/javascript"></script>
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
@@ -39,38 +39,40 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-            <div class="jumbotron">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="${result.rows[0].path}" height="280" width="250" class="img-rounded" alt="Nessuna foto del prodotto disponibile">
-                        <c:if test="${user.id == result.rows[0].shopSeller}">
-                            <form action="UploadPhoto?idPhoto=${param.prodotto}" method="POST" ENCTYPE="multipart/form-data">
-                                <p> <u>Aggiorna immagine: </u></p>
-                                <input name="myFile" type="file" accept=".jpg" required="required">
-                                <input type="submit" value="Aggiorna foto">
-                            </form> 
-                        </c:if>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row">
-                            <h1><c:out value="${result.rows[0].name}" /> <span class="badge badge-info"><c:out value="${result.rows[0].first_genre}" /></span></h1>
-                            <div class="row">
-                                <input id="ratingOverall" type="number" class="rating" value="${rating.rows[0].media}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
-                            </div>
-                            <div class="row">
-                                <p> Venditore: <c:out value="${result.rows[0].shopName}" /> 
-                            </div>
-                            
-                            <div class="row">
-                                <a href="mappa.jsp?map=<c:out value="${result.rows[0].id_shop}" />">Guarda la mappa</a>
-                            </div>
 
-                            <p> € <c:out value="${result.rows[0].price}" /> </p>
-                            <p> </p>
+            <div class="row">
+
+                <div class="col-lg-3">
+                    <h1 class="my-4">Risultati</h1>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="card mt-4">
+                        <img class="card-img-top img-fluid pull-left" src="${result.rows[0].path}" width="280" height="280" alt="Image not available">
+                        <div class="card-body" style="padding-left: 300px">
+
+                            <h1 class="card-title"><c:out value="${result.rows[0].name}" />  <span class="badge badge-info"><c:out value="${result.rows[0].first_genre}" /></span></h1>
+                            <h2>€ <c:out value="${result.rows[0].price}" /></h2>
+                            <h5>Venduto da:<c:out value="${result.rows[0].shopName}" /> </h5>
+
+                            <span class="glyphicon glyphicon-home"></span>
+
+                            <a href="mappa.jsp?map=<c:out value='${result.rows[0].id_shop}' />" 
+                               style="text-decoration: none;    
+                               color: #000000;" >	
+                                Vai al Negozio
+                            </a>
+
+                            <br>
+
+                            <br>
+
+                            <input id="ratingOverall" type="number" class="rating" value="${rating.rows[0].media}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
                             <form action="addCart" method="POST">
-                                <input class="btn btn-success" type="submit">
-                                Aggiungi al carrello
-                                </input>
+                                <input type="submit" class="btn btn-success" value="Compra">
+                                <input type="number" name="quantita" min="1" step="1" default='1'/>
                                 <input type="hidden" name="nomeProdotto" value="${result.rows[0].name}" />
                                 <input type="hidden" name="prezzoProdotto" value="${result.rows[0].price}" />
                                 <input type="hidden" name="deposit" value="${result.rows[0].deposit}" />
@@ -78,33 +80,39 @@
                                 <input type="hidden" name="shopAddress" value="${result.rows[0].address}" />
                                 <input type="hidden" name="idProduct" value="${result.rows[0].id}" />
                                 <input type="hidden" name="path" value="${result.rows[0].path}" />
-                                <input type="number" name="quantita" min="1" step="1" />
                             </form>
+
+                            <c:if test="${user.id == result.rows[0].shopSeller}">
+                                <form action="UploadPhoto?idPhoto=${param.prodotto}" method="POST" ENCTYPE="multipart/form-data">
+                                    <p> <u>Aggiorna immagine: </u></p>
+                                    <input class="btn btn-primary" name="myFile" type="file" accept=".jpg" required="required">
+                                    <input class="btn btn-success" type="submit" value="Aggiorna foto">
+                                </form> 
+                            </c:if>
                         </div>
                     </div>
+                    <!-- /.card -->
+
+                    <br><br>
+
+
+                    <div class="card card-outline-secondary my-4">
+                        <div class="card-header"><h3>Recensioni</h3></div>
+                        <c:forEach items="${reviews.rows}" var="row">
+                            <div class="card-body">
+                                <p><b><c:out value="${row.name}"/></b> <c:out value="${row.description}" /></p>
+                                <br>
+                                <p> Qualità del prodotto </p> <input id="ratingQuality" type="number" class="rating" value="${row.quality}" data-size="xs" data-readonly="true">
+                                <br>
+                                <p> Servizio </p> <input id="ratingService" type="number" class="rating" value="${row.service}" data-size="xs" data-readonly="true">
+                                <br>
+                                <p> Rapporto qualità/prezzo </p> <input id="ratingMoney" type="number" class="rating" value="${row.value_for_money}" data-size="xs" data-readonly="true">
+                                <small class="text-muted">Posted by <c:out value="${row.username}" /> on <c:out value="${row.date_creation}" /></small>
+                                <hr>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
-            </div>
-            <div class="jumbotron">
-                <h2>Recensioni </h2>
-                    <c:forEach items="${reviews.rows}" var="row">
-                    <p> ------------------------------------------------------------------------------------------------ <p>
-                        <div class="row">
-                            <h3><b><c:out value="${row.name}"/></b></h3>
-                            <p> <c:out value="${row.username}" /> --- <c:out value="${row.date_creation}" /> </p>
-                        </div>
-                        <div class="row">
-                            <p> Qualità del prodotto </p> <input id="ratingQuality" type="number" class="rating" value="${row.quality}" data-size="xs" data-readonly="true">
-                        </div>
-                        <div class="row">
-                            <p> Servizio </p> <input id="ratingService" type="number" class="rating" value="${row.service}" data-size="xs" data-readonly="true">                      
-                        </div>
-                        <div class="row">
-                            <p> Rapporto qualità/prezzo </p> <input id="ratingMoney" type="number" class="rating" value="${row.value_for_money}" data-size="xs" data-readonly="true">                           
-                        </div>
-                        <div class="row">
-                            <p> Descrizione: <c:out value="${row.description}" /> </p>
-                        </div>
-                    </c:forEach>
             </div>
         </div>
     </body>
