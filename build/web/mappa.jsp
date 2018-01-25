@@ -22,6 +22,9 @@
 <sql:query dataSource = "${snapshot}" var = "coordinates">
     SELECT * FROM COORDINATES WHERE ID = (SELECT ID_COORDINATE FROM SHOP_COORDINATE WHERE ID_SHOP = ${param.map})
 </sql:query>
+<sql:query dataSource = "${snapshot}" var = "reviews" maxRows="5">
+    SELECT R.*, U.username FROM REVIEWS R, USERS U, PRODUCTS P WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = P.ID AND P.ID_SHOP = ${param.map} ORDER BY R.DATE_CREATION DESC, R.ID 
+</sql:query>
 
 <!DOCTYPE html>
 <html>
@@ -38,46 +41,93 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-            <div class="jumbotron">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="${result.rows[0].path}" height="280" width="250" class="img-rounded" alt="Nessuna foto del prodotto disponibile">
-                        <c:if test="${user.id == result.rows[0].id_owner}">
-                            <form action="UploadPhotoShop?idPhoto=${param.map}" method="POST" ENCTYPE="multipart/form-data">
-                                <p> <u>Aggiorna immagine: </u></p>
-                                <input name="myFile" type="file" accept=".jpg" required="required">
-                                <input type="submit" value="Aggiorna foto">
-                            </form> 
-                        </c:if>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row">
-                            <h1> <c:out value="${result.rows[0].name}" /> </h1>
+
+            <div class="row">
+
+                <div class="col-lg-3">
+                    <h1 class="my-4">Risultati</h1>
+
+                </div>
+
+                <div class="col-lg-9">
+
+                    <div class="card mt-4">
+                        <c:choose>
+                            <c:when test="${empty result.rows[0].path}">
+                                <img class="card-img-top img-fluid pull-left" src="img/noimg.jpg" width="280" height="280" alt="Image not available">
+                            </c:when>
+                            <c:otherwise>
+                                <img class="card-img-top img-fluid pull-left" src="${result.rows[0].path}" width="280" height="280" alt="Image not available">               
+                            </c:otherwise>
+                        </c:choose>
+                        <div class="card-body" style="padding-left: 300px">
+
+                            <h1 class="card-title"><c:out value="${result.rows[0].name}" />  </h1>
                             <p> <input id="ratingOverall" type="number" class="rating" value="${result.rows[0].global_value}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
-                            <a href="<c:out value="${result.rows[0].web_site_URL}" />"> Visita il sito web del negozio</a>
                             <p> Indirizzo: <c:out value="${coordinates.rows[0].address}" /> </p>
                             <c:if test="${result.rows[0].deposit == 'T'}">
                                 <p> Puoi anche ritirare in negozio la merce! </p>
                             </c:if>
+
+                            <span class="glyphicon glyphicon-home"></span>
+
+                            <a href="<c:out value="${result.rows[0].web_site_URL}" />" 
+                               style="text-decoration: none;    
+                               color: #000000;" >	
+                                Vai al Sito Web
+                            </a>
+
+                            <br><br>
+
+                            <c:if test="${user.id == result.rows[0].shopSeller}">
+                                <form action="UploadPhotoShop?idPhoto=${param.map}" method="POST" ENCTYPE="multipart/form-data">
+                                    <p> <u>Aggiorna immagine: </u></p>
+                                    <input class="btn btn-primary" name="myFile" type="file" accept=".jpg" required="required">
+                                    <input class="btn btn-success" type="submit" value="Aggiorna foto">
+                                </form> 
+                            </c:if>
+
+                            <br><br><br><br><br><br><br><br>
+                            
                         </div>
+                                    <div id="map"></div>
+                            <script>
+                                function initMap() {
+                                    var uluru = {lat: ${coordinates.rows[0].latitude}, lng: ${coordinates.rows[0].longitude}};
+                                    var map = new google.maps.Map(document.getElementById('map'), {
+                                        zoom: 4,
+                                        center: uluru
+                                    });
+                                    var marker = new google.maps.Marker({
+                                        position: uluru,
+                                        map: map
+                                    });
+                                }
+                            </script>
+                            <script async defer
+                                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYXsnbH8Seqck98_bvR9m7BPIIjuIlCBY&callback=initMap">
+                            </script>
                     </div>
-                    <div id="map"></div>
-                        <script>
-                            function initMap() {
-                                var uluru = {lat: ${coordinates.rows[0].latitude}, lng: ${coordinates.rows[0].longitude}};
-                                var map = new google.maps.Map(document.getElementById('map'), {
-                                    zoom: 4,
-                                    center: uluru
-                                });
-                                var marker = new google.maps.Marker({
-                                    position: uluru,
-                                    map: map
-                                });
-                            }
-                        </script>
-                        <script async defer
-                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYXsnbH8Seqck98_bvR9m7BPIIjuIlCBY&callback=initMap">
-                        </script>
+                    <br><br>
+
+
+                    <div class="card card-outline-secondary my-4">
+                        <div class="card-header"><h3>Recensioni</h3></div>
+                        <c:forEach items="${reviews.rows}" var="row">
+                            <div class="card-body">
+                                <p><b><c:out value="${row.name}"/></b> <c:out value="${row.description}" /></p>
+                                <br>
+                                <p> Qualità del prodotto </p> <input id="ratingQuality" type="number" class="rating" value="${row.quality}" data-size="xs" data-readonly="true">
+                                <br>
+                                <p> Servizio </p> <input id="ratingService" type="number" class="rating" value="${row.service}" data-size="xs" data-readonly="true">
+                                <br>
+                                <p> Rapporto qualità/prezzo </p> <input id="ratingMoney" type="number" class="rating" value="${row.value_for_money}" data-size="xs" data-readonly="true">
+                                <small class="text-muted">Posted by <c:out value="${row.username}" /> on <c:out value="${row.date_creation}" /></small>
+                                <hr>
+                            </div>
+                        </c:forEach>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -24,12 +24,23 @@
         %>
         <jsp:include page="navbar.jsp"/>
         <div class="container">
+            <c:if test="${param.e == '3'}" >
+                <div class="alert alert-danger">
+                    <strong>Login non effettuato</strong> Username/password non trovati
+                </div>
+            </c:if>
+            <c:if test="${param.e == '4'}" >
+                <div class="alert alert-danger">
+                    <strong>Login non effettuato</strong> Conferma il tuo account tramite link nella mail!
+                </div>
+            </c:if>
+            <c:if test="${param.e == 'c'}" >
+                <div class="alert alert-success">
+                    <strong>Account confermato!</strong> Usa il form per accedere al tuo nuovo account.
+                </div>
+            </c:if>
             <div class="panel panel-primary">
-                <c:if test="${param.e == '1'}" >
-                    <div class="alert alert-danger">
-                        <strong>Login non effettuato</strong> Username/password non trovati
-                    </div>
-                </c:if>
+
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
                     <div class="form-horizontal">

@@ -5,7 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="user" scope="session" class="beans.Utente"/>
@@ -30,7 +34,7 @@
                 <jsp:forward page="errorPage.jsp" />
             </c:when>
             <c:otherwise>
-                
+
                 <div class="container">
                     <div class="jumbotron">
                         <form action="ChangePassword" method="POST">
@@ -71,5 +75,45 @@
                 </div>
             </c:otherwise>
         </c:choose>
-    </body>
+        -----------
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Login</div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <form action="ChangePassword" method="POST">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="previousPassword"><span class="glyphicon glyphicon-user"></span> Vecchia password:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="previousPassword" name="previousPassword" placeholder="Enter old password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="newPassword1"><span class="glyphicon glyphicon-lock"></span> Nuova Password:</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="newPassword1" name="newPassword1" placeholder="Enter new password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="newPassword2"><span class="glyphicon glyphicon-lock"></span> Conferma Nupva Password:</label>
+
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="newPassword2" name="newPassword2" placeholder="Confirm new password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <input type="submit" class="btn btn-success" value="Cambia password">
+                                    <input type="hidden" name="username" value="${param.u}">
+                                    <input type="hidden" name="hash" value="${param.h}">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

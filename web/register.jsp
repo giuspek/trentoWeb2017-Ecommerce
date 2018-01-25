@@ -59,6 +59,11 @@
                     <strong>Registrazione non effettuata</strong> L'username è gia stato usato
                 </div>
             </c:if>
+            <c:if test="${param.e == 'c'}" >
+                <div class="alert alert-success">
+                    <strong>Registrazione effettuata</strong> Attiva il tuo tramite link nella mail.
+                </div>
+            </c:if>
             <div class="panel panel-primary">
                 <div class="panel-heading">Registrati</div>
                 <div class="panel-body">
@@ -96,13 +101,13 @@
                             <label class="control-label col-sm-2" for="pass1"><span class="glyphicon glyphicon-lock"></span> Password:</label>
 
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter password">
+                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass1" name="pass1" placeholder="Enter password">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="pass2"><span class="glyphicon glyphicon-lock"></span> Conferma Password:</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm password">
+                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass2" name="pass2" placeholder="Confirm password">
                             </div>
                         </div>
                         <div class="form-group">

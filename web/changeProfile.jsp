@@ -24,42 +24,35 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-            <div class="jumbotron">
-                <c:choose>
-                    <c:when test="${(empty user.username)  || (user.username != param.n) }">
-                        <c:redirect url="errorPage.jsp" />
-                    </c:when>
-                    <c:otherwise>
-                        <div class="row">
-                            <h1> Cambia i tuoi dati </h1>
-                        </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Cambia dati</div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
                         <form action="ChangeProfile" method="POST">
                             <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="nome">
-                                            Nuovo nome
-                                        </label>
-                                        <input class="form-control" type="text" id="name" name="name" required="required">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="cognome">
-                                            Nuovo cognome
-                                        </label>
-                                        <input class="form-control" type="text" id="surname" name="surname" required="required">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="submit" class="btn btn-success" value="Cambia dati">
-                                        <input type="hidden" name="id" value="${user.id}">
-                                    </div>
+                                <label class="control-label col-sm-2" for="name"><span class="glyphicon glyphicon-user"></span> Nome:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter first name">
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="surname"><span class="glyphicon glyphicon-lock"></span> Cognome:</label>
 
-                            </div>  
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="surname" name="surname" placeholder="Enter last name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success pull-left"><span class="glyphicon glyphicon-send"></span> Submit</button>
+                                    <button class="btn btn-danger pull-left" type="reset" onclick="window.location.href = '<%=request.getHeader("Referer")%>'">Annulla </button>
+                                </div>
+                            </div>
                         </form>
-
-                    </c:otherwise>
-                </c:choose>
+                    </div>
+                </div>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

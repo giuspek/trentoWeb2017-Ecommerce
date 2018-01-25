@@ -50,7 +50,14 @@
                 <div class="col-lg-9">
 
                     <div class="card mt-4">
-                        <img class="card-img-top img-fluid pull-left" src="${result.rows[0].path}" width="280" height="280" alt="Image not available">
+                        <c:choose>
+                            <c:when test="${empty result.rows[0].path}">
+                                <img class="card-img-top img-fluid pull-left" src="img/noimg.jpg" width="280" height="280" alt="Image not available">
+                            </c:when>
+                            <c:otherwise>
+                                <img class="card-img-top img-fluid pull-left" src="${result.rows[0].path}" width="280" height="280" alt="Image not available">               
+                            </c:otherwise>
+                        </c:choose>
                         <div class="card-body" style="padding-left: 300px">
 
                             <h1 class="card-title"><c:out value="${result.rows[0].name}" />  <span class="badge badge-info"><c:out value="${result.rows[0].first_genre}" /></span></h1>

@@ -142,7 +142,7 @@ public class Registration extends HttpServlet {
 //TODO: log the exception
                         response.sendRedirect("errorPage.jsp");
                     }
-                    response.sendRedirect("waitingconfirm.jsp");
+                    response.sendRedirect("register.jsp?e=c");
                 }
             }
         }

@@ -8,8 +8,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "sql" uri = "http://java.sun.com/jsp/jstl/sql" %>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <sql:setDataSource var = "snapshot" driver = "org.apache.derby.jdbc.ClientDriver" url = "jdbc:derby://localhost:1527/guappo"  user = "root"  password = "root" scope="session"/>
 
 <!DOCTYPE html>
@@ -23,35 +21,33 @@
         </sql:query>
     </head>
     <body>
-       <c:if test="${user.typeOfAccount == 'S' || user.typeOfAccount == 'R' || user.typeOfAccount == 'A'}">
+        <c:if test="${user.typeOfAccount == 'S' || user.typeOfAccount == 'R' || user.typeOfAccount == 'A'}">
             <c:redirect url="errorPage.jsp" />
         </c:if>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-            <div class="jumbotron">
-                <c:choose>
-                        
-                    <c:when test = "${theuser.rows[0].username != param.u}">
-                        <c:redirect url="errorPage.jsp" />
-                    </c:when>
 
-                    <c:when test = "${theuser.rows[0].active}">
-                        <c:redirect url="errorPage.jsp" />
-                    </c:when>
-                    
-                    <c:when test = "${theuser.rows[0].hash != param.h}">
-                        <c:redirect url="errorPage.jsp" />
-                    </c:when>
+            <c:choose>
 
-                    <c:otherwise>
-                        <h1> Utente attivato adesso! </h1>
-                        <sql:update dataSource="${snapshot}" sql="UPDATE USERS SET ACTIVE = true WHERE username=?">
-                            <sql:param value="${param.u}" />
-                        </sql:update>
-                    </c:otherwise>
-                </c:choose>
-            </div>
+                <c:when test = "${theuser.rows[0].username != param.u}">
+                    <c:redirect url="errorPage.jsp" />
+                </c:when>
+
+                <c:when test = "${theuser.rows[0].active}">
+                    <c:redirect url="errorPage.jsp" />
+                </c:when>
+
+                <c:when test = "${theuser.rows[0].hash != param.h}">
+                    <c:redirect url="errorPage.jsp" />
+                </c:when>
+
+                <c:otherwise>
+                    <sql:update dataSource="${snapshot}" sql="UPDATE USERS SET ACTIVE = true WHERE username=?">
+                        <sql:param value="${param.u}" />
+                    </sql:update>
+                    <c:redirect url="loginPage.jsp?e=c" />
+                </c:otherwise>
+            </c:choose>
         </div>
-
     </body>
 </html>
