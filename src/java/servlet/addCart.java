@@ -70,7 +70,7 @@ public class addCart extends HttpServlet {
             cart.addElement(name, price, quantita, idProduct,path );              
         }
         session.setAttribute("cart", cart);
-        response.sendRedirect("addedObject.jsp");
+        response.sendRedirect("prodotto.jsp?prodotto="+idProduct+"&e=c");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

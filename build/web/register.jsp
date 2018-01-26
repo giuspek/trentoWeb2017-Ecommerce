@@ -64,7 +64,7 @@
                     <strong>Registrazione effettuata</strong> Attiva il tuo tramite link nella mail.
                 </div>
             </c:if>
-            <div class="panel panel-primary">
+            <div class="panel panel-default">
                 <div class="panel-heading">Registrati</div>
                 <div class="panel-body">
                     <form class="form-horizontal" action="Registration" method="POST">
@@ -114,7 +114,7 @@
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button id="confirm" type="submit" class="btn btn-success pull-left" disabled="true" ><span class="glyphicon glyphicon-send"></span> Submit</button>
                                 <!-- Trigger the modal with a button -->
-                                <button type="button" id="button" class="btn btn-primary btn pull-right" data-toggle="modal" data-target="#myModal">Acceta le condizioni</button>
+                                <button type="button" id="button" class="btn btn-primary btn pull-right" data-toggle="modal" data-target="#myModal">Accetta le condizioni</button>
                             </div>
                         </div>
                     </form>
@@ -127,10 +127,23 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Modal Header</h4>
+                        <h4 class="modal-title">Condizioni d'uso</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p>Gentile utente, ai sensi dell'art. 13 del D. Lgs. 196/2003 La informiamo che Guappo Srl (da qui in avanti
+                            “Guappo”), procederà al trattamento dei dati da Lei forniti nel rispetto della normativa in materia di tutela
+                            del trattamento dei dati personali. Il conferimento dei dati è facoltativo e la negazione dell’autorizzazione
+                            al trattamento dei dati non ci consentirà l’erogazione dei servizi richiesti (ad esempio newsletter,
+                            disponibilità merce dei singoli punti vendita, promozioni dedicate agli utenti registrati ecc.).<br>
+                            <b>Tipi di dati:</b> i dati personali trattati sono esclusivamente quelli da Lei forniti volontariamente all’atto
+                            della registrazione sul sito www.guappo.it. Le comunicazioni verranno inviate prevalentemente via
+                            email.<br>
+                            <b>Finalita' del trattamento:</b> I dati saranno trattati per finalità statistiche, commerciali, promozionali,
+                            pubblicitarie, di marketing e di profilazione;<br>
+                            <b>Modalità del trattamento:</b> i dati potranno essere trattati, per il perseguimento delle finalità di cui sopra,
+                            in forma cartacea o con strumenti elettronici, in Italia o all’estero, compresi i paesi non appartenenti
+                            all’Unione Europea. I dati potranno essere comunicati da Guappo a suoi partner commerciali.
+                        </p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" onclick="app()" class="btn btn-success" data-toggle="modal" data-target="#myModal">YES</button>

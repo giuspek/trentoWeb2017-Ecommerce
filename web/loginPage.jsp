@@ -39,7 +39,7 @@
                     <strong>Account confermato!</strong> Usa il form per accedere al tuo nuovo account.
                 </div>
             </c:if>
-            <div class="panel panel-primary">
+            <div class="panel panel-default">
 
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">

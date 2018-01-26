@@ -26,12 +26,11 @@
             SELECT P.*, S.name as shopName, S.id_owner AS shopSeller, S.deposit, C.address from PRODUCTS P, SHOPS S, SHOP_COORDINATE X, COORDINATES C WHERE P.id = ${param.prodotto} AND P.ID_SHOP = S.ID AND S.ID = X.ID_SHOP AND X.ID_COORDINATE = C.ID
         </sql:query>
         <sql:query dataSource = "${snapshot}" var = "reviews">
-            SELECT R.*, U.username FROM REVIEWS R, USERS U WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = ${param.prodotto} ORDER BY DATE_CREATION, R.ID DESC
+            SELECT R.*, U.username FROM REVIEWS R, USERS U WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = ${param.prodotto} ORDER BY DATE_CREATION DESC, R.ID 
         </sql:query>
         <sql:query dataSource = "${snapshot}" var = "rating">
             SELECT AVG(CAST(GLOBAL_VALUE AS FLOAT)) AS media FROM REVIEWS WHERE ID_PRODUCT = ${param.prodotto} GROUP BY ID_PRODUCT
         </sql:query>
-
         <title>
             <c:out value="${result.rows[0].name}" /> 
         </title>
@@ -48,7 +47,11 @@
                 </div>
 
                 <div class="col-lg-9">
-
+                    <c:if test="${param.e == 'c'}" >
+                        <div class="alert alert-success">
+                            <strong>Prodotto aggiunto al carrello!</strong>
+                        </div>
+                    </c:if>
                     <div class="card mt-4">
                         <c:choose>
                             <c:when test="${empty result.rows[0].path}">
@@ -77,6 +80,7 @@
                             <br>
 
                             <input id="ratingOverall" type="number" class="rating" value="${rating.rows[0].media}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
+                            <br>
                             <form action="addCart" method="POST">
                                 <input type="submit" class="btn btn-success" value="Compra">
                                 <input type="number" name="quantita" min="1" step="1" default='1'/>
@@ -92,7 +96,7 @@
                             <c:if test="${user.id == result.rows[0].shopSeller}">
                                 <form action="UploadPhoto?idPhoto=${param.prodotto}" method="POST" ENCTYPE="multipart/form-data">
                                     <p> <u>Aggiorna immagine: </u></p>
-                                    <input class="btn btn-primary" name="myFile" type="file" accept=".jpg" required="required">
+                                    <input class="btn" name="myFile" type="file" accept=".jpg" required="required">
                                     <input class="btn btn-success" type="submit" value="Aggiorna foto">
                                 </form> 
                             </c:if>
