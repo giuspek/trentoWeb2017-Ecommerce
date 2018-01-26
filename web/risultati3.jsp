@@ -152,9 +152,9 @@
                             </div>
                             <div class="form-group">
                                 <div class="col">
-                                    <input type="hidden" id="order" name="order" value="name">
+                                    <input type="hidden" id="order" name="order" value="price">
                                     <input type="hidden" id="oggetto" name="oggetto" value="${param.oggetto}">
-                                    <input type="hidden" id="filtro" name="filtro" value="price">
+                                    <input type="hidden" id="filtro" name="filtro" value="name">
                                     <button class="btn btn-outline-success " id="sender" type="submit" value="Conferma"><span class="glyphicon glyphicon-search"></span> Search</button>
                                 </div>
                             </div>
