@@ -29,7 +29,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Il mio business</title>
+        <title>Il mio Profilo</title>
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
@@ -53,17 +53,17 @@
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                        <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
                             <div class="hidden-xs">I tuoi prodotti</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" id="shop" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                        <button type="button" id="shop" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                             <div class="hidden-xs">Il tuo negozio</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" id="products" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                        <button type="button" id="products" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                             <div class="hidden-xs">Cambia informazioni</div>
                         </button>
                     </div>
@@ -73,16 +73,16 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="tab1">
                             <p><b><c:out value="${user.firstName}" /> <c:out value="${user.lastName}" /></b> </p><br>
-                            <p> Nickname: <c:out value="${user.username}" /></p>
+                            <p> Nickname: <label><c:out value="${user.username}" /></label></p>
                             <p> Tipo di utente: 
                                 <c:if test="${user.typeOfAccount == 'R'}">
-                                    Registrato
+                                    <label>Registrato</label>
                                 </c:if>
                                 <c:if test="${user.typeOfAccount == 'S'}">
-                                    Venditore
+                                    <label>Venditore</label>
                                 </c:if>
                                 <c:if test="${user.typeOfAccount == 'R'}">
-                                    Admin
+                                    <label>Admin</label>
                                 </c:if>
                             </p>
                         </div>

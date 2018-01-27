@@ -12,20 +12,20 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Guappo - Recupera password</title>
+        <title>Recupera password</title>
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-            <div class="panel panel-primary">
-                <div class="panel-heading">Recupera password</div>
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-size: 30px">Recupera Password</div>
                 <div class="panel-body">
                     <div class="form-horizontal">
                         <form action="resetPassword" method="POST">
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="mail"><span class="glyphicon glyphicon-lock"></span> Email:</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="mail" name="mail" placeholder="Enter e-mail:">
+                                    <input type="password" class="form-control" id="mail" name="mail" placeholder="Inserisci Email">
                                 </div>
                             </div>
                             <div class="form-group">

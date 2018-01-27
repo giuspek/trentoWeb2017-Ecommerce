@@ -30,7 +30,7 @@
 </c:if>
 <html>
     <head>
-        <title>Guappo</title>
+        <title>Registarti</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -65,49 +65,49 @@
                 </div>
             </c:if>
             <div class="panel panel-default">
-                <div class="panel-heading">Registrati</div>
+                <div class="panel-heading" style="font-size: 30px">Registrati</div>
                 <div class="panel-body">
                     <form class="form-horizontal" action="Registration" method="POST">
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="nome"><span class="glyphicon glyphicon-user"></span> Nome:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Enter First Name" required>
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Inserisci Nome" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="cognome"><span class="glyphicon glyphicon-user"></span> Cognome:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="cognome" name="cognome" placeholder="Enter Last Name" required>
+                                <input type="text" class="form-control" id="cognome" name="cognome" placeholder="Inserisci Cognome" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="username"><span class="glyphicon glyphicon-user"></span> Username:</label>
+                            <label class="control-label col-sm-2" for="username"><span class="glyphicon glyphicon-sunglasses"></span> Username:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Inserisci Username" required>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2" for="mail1"><span class="glyphicon glyphicon-user"></span> Mail:</label>
+                            <label class="control-label col-sm-2" for="mail1"><span class="glyphicon glyphicon-phone"></span> Email:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="mail1" name="mail1" placeholder="Enter Mail" required>
+                                <input type="email" class="form-control" id="mail1" name="mail1" placeholder="Inserisci Email" required>
                             </div>
                         </div><div class="form-group">
-                            <label class="control-label col-sm-2" for="mail2"><span class="glyphicon glyphicon-user"></span> Conferma mail:</label>
+                            <label class="control-label col-sm-2" for="mail2"><span class="glyphicon glyphicon-phone"></span> Conferma Email:</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="mail2" name="mail2" placeholder="Confirm Mail" required>
+                                <input type="email" class="form-control" id="mail2" name="mail2" placeholder="Conferma Email" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="pass1"><span class="glyphicon glyphicon-lock"></span> Password:</label>
 
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass1" name="pass1" placeholder="Enter password" required>
+                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass1" name="pass1" placeholder="Inserisci Password" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="pass2"><span class="glyphicon glyphicon-lock"></span> Conferma Password:</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass2" name="pass2" placeholder="Confirm password" required>
+                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass2" name="pass2" placeholder="Conferma Password" required>
                             </div>
                         </div>
                         <div class="form-group">

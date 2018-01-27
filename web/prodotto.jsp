@@ -40,7 +40,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    <h1 class="my-4">Prodotto</h1>
+                    
                 </div>
                 <div class="col-lg-9">
                     <c:if test="${param.e == 'c'}" >
@@ -77,7 +77,7 @@
                             <input id="ratingOverall" type="number" class="rating" value="${rating.rows[0].media}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
                             <br>
                             <form action="addCart" method="POST">
-                                <input type="submit" class="btn btn-success" value="Compra">
+                                <input type="submit" class="btn btn-success btn-md" value="Compra">
                                 <input type="number" name="quantita" min="1" step="1" default='1'/>
                                 <input type="hidden" name="nomeProdotto" value="${result.rows[0].name}" />
                                 <input type="hidden" name="prezzoProdotto" value="${result.rows[0].price}" />

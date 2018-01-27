@@ -47,7 +47,7 @@
                         </button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                        <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                             <div class="hidden-xs">Cambia dati</div>
                         </button>
                     </div>
@@ -57,16 +57,16 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="tab1">
                             <p><b><c:out value="${user.firstName}" /> <c:out value="${user.lastName}" /></b> </p><br>
-                            <p> Nickname: <c:out value="${user.username}" /></p> <br>
+                            <p> Nickname: <label><c:out value="${user.username}" /></label></p> <br>
                             <p> Tipo di utente: 
                                 <c:if test="${user.typeOfAccount == 'R'}">
-                                    Registrato
+                                    <label>Registrato</label>
                                 </c:if>
                                 <c:if test="${user.typeOfAccount == 'S'}">
-                                    Venditore
+                                    <label>Venditore</label>
                                 </c:if>
                                 <c:if test="${user.typeOfAccount == 'R'}">
-                                    Admin
+                                    <label>Admin</label>
                                 </c:if>
                             </p>
                         </div>

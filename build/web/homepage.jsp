@@ -76,7 +76,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Guappo-HomePage</title>
+        <title>Guappo</title>
 
     </head>
     <body>
@@ -162,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9" style="padding-top: 20px;">
                     <div class="thumbnail">
                         <img src="img/homepage.jpg" alt="Guappo" style="width:100%">
                     </div>

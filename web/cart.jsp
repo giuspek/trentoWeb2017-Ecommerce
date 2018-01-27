@@ -20,7 +20,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Carrello</title>
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
@@ -57,7 +57,7 @@
             <c:if test="${(empty user.username)}">
                 <div class="container">
                     <div class="jumbotron">
-                        <p> Non puoi ancora acquistare: prima <a href="register.jsp"> registrati </a> o <a href="loginPage.jsp" > accedi. </a>
+                        <p> Non puoi ancora acquistare: prima <a href="register.jsp"> Registrati </a> o <a href="loginPage.jsp" > Accedi</a>
                     </div>
                 </div>
             </c:if>

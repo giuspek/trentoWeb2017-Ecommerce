@@ -124,7 +124,7 @@
                             </form>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" /> <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 20px"  ><jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" /> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="cart.jsp">Il mio Carrello</a></li>
                                 <li><a href="business.jsp">Il mio Profilo</a></li>
@@ -133,7 +133,7 @@
                                 <li><a href="Logout">Esci</a></li>
                             </ul>
                         </li>                     
-                        <li><a href="notificheSeller.jsp">Notifiche</a></li>
+                        <li><a href="notificheSeller.jsp" style="font-size: 20px">Notifiche</a></li>
                     </ul>
                 </div>
             </c:when>
@@ -154,13 +154,13 @@
                             </form>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" /> <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 20px"><jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" /> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="profile.jsp">Il mio Profilo</a></li>                              
                                 <li><a href="Logout">Esci</a></li>
                             </ul>
                         </li>                     
-                        <li><a href="notificheAdmin.jsp">Notifiche</a></li>
+                        <li><a href="notificheAdmin.jsp" style="font-size: 20px">Notifiche</a></li>
                     </ul>
                 </div>
             </c:when>
@@ -181,7 +181,7 @@
                             </form>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" /> <span class="caret"></span></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size: 20px"><jsp:getProperty name="user" property="firstName" /> <jsp:getProperty name="user" property="lastName" /> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="cart.jsp">Il mio Carrello</a></li>
                                 <li><a href="profile.jsp">Il mio Profilo</a></li>
@@ -190,7 +190,7 @@
                                 <li><a href="Logout">Esci</a></li>
                             </ul>
                         </li>                     
-                        <li><a href="notifiche.jsp">Notifiche</a></li>
+                        <li><a href="notifiche.jsp" style="font-size: 20px">Notifiche</a></li>
                     </ul>
                 </div>
             </c:when>
@@ -209,9 +209,9 @@
                                 <button class="btn btn-outline-success" type="submit" style="font-size: 16px"><span class="glyphicon glyphicon-search"></span> Search</button>
                             </form>
                         </li>
-                        <li><a href="register.jsp" style="font-size: 20px"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                        <li><a href="loginPage.jsp" style="font-size: 20px"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                        <li><a href="cart.jsp" style="font-size: 20px"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello</a></li>
+                        <li><a href="register.jsp" style="font-size: 18px"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="loginPage.jsp" style="font-size: 18px"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="cart.jsp" style="font-size: 18px"><span class="glyphicon glyphicon-shopping-cart"></span> Carrello</a></li>
                     </ul>
                 </div>
             </c:otherwise>

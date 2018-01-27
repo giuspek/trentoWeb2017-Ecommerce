@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Guappo</title>
+        <title>Login</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     </head>
@@ -41,21 +41,21 @@
             </c:if>
             <div class="panel panel-default">
 
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading" style="font-size: 30px">Login</div>
                 <div class="panel-body">
                     <div class="form-horizontal">
                         <form action="Login" method="POST">
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="usrname"><span class="glyphicon glyphicon-user"></span> Username:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="usrname" name="usrname" placeholder="Enter username">
+                                    <input type="text" class="form-control" id="usrname" name="usrname" placeholder="Inserisci Username">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="password"><span class="glyphicon glyphicon-lock"></span> Password:</label>
 
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Inserisci Password">
                                 </div>
                             </div>
                             <div class="form-group">

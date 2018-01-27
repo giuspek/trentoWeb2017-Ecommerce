@@ -15,7 +15,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Segnala anomalia</title>
+        <title>Segnala Anomalia</title>
         <sql:query dataSource="${snapshot}" var="result" scope="page"
                    sql="select S.ID_BUYER AS value from SELLS S where S.ID = ?" >
             <sql:param value="${param.sell}"/>

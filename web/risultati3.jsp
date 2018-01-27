@@ -180,16 +180,18 @@
                             </c:otherwise>
                         </c:choose>
                         <div class="media-body">
-                            <h4 class="media-heading"><c:out value="${row.name}" /></h4>
+                            <h3 class="media-heading"><c:out value="${row.name}" /></h3>
                             <p>€ <c:out value="${row.price}" /></p>
                             <div class="row">
                                 <input id="ratingOverall" type="number" class="rating" value="${row.global_value}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
                             </div>
-                            <button type="submit" onclick="window.location.href = 'prodotto.jsp?prodotto=${row.id}'" class="btn btn-success pull-left"><span class="glyphicon glyphicon-send"></span> Vedi prodotto</button>
-                            <!-- Trigger the modal with a button -->
-                            <button data-toggle="collapse" class="btn btn-primary" data-target="#demo${row.id}">Leggi descrizione</button>
-                            <div id="demo${row.id}" class="collapse">
-                                <p><c:out value="${row.description}" /></p>
+                            <div class="form-group">
+                                <button type="submit" onclick="window.location.href = 'prodotto.jsp?prodotto=${row.id}'" class="btn btn-success btn-sm pull-left"><span class="glyphicon glyphicon-send"></span> Vedi prodotto</button>
+                                <!-- Trigger the modal with a button -->
+                                <button data-toggle="collapse" class="btn btn-primary btn-sm" data-target="#demo${row.id}">Leggi descrizione</button>
+                                <div id="demo${row.id}" class="collapse">
+                                    <p><c:out value="${row.description}" /></p>
+                                </div>
                             </div>
                         </div>
                     </div>

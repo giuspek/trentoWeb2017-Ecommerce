@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>404-Guappo Not Found</title>
+    <title>Guappo Not Found</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +30,7 @@
     <!-- Page Content -->
     <div class="container">
       <!-- Page Heading/Breadcrumbs -->
-        <h1 align="center">404 Page not Found</h1>
+        <h1 align="center">Oh No! Cosa hai fatto?</h1>
         <p align="center">
           <button class="btn btn-outline-secondary" onclick="window.location.href='homepage.jsp'">HomePage</button>
         </p>
