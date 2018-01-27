@@ -26,7 +26,7 @@
             SELECT P.*, S.name as shopName, S.id_owner AS shopSeller, S.deposit, C.address from PRODUCTS P, SHOPS S, SHOP_COORDINATE X, COORDINATES C WHERE P.id = ${param.prodotto} AND P.ID_SHOP = S.ID AND S.ID = X.ID_SHOP AND X.ID_COORDINATE = C.ID
         </sql:query>
         <sql:query dataSource = "${snapshot}" var = "reviews">
-            SELECT R.*, U.username FROM REVIEWS R, USERS U WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = ${param.prodotto} ORDER BY DATE_CREATION DESC, R.ID 
+            SELECT R.*, cast(R.date_creation As Date) as date, U.username FROM REVIEWS R, USERS U WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = ${param.prodotto} ORDER BY DATE_CREATION DESC, R.ID 
         </sql:query>
         <sql:query dataSource = "${snapshot}" var = "rating">
             SELECT AVG(CAST(GLOBAL_VALUE AS FLOAT)) AS media FROM REVIEWS WHERE ID_PRODUCT = ${param.prodotto} GROUP BY ID_PRODUCT
@@ -38,14 +38,10 @@
     <body>
         <jsp:include page="navbar.jsp" />
         <div class="container">
-
             <div class="row">
-
                 <div class="col-lg-3">
-                    <h1 class="my-4">Risultati</h1>
-
+                    <h1 class="my-4">Prodotto</h1>
                 </div>
-
                 <div class="col-lg-9">
                     <c:if test="${param.e == 'c'}" >
                         <div class="alert alert-success">
@@ -62,7 +58,6 @@
                             </c:otherwise>
                         </c:choose>
                         <div class="card-body" style="padding-left: 300px">
-
                             <h1 class="card-title"><c:out value="${result.rows[0].name}" />  <span class="badge badge-info"><c:out value="${result.rows[0].first_genre}" /></span></h1>
                             <h2>€ <c:out value="${result.rows[0].price}" /></h2>
                             <h5>Venduto da:<c:out value="${result.rows[0].shopName}" /> </h5>
@@ -118,7 +113,7 @@
                                 <p> Servizio </p> <input id="ratingService" type="number" class="rating" value="${row.service}" data-size="xs" data-readonly="true">
                                 <br>
                                 <p> Rapporto qualità/prezzo </p> <input id="ratingMoney" type="number" class="rating" value="${row.value_for_money}" data-size="xs" data-readonly="true">
-                                <small class="text-muted">Posted by <c:out value="${row.username}" /> on <c:out value="${row.date_creation}" /></small>
+                                <small class="text-muted">Posted by <c:out value="${row.username}" /> on <c:out value="${row.date}" /></small>
                                 <hr>
                             </div>
                         </c:forEach>

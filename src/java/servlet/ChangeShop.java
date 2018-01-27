@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Giuseppe
  */
-public class ChangeUsername extends HttpServlet {
+public class ChangeShop extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,42 +35,18 @@ public class ChangeUsername extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-       
-        HttpSession s=request.getSession();
-        Utente u=(Utente) s.getAttribute("user");
+            throws ServletException, IOException {
+        HttpSession s = request.getSession();
         Connection con = (Connection) getServletContext().getAttribute("db");
-        PreparedStatement ps=null;
+        PreparedStatement ps = null;
+        
         try {
-            ps = con.prepareStatement("SELECT * FROM USERS WHERE USERNAME = ?"); //con is a Connection object
-            ps.setString(1, request.getParameter("nick1"));
-        }
-        catch (SQLException ex) {
-            response.sendRedirect("errorPage.jsp");
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ResultSet rs=null;
-         try {
-             rs = ps.executeQuery();
-        } catch (SQLException ex) {
-            response.sendRedirect("errorPage.jsp");
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         
-         
-        try {
-            if (rs.next()){
-                 response.sendRedirect("changeUsername.jsp?e=1");
-            }
-            else{
-                ps = con.prepareStatement("UPDATE USERS SET USERNAME = ? WHERE USERNAME = ?");
-                ps.setString(1, request.getParameter("nick1"));
-                ps.setString(2, u.getUsername());
-                ps.executeUpdate();
-                u.setUsername(request.getParameter("nick1"));
-                s.setAttribute("user", u);
-                response.sendRedirect("profile.jsp");
-            }
+            ps = con.prepareStatement("UPDATE SHOPS SET NAME = ?, DESCRIPTION = ? WHERE ID = ?");
+            ps.setString(1, request.getParameter("name"));
+            ps.setString(2, request.getParameter("description"));
+            ps.setString(3, request.getParameter("id"));
+            ps.executeUpdate();
+            response.sendRedirect("business.jsp");
         } catch (SQLException ex) {
             response.sendRedirect("errorPage.jsp");
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,7 +65,7 @@ public class ChangeUsername extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("errorPage.jsp");
+        processRequest(request, response);
     }
 
     /**
@@ -104,11 +79,7 @@ public class ChangeUsername extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ChangeUsername.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

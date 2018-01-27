@@ -23,7 +23,7 @@
     SELECT * FROM COORDINATES WHERE ID = (SELECT ID_COORDINATE FROM SHOP_COORDINATE WHERE ID_SHOP = ${param.map})
 </sql:query>
 <sql:query dataSource = "${snapshot}" var = "reviews" maxRows="5">
-    SELECT R.*, U.username FROM REVIEWS R, USERS U, PRODUCTS P WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = P.ID AND P.ID_SHOP = ${param.map} ORDER BY R.DATE_CREATION DESC, R.ID 
+    SELECT R.*, cast(R.date_creation as Date) as date,P.name as nameProduct,P.id as idProduct, U.username FROM REVIEWS R, USERS U, PRODUCTS P WHERE R.ID_CREATOR = U.ID AND ID_PRODUCT = P.ID AND P.ID_SHOP = ${param.map} ORDER BY R.DATE_CREATION DESC, R.ID 
 </sql:query>
 
 <!DOCTYPE html>
@@ -45,8 +45,7 @@
             <div class="row">
 
                 <div class="col-lg-3">
-                    <h1 class="my-4">Risultati</h1>
-
+                    <h1> Negozio </h1>
                 </div>
 
                 <div class="col-lg-9">
@@ -63,6 +62,7 @@
                         <div class="card-body" style="padding-left: 300px">
 
                             <h1 class="card-title"><c:out value="${result.rows[0].name}" />  </h1>
+                            <p> <c:out value="${result.rows[0].description}" /> </p>
                             <p> <input id="ratingOverall" type="number" class="rating" value="${result.rows[0].global_value}" data-size="xs" data-readonly="true" min="0" max="5" data-step="0.1">
                             <p> Indirizzo: <c:out value="${coordinates.rows[0].address}" /> </p>
                             <c:if test="${result.rows[0].deposit == 'T'}">
@@ -115,6 +115,7 @@
                         <div class="card-header"><h3>Recensioni</h3></div>
                         <c:forEach items="${reviews.rows}" var="row">
                             <div class="card-body">
+                                <p><u><a href="prodotto.jsp?prodotto=<c:out value='${row.idProduct}' />" > <c:out value="${row.nameProduct}"/></a></u></p>
                                 <p><b><c:out value="${row.name}"/></b> <c:out value="${row.description}" /></p>
                                 <br>
                                 <p> Qualità del prodotto </p> <input id="ratingQuality" type="number" class="rating" value="${row.quality}" data-size="xs" data-readonly="true">
@@ -122,7 +123,7 @@
                                 <p> Servizio </p> <input id="ratingService" type="number" class="rating" value="${row.service}" data-size="xs" data-readonly="true">
                                 <br>
                                 <p> Rapporto qualità/prezzo </p> <input id="ratingMoney" type="number" class="rating" value="${row.value_for_money}" data-size="xs" data-readonly="true">
-                                <small class="text-muted">Posted by <c:out value="${row.username}" /> on <c:out value="${row.date_creation}" /></small>
+                                <small class="text-muted">Posted by <c:out value="${row.username}" /> on <c:out value="${row.date}" /></small>
                                 <hr>
                             </div>
                         </c:forEach>

@@ -16,18 +16,18 @@
 <!DOCTYPE html>
 <script>
     var checkboxes = $("input[type='checkbox']");
-    
-    function app(){
+
+    function app() {
         console.log("aa");
-        $('#bottone').attr('disabled', $('.cbox:checked').length === 0);  
+        $('#bottone').attr('disabled', $('.cbox:checked').length === 0);
     }
-    
+
     $(document).ready(function () {
-        checkboxes.click(function() {
-    $("#bottone").attr("disabled", );
+        checkboxes.click(function () {
+            $("#bottone").attr("disabled", );
+        });
+
     });
-    
-});
 </script>
 <c:if test="${user.typeOfAccount != 'A' }">
     <jsp:forward page="errorPage.jsp" />
@@ -36,9 +36,20 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Le mie notifiche</title>
-        <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
-                   sql="SELECT A.*, P.name, U.first_name, U.last_name, S1.name AS nomeNegozio FROM ANOMALIES A, SELLS S, PRODUCTS P, SHOPS S1, USERS U WHERE A.MANAGED = false AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID AND S1.ID = P.ID_SHOP AND U.ID = S.ID_BUYER" >
-        </sql:query>
+        <c:choose>
+            <c:when test="${param.e != 'plus'}">
+                <sql:query dataSource="${snapshot}" var="theproducts" scope="page" maxRows="2"
+                           sql="SELECT A.*, P.name, U.first_name, U.last_name, S1.name AS nomeNegozio FROM ANOMALIES A, SELLS S, PRODUCTS P, SHOPS S1, USERS U WHERE A.MANAGED = false AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID AND S1.ID = P.ID_SHOP AND U.ID = S.ID_BUYER ORDER BY A.ID DESC" >
+                </sql:query>
+            </c:when>
+
+            <c:otherwise>
+                <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
+                           sql="SELECT A.*, P.name, U.first_name, U.last_name, S1.name AS nomeNegozio FROM ANOMALIES A, SELLS S, PRODUCTS P, SHOPS S1, USERS U WHERE A.MANAGED = false AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID AND S1.ID = P.ID_SHOP AND U.ID = S.ID_BUYER ORDER BY A.ID DESC" >
+                </sql:query>
+            </c:otherwise>
+        </c:choose>
+
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
@@ -91,6 +102,14 @@
                     </div>  
                 </div>
             </c:forEach>
+            <c:if test="${param.e != 'plus'}">
+                <form action="notificheAdmin.jsp?e=plus" method="GET">
+                    <button type="submit" class="btn btn-success">
+                        Mostra tutte
+                        <input type="hidden" name="e" value="plus">
+                    </button>
+                </form>
+            </c:if>
         </div>
     </body>
 </html>

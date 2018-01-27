@@ -44,7 +44,7 @@
                         <h4 class="media-heading"><c:out value="${row.name}" /></h4>
                         <p>€ <c:out value="${row.price}" /></p>
                         <p>N. <c:out value="${row.quantity}" /></p>
-                        <button type="submit" onclick="window.location.href = 'prodotto.jsp?prodotto=${row.id}'" class="btn btn-success pull-left"><span class="glyphicon glyphicon-send"></span> Vedi prodotto</button>
+                        <button type="submit" onclick="window.location.href = 'prodotto.jsp?prodotto=${row.idProduct}'" class="btn btn-success pull-left"><span class="glyphicon glyphicon-send"></span> Vedi prodotto</button>
                         <!-- Trigger the modal with a button -->
                         <form action="EliminateFromCart" method="POST">
                             <button type="submit" class="btn btn-danger pull-left"><span class="glyphicon glyphicon-send"></span> Rimuovi Prodotto</button>
@@ -73,7 +73,7 @@
             <c:if test="${!(empty user.username) && (cart.number == 0)}">
                 <div class="container">
                     <div class="jumbotron">
-                        <h1> Il tuo carrello è vuoto! </h1>
+                        <h2> Il tuo carrello è vuoto! </h2>
                     </div>
                 </div>
             </c:if>

@@ -19,56 +19,58 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Scrivi recensione</title>
-    <sql:query dataSource="${snapshot}" var="result" scope="page"
-               sql="select S.ID_BUYER AS value from SELLS S where S.ID = ?" >
-        <sql:param value="${param.sell}"/>
-    </sql:query>
-</head>
-<body>
+        <sql:query dataSource="${snapshot}" var="result" scope="page"
+                   sql="select S.ID_BUYER AS value from SELLS S where S.ID = ?" >
+            <sql:param value="${param.sell}"/>
+        </sql:query>
+    </head>
+    <body>
 
-    <jsp:include page="navbar.jsp" />
-    <c:choose>
-        <c:when test="${empty param.sell || empty param.nameProduct || user.id != result.rows[0].value}" >
-            <c:redirect url="errorPage.jsp" />
-        </c:when>
-        <c:otherwise>
-            <div class="container">
-                <h1>Recensione per: <c:out value="${param.nameProduct}" /></h1>
-                <form action="CreateReview" method="POST" id="mainForm">
-                    <div class="form-group">
-
-                        <div class="jumbotron">
-                            <div class="row">
-                                <p> Qualità del prodotto <input name="ratingQuality" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
+        <jsp:include page="navbar.jsp" />
+        <c:choose>
+            <c:when test="${empty param.sell || empty param.nameProduct || user.id != result.rows[0].value}" >
+                <c:redirect url="errorPage.jsp" />
+            </c:when>
+            <c:otherwise>
+                <div class="container">
+                    <div class="col">
+                        <div class="panel panel-default">
+                            <div class="panel-heading text-center" style="font-size: 35px">Recensione per: <c:out value="${param.nameProduct}" />
                             </div>
-                            <div class="row">
-                                <p> Qualità del servizio <input name="ratingService" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
-                            </div>
-                            <div class="row">
-                                <p> Rapporto qualità/prezzo <input name="ratingPrice" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
-                            </div>
-                            <div class="row">
-                                <p> Valore globale <input name="overall" id="overall" type="number" class="rating" min="0" max="5" step="1" required="required"> </p>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <p> Titolo recensione* </p>
-                                <input type="text" name="title" maxlength="25" required="required">
-                            </div>
-                            <div class="row">
-                                <p> Descrizione </p>
-                                <textarea name="description" form="mainForm" rows="8" cols="150" required="required"></textarea>
-
-                            </div>
-                            <div class="row">
-                                <input type="submit" class="btn btn-warning" value="Invia recensione">
-                                <input type="hidden" name="sell" value="${param.sell}">
+                            <div class="panel-body">
+                                <form action="CreateReview" method="POST" id="mainForm">
+                                    <div class="form-group">
+                                        <div class="col" style="padding-top: 15px;">
+                                            <label> Qualità del prodotto <input name="ratingQuality" type="number" class="rating" min="0" max="5" step="1" required="required"> </label>
+                                        </div>
+                                        <div class="col" style="padding-top: 15px;">
+                                            <label> Qualità del servizio <input name="ratingService" type="number" class="rating" min="0" max="5" step="1" required="required"> </label>
+                                        </div>
+                                        <div class="col" style="padding-top: 15px;">
+                                            <label> Rapporto qualità/prezzo <input name="ratingPrice" type="number" class="rating" min="0" max="5" step="1" required="required"> </label>
+                                        </div>
+                                        <div class="col" style="padding-top: 15px;">
+                                            <label> Valore globale <input name="overall" id="overall" type="number" class="rating" min="0" max="5" step="1" required="required"> </label>
+                                        </div>
+                                        <hr>
+                                        <div class="col" style="padding-top: 15px;">
+                                            <label> Titolo recensione </label>
+                                            <input type="text" name="title" maxlength="25" required="required">
+                                        </div>
+                                        <div class="col" style="padding-top: 15px;">
+                                            <textarea name="description" form="mainForm" rows="8" cols="150" required="required" class="form-control" placeholder="Descrizione Prodotto (obbligatoria)"></textarea>
+                                        </div>
+                                        <div class="col" style="padding-top: 15px;">
+                                            <button type="submit" class="btn btn-success" value="Invia recensione"><span class="glyphicon glyphicon-send"></span> Invia recensione</button>	
+                                            <input type="hidden" name="sell" value="${param.sell}">
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-        </c:otherwise>
-    </c:choose>
-</body>
+                </div>
+            </c:otherwise>
+        </c:choose>
+    </body>
 </html>

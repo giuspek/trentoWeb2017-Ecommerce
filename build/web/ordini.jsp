@@ -28,6 +28,11 @@
         </c:if>
         <jsp:include page="navbar.jsp" />
         <div class='container'>
+            <c:if test="${param.e == 'c1'}" >
+                <div class="alert alert-success">
+                    <strong>Segnalazione anomalia andata a buon fine!</strong>
+                </div>
+            </c:if>
             <h2> I tuoi ordini </h2>
             <c:forEach items="${theproducts.rows}" var="row">
                 <div class="media">

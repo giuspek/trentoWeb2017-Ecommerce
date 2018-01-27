@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -26,6 +28,27 @@ import javax.servlet.http.HttpSession;
  */
 public class CreateAnomaly extends HttpServlet {
 
+    
+    protected String convert(String a){
+     final StringBuilder result = new StringBuilder();
+     final StringCharacterIterator iterator = new StringCharacterIterator(a);
+     char character =  iterator.current();
+     while (character != CharacterIterator.DONE ){
+       if (character == 'è') {
+         result.append("&#232;");
+       }
+       else if (character == 'é') {
+         result.append("&#233;");
+       }
+       else {
+         //the char is not a special one
+         //add it to the result as is
+         result.append(character);
+       }
+       character = iterator.next();
+     }
+     return result.toString();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,7 +60,8 @@ public class CreateAnomaly extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-
+        
+        String prova = convert(request.getParameter("description"));
         HttpSession s = request.getSession();
         Utente u = (Utente) s.getAttribute("user");
         Connection con = (Connection) getServletContext().getAttribute("db");
@@ -54,17 +78,18 @@ public class CreateAnomaly extends HttpServlet {
             ps = con.prepareStatement("INSERT INTO ANOMALIES VALUES (DEFAULT,?,?,?,?,?,?,null,null)");
 
             ps.setString(1, request.getParameter("type"));
-            ps.setString(2, request.getParameter("description"));
+            ps.setString(2, prova);
             ps.setBoolean(3, false);
             ps.setInt(4, Integer.parseInt(request.getParameter("sell")));
             ps.setInt(5, u.getId());
             ps.setInt(6, idVenditore);
 
             ps.executeUpdate();
-            response.sendRedirect("notifiche.jsp");
+            response.sendRedirect("ordini.jsp?param="+prova);
         } else {
-            response.sendRedirect("errorPage.jsp");
+            response.sendRedirect("errorPage1.jsp");
         }
+        
 
     }
 

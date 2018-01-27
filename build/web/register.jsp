@@ -71,43 +71,43 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="nome"><span class="glyphicon glyphicon-user"></span> Nome:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Enter First Name">
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Enter First Name" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="cognome"><span class="glyphicon glyphicon-user"></span> Cognome:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="cognome" name="cognome" placeholder="Enter Last Name">
+                                <input type="text" class="form-control" id="cognome" name="cognome" placeholder="Enter Last Name" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="username"><span class="glyphicon glyphicon-user"></span> Username:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="mail1"><span class="glyphicon glyphicon-user"></span> Mail:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="mail1" name="mail1" placeholder="Enter Mail">
+                                <input type="email" class="form-control" id="mail1" name="mail1" placeholder="Enter Mail" required>
                             </div>
                         </div><div class="form-group">
                             <label class="control-label col-sm-2" for="mail2"><span class="glyphicon glyphicon-user"></span> Conferma mail:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="mail2" name="mail2" placeholder="Confirm Mail">
+                                <input type="email" class="form-control" id="mail2" name="mail2" placeholder="Confirm Mail" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="pass1"><span class="glyphicon glyphicon-lock"></span> Password:</label>
 
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass1" name="pass1" placeholder="Enter password">
+                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass1" name="pass1" placeholder="Enter password" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2" for="pass2"><span class="glyphicon glyphicon-lock"></span> Conferma Password:</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass2" name="pass2" placeholder="Confirm password">
+                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass2" name="pass2" placeholder="Confirm password" required>
                             </div>
                         </div>
                         <div class="form-group">

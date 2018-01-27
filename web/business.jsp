@@ -54,7 +54,7 @@
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                            <div class="hidden-xs">Cambia dati</div>
+                            <div class="hidden-xs">I tuoi prodotti</div>
                         </button>
                     </div>
                     <div class="btn-group" role="group">
@@ -64,7 +64,7 @@
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" id="products" class="btn btn-default" href="#tab4" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                            <div class="hidden-xs">I tuoi prodotti</div>
+                            <div class="hidden-xs">Cambia informazioni</div>
                         </button>
                     </div>
                 </div>
@@ -88,14 +88,18 @@
                         </div>
                         <div class="tab-pane fade in" id="tab2">
                             <div class="row">
-                                <form action="changeUsername.jsp" method="POST">
-                                    <input type="submit" value="Cambia username" class="btn btn-primary center-align">
-                                    <input type="hidden" name="n" value="${user.username}">
-                                </form>
-                                <form action="changeProfile.jsp" method="GET">
-                                    <input type="submit" value="Cambia nome/cognome" class="btn btn-primary">
-                                    <input type="hidden" name="n" value="${user.username}">
-                                </form> 
+                                <div class="container">
+                                    <c:forEach items="${products.rows}" var="row">
+
+                                        <b> <c:out value="${row.name}" />, <c:out value="${row.platform}" /> </b>
+
+
+                                        <p> € <c:out value="${row.price}" /> <a href="prodotto.jsp?prodotto=${row.id}">Vedi Prodotto</a></p>
+
+                                        <br>
+
+                                    </c:forEach>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade in" id="tab3">
@@ -130,25 +134,24 @@
                             </div>
                         </div>
                         <div class="tab-pane fade in" id="tab4">
+
                             <div class="row">
-                                <div class="container">
-                                <c:forEach items="${products.rows}" var="row">
-                                    
-                                            <b> <c:out value="${row.name}" />, <c:out value="${row.platform}" /> </b>
-                                        
-                                        
-                                            <p> € <c:out value="${row.price}" /> <a href="prodotto.jsp?prodotto=${row.id}">Vedi Prodotto</a></p>
-                                       
-                                        <br>
-                                    
-                                </c:forEach>
-                                </div>
+                                <form action="changeProfile.jsp" method="GET">
+                                    <input type="submit" value="Cambia nome/cognome" class="btn btn-primary">
+                                    <input type="hidden" name="n" value="${user.username}">
+                                </form> 
+                                <form action="changeShop.jsp" method="POST">
+                                    <input type="submit" value="Cambia informazioni negozio" class="btn btn-primary">
+                                    <input type="hidden" name="n" value="${user.username}">
+                                    <input type="hidden" name="s" value="${result.rows[0].id}">
+                                </form> 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </body>
+
+    </div>
+</body>
 </html>

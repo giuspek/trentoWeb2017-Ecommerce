@@ -35,7 +35,6 @@ public class ManageAnomaly extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-
          
         if (request.getParameter("anomaly") == null) {
             
@@ -53,7 +52,7 @@ public class ManageAnomaly extends HttpServlet {
                 ps.setString(1, request.getParameter("description"));
                 ps.setInt(2, Integer.parseInt(request.getParameter("anomaly")));
                 ps.executeUpdate();
-                response.sendRedirect("changeProfileOK.jsp");
+                response.sendRedirect("ordini.jsp?e=c1");
                 
             } else if ("approved".equals(request.getParameter("choice"))) {
                  
@@ -74,7 +73,7 @@ public class ManageAnomaly extends HttpServlet {
                     ps.setInt(1, i);
                     ps.setInt(2, Integer.parseInt(request.getParameter("anomaly")));
                     ps.executeUpdate();
-                    response.sendRedirect("changeProfileOK.jsp");
+                    response.sendRedirect("ordini.jsp?e=c1");
                 }
                 
             }

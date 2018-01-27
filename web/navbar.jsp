@@ -47,13 +47,13 @@
         if(x === "first_genre")
             $("#oggetto").autocomplete({
                 source: categorie,
-                minLength: 1,
+                minLength: 3,
                 limit: 10
             });
         else{
            $("#oggetto").autocomplete({
                 source: lista,
-                minLength: 1,
+                minLength: 3,
                 limit: 10
             }); 
         }
@@ -64,7 +64,7 @@
     function applyName(){
             $("#oggetto").autocomplete({
                 source: categorie,
-                minLength: 1,
+                minLength: 3,
                 limit: 10
             });
         }
@@ -133,7 +133,7 @@
                                 <li><a href="Logout">Esci</a></li>
                             </ul>
                         </li>                     
-                        <li><a href="notifiche.jsp">Notifiche</a></li>
+                        <li><a href="notificheSeller.jsp">Notifiche</a></li>
                     </ul>
                 </div>
             </c:when>

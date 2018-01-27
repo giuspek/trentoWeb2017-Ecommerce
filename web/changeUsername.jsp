@@ -56,6 +56,13 @@
                 </c:choose>
             </div>
         </div>
-
+        ----------------
+        
+        
+        <c:if test="${param.e == 'c'}" >
+                        <div class="alert alert-success">
+                            <strong>Prodotto aggiunto al carrello!</strong>
+                        </div>
+                    </c:if>
     </body>
 </html>
