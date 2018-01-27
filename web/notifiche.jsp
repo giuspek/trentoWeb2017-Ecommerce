@@ -27,6 +27,10 @@
                            sql="SELECT A.*, P.name, S1.name AS nomeNegozio, S1.id AS idNegozio FROM ANOMALIES A, SELLS S, PRODUCTS P, SHOPS S1 WHERE A.ID_BUYER = ? AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID AND P.ID_SHOP = S1.ID ORDER BY A.ID DESC" >
                     <sql:param value="${user.id}"/>
                 </sql:query>
+                <sql:query dataSource="${snapshot}" var="theproductsAll" scope="page"
+                           sql="SELECT A.*, P.name, S1.name AS nomeNegozio, S1.id AS idNegozio FROM ANOMALIES A, SELLS S, PRODUCTS P, SHOPS S1 WHERE A.ID_BUYER = ? AND A.ID_SELL = S.ID AND S.ID_PRODUCT = P.ID AND P.ID_SHOP = S1.ID ORDER BY A.ID DESC" >
+                    <sql:param value="${user.id}"/>
+                </sql:query>
             </c:when>
             <c:otherwise>
                 <sql:query dataSource="${snapshot}" var="theproducts" scope="page"
@@ -325,14 +329,13 @@
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
-            <c:if test="${param.e != 'plus'}">
+            <c:if test="${param.e != 'plus' && theproductsAll.rowCount > 2}">
                 <form action="notifiche.jsp?e=plus" method="GET">
                     <button type="submit" class="btn btn-success">
                     Mostra tutte
                     <input type="hidden" name="e" value="plus">
                 </button>
-                </form>
-                
+                </form>  
             </c:if>
         </div>
 

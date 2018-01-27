@@ -101,7 +101,7 @@
                             <label class="control-label col-sm-2" for="pass1"><span class="glyphicon glyphicon-lock"></span> Password:</label>
 
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass1" name="pass1" placeholder="Inserisci Password" required>
+                                <input type="password" class="form-control" pattern="[A-Za-z0-9]{8,}" id="pass1" name="pass1" placeholder="Inserisci Password" required title="Minimo 8 caratteri, almeno un numero">
                             </div>
                         </div>
                         <div class="form-group">

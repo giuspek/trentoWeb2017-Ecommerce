@@ -42,11 +42,11 @@
                             <form action="AddToSells" method="POST">
                                 <div class="col" style="padding-top: 15px;">
                                     <label for="cardID"><span class="glyphicon glyphicon-credit-card"></span> Numero Carta: </label>
-                                    <input type="text" name="cardID" required="true">
+                                    <input type="text" name="cardID" required="true" pattern="[0-9]{16}" title="16 numbers, as 0000111122223333">
                                 </div>
                                 <div class="col" style="padding-top: 15px;">
                                     <label for="pin"><span class="glyphicon glyphicon-lock"></span> Pin: </label>
-                                    <input type="text" name="pin" required="true">
+                                    <input type="text" name="pin" required="true" pattern="[0-9]{3}" title="3 numbers, as 123">
                                 </div>
                                 <div class="col" style="padding-top: 15px;">
                                     <label for="month"><span class="glyphicon glyphicon-calendar"></span> Data di Scadenza: </label>

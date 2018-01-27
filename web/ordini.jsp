@@ -33,6 +33,11 @@
                     <strong>Segnalazione anomalia andata a buon fine!</strong>
                 </div>
             </c:if>
+            <c:if test="${param.e == 's'}" >
+                <div class="alert alert-success">
+                    <strong>Prodotti acquistati</strong> Grazie per averci scelto!
+                </div>
+            </c:if>
             <h2> I tuoi ordini </h2>
             <c:forEach items="${theproducts.rows}" var="row">
                 <div class="media">

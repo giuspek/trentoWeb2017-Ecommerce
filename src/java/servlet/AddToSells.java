@@ -58,7 +58,7 @@ public class AddToSells extends HttpServlet {
         }
         
         session.setAttribute("cart", null);
-        response.sendRedirect("homepage.jsp");
+        response.sendRedirect("ordini.jsp?e=s");
         
     }
 

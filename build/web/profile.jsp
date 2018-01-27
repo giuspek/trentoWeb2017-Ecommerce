@@ -65,17 +65,13 @@
                                 <c:if test="${user.typeOfAccount == 'S'}">
                                     <label>Venditore</label>
                                 </c:if>
-                                <c:if test="${user.typeOfAccount == 'R'}">
+                                <c:if test="${user.typeOfAccount == 'A'}">
                                     <label>Admin</label>
                                 </c:if>
                             </p>
                         </div>
                         <div class="tab-pane fade in" id="tab2">
                             <div class="row">
-                                <form action="changeUsername.jsp" method="POST">
-                                    <input type="submit" value="Cambia username" class="btn btn-primary center-align">
-                                    <input type="hidden" name="n" value="${user.username}">
-                                </form>
                                 <form action="changeProfile.jsp" method="GET">
                                     <input type="submit" value="Cambia nome/cognome" class="btn btn-primary">
                                     <input type="hidden" name="n" value="${user.username}">
